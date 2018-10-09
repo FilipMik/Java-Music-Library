@@ -15,6 +15,3 @@ Java Music library project for the PA165 course
 6. Always update master branch before checkouting new branch, so your branch is up to date with master.
 7. Make sure to update your branch before creating pull request, so your branch can be easily merged into master.
 8. 2 approving reviews are required in order to merge your branch into master branch.
-    
-# Assignment
-Let us introduce you the Music Library used for managing songs. Each song has a title, bitrate, its position on the album's playlist, and commentary. For the sake of simplicity, each song belongs to exactly one musician, it is part of exactly one album, and can be of exactly one genre. Each album has basic attributes such as date of release, title, commentary, musician and album art. In order to support compilation albums each album can contain songs of different genres from different musicians.
