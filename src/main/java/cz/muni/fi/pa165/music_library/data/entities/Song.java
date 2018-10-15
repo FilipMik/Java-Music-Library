@@ -40,4 +40,14 @@ public class Song {
     public Genre getGenre() {
         return genre;
     }
+
+    public void setAlbumPosition(Integer albumPosition) {
+        this.albumPosition = albumPosition;
+    }
+
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
+    }
+
+
 }
