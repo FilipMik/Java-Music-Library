@@ -42,13 +42,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Boolean deleteUser(User user) {
+    public Boolean deleteUser(int userId) {
         // TODO implement
         return null;
     }
 
     @Override
-    public void updateUserEmail(int userId, String email) {
+    public Boolean updateUserEmail(int userId, String email) {
         // TODO implement
+        return null;
     }
 }
