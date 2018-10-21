@@ -37,18 +37,21 @@ public class PlayListDaoImpl implements PlayListDao {
     }
 
     @Override
-    public void deletePlaylist(int playlistId) {
+    public Boolean deletePlaylist(int playlistId) {
         // TODO implement
+        return null;
     }
 
     @Override
-    public void updatePlaylistTitle(int playlistId, String title) {
+    public Boolean updatePlaylistTitle(int playlistId, String title) {
         // TODO implement
+        return null;
     }
 
     @Override
-    public void addSong(int playlistId, Song song) {
+    public Boolean addSong(int playlistId, Song song) {
         // TODO implement
+        return null;
     }
 
     @Override
@@ -58,7 +61,8 @@ public class PlayListDaoImpl implements PlayListDao {
     }
 
     @Override
-    public void clearSongs(int playlistId) {
+    public Boolean clearSongs(int playlistId) {
         // TODO implement
+        return null;
     }
 }
