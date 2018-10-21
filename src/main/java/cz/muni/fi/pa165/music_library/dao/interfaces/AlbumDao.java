@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.music_library.dao.interfaces;
 
 import cz.muni.fi.pa165.music_library.data.entities.Album;
+import cz.muni.fi.pa165.music_library.data.entities.Song;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -20,6 +22,9 @@ public interface AlbumDao {
 
     void deleteAlbum(int albumId);
 
-    void updateAlbum(int albumId);
+    void updateAlbumCommentary(int albumId, String commentary);
 
+    void updateAlbumArt(int albumId, Image albumArt);
+
+    void updateAlbumSongs(int albumId, List<Song> songs);
 }

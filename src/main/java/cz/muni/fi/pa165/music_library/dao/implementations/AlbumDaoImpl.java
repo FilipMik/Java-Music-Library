@@ -2,7 +2,9 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
+import cz.muni.fi.pa165.music_library.data.entities.Song;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,18 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
-    public void updateAlbum(int albumId) {
+    public void updateAlbumCommentary(int albumId, String commentary) {
+        // TODO implement
+
+    }
+
+    @Override
+    public void updateAlbumArt(int albumId, Image albumArt) {
+        // TODO implement
+    }
+
+    @Override
+    public void updateAlbumSongs(int albumId, List<Song> songs) {
         // TODO implement
     }
 }
