@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class AlbumDaoImpl implements AlbumDao {
 
-    private List<Album> albums;
+    private List<Album> albums = new ArrayList<>();
 
     public AlbumDaoImpl() {
         // TODO get from DB

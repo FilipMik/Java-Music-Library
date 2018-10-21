@@ -5,4 +5,6 @@ package cz.muni.fi.pa165.music_library.dao.interfaces;
  */
 
 public interface ArtistDao {
+
+
 }
