@@ -13,6 +13,10 @@ public class AlbumDaoImpl implements AlbumDao {
 
     private List<Album> albums;
 
+    public AlbumDaoImpl() {
+        // TODO get from DB
+    }
+
     @Override
     public List<Album> getAllALbums() {
         return albums;
@@ -20,28 +24,28 @@ public class AlbumDaoImpl implements AlbumDao {
 
     @Override
     public Album getAlbum(int albumId) {
-        // TODO
+        // TODO implement
         return null;
     }
 
     @Override
     public Album getAlbumByTitle(int title) {
-        // TODO
+        // TODO implement
         return null;
     }
 
     @Override
     public void addAlbum(Album album) {
-        // TODO
+        // TODO implement
     }
 
     @Override
     public void deleteAlbum(int albumId) {
-        // TODO
+        // TODO implement
     }
 
     @Override
     public void updateAlbum(int albumId) {
-        // TODO
+        // TODO implement
     }
 }
