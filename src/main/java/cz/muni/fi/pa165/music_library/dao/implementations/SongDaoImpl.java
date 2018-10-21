@@ -36,12 +36,14 @@ public class SongDaoImpl implements SongDao {
     }
 
     @Override
-    public void deleteSong() {
+    public Boolean deleteSong(int songId) {
         // TODO implement
+        return null;
     }
 
     @Override
-    public void updateSongCommentary(int songId, String commentary) {
+    public Boolean updateSongCommentary(int songId, String commentary) {
         // TODO implement
+        return null;
     }
 }
