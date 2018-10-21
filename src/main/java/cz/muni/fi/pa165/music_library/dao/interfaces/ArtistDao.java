@@ -20,5 +20,7 @@ public interface ArtistDao {
 
     void deleteArtist();
 
-    void updateArtist();
+    void updateArtistInfo(int artistId, String info);
+
+    void updateArtistSongsCreated(int artistId, int songsCreated);
 }
