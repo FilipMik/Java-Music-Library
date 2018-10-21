@@ -42,12 +42,20 @@ public class ArtistDaoImpl implements ArtistDao {
     }
 
     @Override
-    public void deleteArtist() {
-        // TODO implement
+    public Boolean deleteArtist(int artistId) {
+        //TODO implement
+        return null;
     }
 
     @Override
-    public void updateArtist() {
+    public Boolean updateArtistInfo(int artistId, String info) {
         // TODO implement
+        return null;
+    }
+
+    @Override
+    public Boolean updateArtistSongsCreated(int artistId, int songsCreated) {
+        // TODO implement
+        return null;
     }
 }

@@ -18,9 +18,9 @@ public interface ArtistDao {
 
     Boolean AddArtist(Artist artist);
 
-    void deleteArtist();
+    Boolean deleteArtist(int artistId);
 
-    void updateArtistInfo(int artistId, String info);
+    Boolean updateArtistInfo(int artistId, String info);
 
-    void updateArtistSongsCreated(int artistId, int songsCreated);
+    Boolean updateArtistSongsCreated(int artistId, int songsCreated);
 }
