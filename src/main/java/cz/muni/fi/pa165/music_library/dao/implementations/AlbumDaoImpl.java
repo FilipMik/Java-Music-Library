@@ -38,29 +38,33 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
+    public List<Song> getAlbumSongs(int albumId) {
+        // TODO implement
+        return null;
+    }
+
+    @Override
     public Boolean addAlbum(Album album) {
         return false;
         // TODO implement
     }
 
     @Override
-    public void deleteAlbum(int albumId) {
+    public Boolean deleteAlbum(int albumId) {
+        return false;
         // TODO implement
     }
 
     @Override
-    public void updateAlbumCommentary(int albumId, String commentary) {
-        // TODO implement
-
-    }
-
-    @Override
-    public void updateAlbumArt(int albumId, Image albumArt) {
+    public Boolean updateAlbumCommentary(int albumId, String commentary) {
+        return false;
         // TODO implement
     }
 
     @Override
-    public void updateAlbumSongs(int albumId, List<Song> songs) {
+    public Boolean updateAlbumArt(int albumId, Image albumArt) {
         // TODO implement
+        return false;
     }
+
 }
