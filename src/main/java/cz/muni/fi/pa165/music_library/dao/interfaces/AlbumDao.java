@@ -14,11 +14,11 @@ public interface AlbumDao {
 
     List<Album> getAllALbums();
 
-    Album getAlbum(int albumId);
+    Album getAlbumById(int albumId);
 
     Album getAlbumByTitle(int title);
 
-    void addAlbum(Album album);
+    Boolean addAlbum(Album album);
 
     void deleteAlbum(int albumId);
 

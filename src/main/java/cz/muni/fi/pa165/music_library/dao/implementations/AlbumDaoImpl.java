@@ -26,7 +26,7 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
-    public Album getAlbum(int albumId) {
+    public Album getAlbumById(int albumId) {
         // TODO implement
         return null;
     }
@@ -38,7 +38,8 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
-    public void addAlbum(Album album) {
+    public Boolean addAlbum(Album album) {
+        return false;
         // TODO implement
     }
 
