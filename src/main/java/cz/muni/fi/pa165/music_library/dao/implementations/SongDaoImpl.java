@@ -7,19 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Filip Mik on 21. 10. 2018
+ * @author ADD YOUR NAME WHEN IMPLEMENTING
  */
 
 public class SongDaoImpl implements SongDao {
 
     private List<Song> songs = new ArrayList<>();
 
-    public SongDaoImpl() {
+    @Override
+    public void createSong(Song song) {
         // TODO implement
     }
 
     @Override
     public List<Song> getAllSongs() {
+        // TODO implement
         return songs;
     }
 

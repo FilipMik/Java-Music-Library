@@ -11,6 +11,12 @@ import java.util.List;
 public interface SongDao {
 
     /**
+     * Crates new song and add to database
+     * @param song Song to be added to database
+     */
+    void createSong(Song song);
+
+    /**
      * Get all songs that are stored in system database
      * @return List of all songs from database, zero list of there are no songs
      */
