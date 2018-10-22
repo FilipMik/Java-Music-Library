@@ -6,7 +6,7 @@ import cz.muni.fi.pa165.music_library.data.entities.User;
 import java.util.List;
 
 /**
- * @author Filip Mik on 21. 10. 2018
+ * @author //TODO YOUR NAME HERE
  */
 
 public class UserDaoImpl implements UserDao {

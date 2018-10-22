@@ -33,12 +33,12 @@ public interface AlbumDao {
     Album getAlbumById(Long albumId);
 
     /**
-     * Get album by title
+     * Get albums wtih given title
      *
      * @param title Title of searched album
-     * @return Album with given title
+     * @return List of albums with given title
      */
-    Album getAlbumByTitle(String title);
+    List<Album> getAlbumByTitle(String title);
 
     /**
      * Deletes given album

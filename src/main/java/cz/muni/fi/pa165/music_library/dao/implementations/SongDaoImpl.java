@@ -6,7 +6,7 @@ import cz.muni.fi.pa165.music_library.data.entities.Song;
 import java.util.List;
 
 /**
- * @author ADD YOUR NAME WHEN IMPLEMENTING
+ * @author //TODO YOUR NAME HERE
  */
 
 public class SongDaoImpl implements SongDao {
@@ -14,7 +14,6 @@ public class SongDaoImpl implements SongDao {
     @Override
     public void createSong(Song song) {
         //TODO implement
-
     }
 
     @Override

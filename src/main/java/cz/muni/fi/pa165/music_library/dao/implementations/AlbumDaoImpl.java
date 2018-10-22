@@ -31,7 +31,7 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
-    public Album getAlbumByTitle(String title) {
+    public List<Album> getAlbumByTitle(String title) {
         // TODO implement
         return null;
     }
