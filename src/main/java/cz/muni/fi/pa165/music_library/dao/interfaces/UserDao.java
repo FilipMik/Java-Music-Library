@@ -23,13 +23,6 @@ public interface UserDao {
     List<User> getAllUsers();
 
     /**
-     * Find given user
-     * @param user User to be found
-     * @return Found user from database
-     */
-    User getUser(User user);
-
-    /**
      * Find user with given id and return it
      * @param userId Id of searched user
      * @return User object with given id

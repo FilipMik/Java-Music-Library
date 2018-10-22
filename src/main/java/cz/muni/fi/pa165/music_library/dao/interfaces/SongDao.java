@@ -33,6 +33,13 @@ public interface SongDao {
     Song getSongById(Long songId);
 
     /**
+     * Get all songs with given name/title
+     * @param title Title of songs to be found
+     * @return List of found songs
+     */
+    List<Song> getSongByTitle(String title);
+
+    /**
      * Remove given song from persistence(database)
      *
      * @param song Song that will be deleted

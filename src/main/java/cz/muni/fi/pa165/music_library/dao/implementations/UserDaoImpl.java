@@ -23,12 +23,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUser(User user) {
-        //TODO implement
-        return null;
-    }
-
-    @Override
     public User getUserById(Long userId) {
         //TODO implement
         return null;

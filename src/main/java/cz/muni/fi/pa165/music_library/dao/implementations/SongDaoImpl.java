@@ -30,6 +30,12 @@ public class SongDaoImpl implements SongDao {
     }
 
     @Override
+    public List<Song> getSongByTitle(String title) {
+        //TODO implement
+        return null;
+    }
+
+    @Override
     public void deleteSong(Song song) {
         //TODO implement
     }
