@@ -34,7 +34,7 @@ public class PlayListDaoImpl implements PlayListDao {
     }
 
     @Override
-    public void updatePlaylistTitle(Playlist playlist) {
+    public void updatePlaylist(Playlist playlist) {
         //TODO implement
     }
 }

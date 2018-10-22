@@ -44,5 +44,5 @@ public interface PlayListDao {
      *
      * @param playlist Playlist that will be updated
      */
-    void updatePlaylistTitle(Playlist playlist);
+    void updatePlaylist(Playlist playlist);
 }
