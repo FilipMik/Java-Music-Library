@@ -1,19 +1,34 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * @author Klara
  */
 
+@Entity
+@Table(name="Users")
 public class User {
 
+    @Id
     private Long userId;
+
     private String userName;
+
     private String email;
+
     private Date dateCreated;
+
     private UserLevel userLevel;
+
+    @OneToMany
+    List<Playlist> playlists;
+
+    public User() {
+    }
 
     public Long getUserId() {
         return userId;
@@ -55,27 +70,35 @@ public class User {
         this.userLevel = userLevel;
     }
 
+    public List<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof User)) return false;
 
         User user = (User) o;
 
-        if (userId != null ? !userId.equals(user.userId) : user.userId != null) return false;
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (dateCreated != null ? !dateCreated.equals(user.dateCreated) : user.dateCreated != null) return false;
-        return userLevel == user.userLevel;
+        if (getUserName() != null ? !getUserName().equals(user.getUserName()) : user.getUserName() != null)
+            return false;
+        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
+        if (getDateCreated() != null ? !getDateCreated().equals(user.getDateCreated()) : user.getDateCreated() != null)
+            return false;
+        return getUserLevel() == user.getUserLevel();
     }
 
     @Override
     public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (dateCreated != null ? dateCreated.hashCode() : 0);
-        result = 31 * result + (userLevel != null ? userLevel.hashCode() : 0);
+        int result = getUserName() != null ? getUserName().hashCode() : 0;
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getDateCreated() != null ? getDateCreated().hashCode() : 0);
+        result = 31 * result + (getUserLevel() != null ? getUserLevel().hashCode() : 0);
         return result;
     }
 }

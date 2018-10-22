@@ -1,5 +1,9 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
@@ -7,13 +11,22 @@ import java.util.List;
  * @author Peter Žiška
  * ID: 487569
  */
+
+@Entity
 public class Playlist {
 
+    @Id
     private Long playlistId;
+
     private String title;
+
     private Date dateCreated;
-    private Integer songsCount;
+
+    @OneToMany
     private List<Song> songList;
+
+    @ManyToOne
+    private User user;
 
     public Playlist() {
     }
@@ -42,14 +55,6 @@ public class Playlist {
         this.dateCreated = dateCreated;
     }
 
-    public Integer getSongsCount() {
-        return songsCount;
-    }
-
-    public void setSongsCount(Integer songsCount) {
-        this.songsCount = songsCount;
-    }
-
     public List<Song> getSongList() {
         return songList;
     }
@@ -58,25 +63,29 @@ public class Playlist {
         this.songList = songList;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Playlist)) return false;
+
         Playlist playlist = (Playlist) o;
-        if (playlistId != null ? !playlistId.equals(playlist.playlistId) : playlist.playlistId != null) return false;
-        if (dateCreated != null ? !dateCreated.equals(playlist.dateCreated) : playlist.dateCreated != null) return false;
-        if (title != null ? !title.equals(playlist.title) : playlist.title != null) return false;
-        if (songList != null ? !songList.equals(playlist.songList) : playlist.songList != null) return false;
-        return songsCount != null ? songsCount.equals(playlist.songsCount) : playlist.songsCount == null;
+
+        if (getTitle() != null ? !getTitle().equals(playlist.getTitle()) : playlist.getTitle() != null) return false;
+        return getDateCreated() != null ? getDateCreated().equals(playlist.getDateCreated()) : playlist.getDateCreated() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = playlistId != null ? playlistId.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (songsCount != null ? songsCount.hashCode() : 0);
-        result = 31 * result + (dateCreated != null ? dateCreated.hashCode() : 0);
-        result = 31 * result + (songList != null ? songList.hashCode() : 0);
+        int result = getTitle() != null ? getTitle().hashCode() : 0;
+        result = 31 * result + (getDateCreated() != null ? getDateCreated().hashCode() : 0);
         return result;
     }
 }
