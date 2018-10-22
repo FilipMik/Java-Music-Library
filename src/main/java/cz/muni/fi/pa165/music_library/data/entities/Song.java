@@ -1,24 +1,22 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
-import java.util.Objects;
-
 /**
  * @author Filip Mik on 16. 10. 2018
  */
 
 public class Song {
-    private Integer songId;
+    private Long songId;
     private String title;
     private Integer bitRate;
     private Integer albumPosition;
     private String commentary;
     private Genre genre;
 
-    public Integer getSongId() {
+    public Long getSongId() {
         return songId;
     }
 
-    public void setSongId(Integer songId) {
+    public void setSongId(Long songId) {
         this.songId = songId;
     }
 

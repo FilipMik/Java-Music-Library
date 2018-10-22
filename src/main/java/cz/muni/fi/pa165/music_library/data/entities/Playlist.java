@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Playlist {
 
-    private Integer playlistId;
+    private Long playlistId;
     private String title;
     private Date dateCreated;
     private Integer songsCount;
@@ -18,11 +18,11 @@ public class Playlist {
     public Playlist() {
     }
 
-    public Integer getPlaylistId() {
+    public Long getPlaylistId() {
         return playlistId;
     }
 
-    public void setPlaylistId(Integer playlistId) {
+    public void setPlaylistId(Long playlistId) {
         this.playlistId = playlistId;
     }
 
