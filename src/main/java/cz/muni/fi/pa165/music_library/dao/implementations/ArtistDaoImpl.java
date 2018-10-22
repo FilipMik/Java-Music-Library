@@ -7,55 +7,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Filip Mik on 21. 10. 2018
+ * @author //TODO your name here
  */
 
 public class ArtistDaoImpl implements ArtistDao {
 
-    private List<Artist> artists = new ArrayList<>();
-
-    public ArtistDaoImpl() {
-        // TODO implement
+    @Override
+    public void createArtist(Artist artist) {
+        //TODO implement
     }
 
     @Override
     public List<Artist> getAllArtists() {
-        return artists;
+        //TODO implement
+        return new ArrayList<>();
     }
 
     @Override
-    public Artist getArtistById(int artistId) {
-        // TODO implement
-        return null;
-    }
-
-    @Override
-    public Artist getArtistByName(int artistName) {
-        // TODO implement
-        return null;
-    }
-
-    @Override
-    public Boolean addArtist(Artist artist) {
-        // TODO implement
-        return null;
-    }
-
-    @Override
-    public Boolean deleteArtist(int artistId) {
+    public Artist getArtistById(Long artistId) {
         //TODO implement
         return null;
     }
 
     @Override
-    public Boolean updateArtistInfo(int artistId, String info) {
-        // TODO implement
+    public List<Artist> getArtistByName(String artistName) {
+        //TODO implement
         return null;
     }
 
     @Override
-    public Boolean updateArtistSongsCreated(int artistId, int songsCreated) {
-        // TODO implement
-        return null;
+    public void deleteArtist(Artist artist) {
+        //TODO implement
     }
+
+    @Override
+    public void updateArtistInfo(Artist artist) {
+        //TODO implement
+    }
+
 }

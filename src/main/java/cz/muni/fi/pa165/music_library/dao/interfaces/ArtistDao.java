@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.music_library.dao.interfaces;
 
+import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
 
 import java.util.List;
@@ -9,6 +10,12 @@ import java.util.List;
  */
 
 public interface ArtistDao {
+
+    /**
+     * Store artist to persistence
+     * @param artist Artist to be stored in persistence
+     */
+    void createArtist(Artist artist);
 
     /**
      * Get all artist stored in system database
@@ -21,42 +28,26 @@ public interface ArtistDao {
      * @param artistId Id of searched artist
      * @return Found artist with given id
      */
-    Artist getArtistById(int artistId);
+    Artist getArtistById(Long artistId);
 
     /**
      * Get artist with given name
      * @param artistName Name of searched artist
      * @return Found artist with given name
      */
-    Artist getArtistByName(int artistName);
+    List<Artist> getArtistByName(String artistName);
+
 
     /**
-     * Add new artists to database
-     * @param artist New artists object to be added to database
-     * @return True if artist was added, false if the artist already exists in database
+     * Remove given artist
+     * @param artist Artist that will be removed from database
      */
-    Boolean addArtist(Artist artist);
+    void deleteArtist(Artist artist);
 
     /**
-     * Remove artist with given id from database
-     * @param artistId Id of artists that will be removed from database
-     * @return True if artists was found and deleted, false if artist with given id doesnt exist
+     * Update artist
+     * @param artist Artist that will be updated
      */
-    Boolean deleteArtist(int artistId);
+    void updateArtistInfo(Artist artist);
 
-    /**
-     * Update artist info
-     * @param artistId Id of artists that will be updated
-     * @param info New artists info
-     * @return True if artists was found and update, false if artist with given id doesnt exist
-     */
-    Boolean updateArtistInfo(int artistId, String info);
-
-    /**
-     * Update artist info
-     * @param artistId Id of artists that will be updated
-     * @param songsCreated New artists count of songsCreated
-     * @return True if artists was found and update, false if artist with given id doesnt exist
-     */
-    Boolean updateArtistSongsCreated(int artistId, int songsCreated);
 }

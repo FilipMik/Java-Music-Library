@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Artist {
 
-    private Integer artistId;
+    private Long artistId;
     private String name;
     private Integer songCreated;
     private Date birthDate;
@@ -15,11 +15,11 @@ public class Artist {
 
     public Artist() { }
 
-    public Integer getArtistId() {
+    public Long getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Integer artistId) {
+    public void setArtistId(Long artistId) {
         this.artistId = artistId;
     }
 
