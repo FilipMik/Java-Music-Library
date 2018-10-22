@@ -24,7 +24,7 @@ public class SongDaoImpl implements SongDao {
     }
 
     @Override
-    public Song getSongById(Song song) {
+    public Song getSongById(Long songId) {
         //TODO implement
         return null;
     }

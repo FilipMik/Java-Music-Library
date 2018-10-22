@@ -27,10 +27,10 @@ public interface SongDao {
     /**
      * Get given song
      *
-     * @param song Searched song
+     * @param songId Id Searched song
      * @return Found song
      */
-    Song getSongById(Song song);
+    Song getSongById(Long songId);
 
     /**
      * Remove given song from persistence(database)

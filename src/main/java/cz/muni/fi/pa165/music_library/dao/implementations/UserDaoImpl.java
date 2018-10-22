@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 import cz.muni.fi.pa165.music_library.dao.interfaces.UserDao;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,44 +11,42 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
-    private List<User> users = new ArrayList<>();
-
-    public UserDaoImpl() {
-        // TODO implement
+    @Override
+    public void createUser(User user) {
+        //TODO implement
     }
 
     @Override
     public List<User> getAllUsers() {
-        return users;
-    }
-
-    @Override
-    public User getUserById(int userId) {
-        // TODO implement
+        //TODO implement
         return null;
     }
 
     @Override
-    public User getUserByName(int username) {
-        // TODO implement
+    public User getUser(User user) {
+        //TODO implement
         return null;
     }
 
     @Override
-    public Boolean addUser(User user) {
-        // TODO implement
+    public User getUserById(Long userId) {
+        //TODO implement
         return null;
     }
 
     @Override
-    public Boolean deleteUser(int userId) {
-        // TODO implement
+    public User getUserByName(String username) {
+        //TODO implement
         return null;
     }
 
     @Override
-    public Boolean updateUserEmail(int userId, String email) {
-        // TODO implement
-        return null;
+    public void deleteUser(User user) {
+        //TODO implement
+    }
+
+    @Override
+    public void updateUser(User user) {
+        //TODO implement
     }
 }
