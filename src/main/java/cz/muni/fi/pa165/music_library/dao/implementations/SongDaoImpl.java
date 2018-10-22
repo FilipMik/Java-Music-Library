@@ -40,7 +40,7 @@ public class SongDaoImpl implements SongDao {
     }
 
     @Override
-    public void updateSongCommentary(Song song) {
+    public void updateSong(Song song) {
         //TODO implement
     }
 }

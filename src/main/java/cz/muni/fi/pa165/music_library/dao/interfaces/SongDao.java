@@ -51,5 +51,5 @@ public interface SongDao {
      *
      * @param song Song that will be updated
      */
-    void updateSongCommentary(Song song);
+    void updateSong(Song song);
 }
