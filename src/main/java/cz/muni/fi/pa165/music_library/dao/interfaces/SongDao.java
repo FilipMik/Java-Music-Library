@@ -12,41 +12,37 @@ public interface SongDao {
 
     /**
      * Crates new song and add to database
+     *
      * @param song Song to be added to database
      */
     void createSong(Song song);
 
     /**
      * Get all songs that are stored in system database
+     *
      * @return List of all songs from database, zero list of there are no songs
      */
     List<Song> getAllSongs();
 
     /**
-     * Get a song with given id
-     * @param songId Id of searched song
-     * @return Song with given id
+     * Get given song
+     *
+     * @param song Searched song
+     * @return Found song
      */
-    Song getSongById(int songId);
+    Song getSongById(Song song);
 
     /**
-     * Add new song to the database
-     * @param song Song to be added
-     * @return True if song was added, false if there is already this song in databse
+     * Remove given song from persistence(database)
+     *
+     * @param song Song that will be deleted
      */
-    Boolean AddSong(Song song);
+    void deleteSong(Song song);
 
     /**
-     * Remove song with given id from the database
-     * @return True if song was found and deleted, false otherwise
+     * Update given song
+     *
+     * @param song Song that will be updated
      */
-    Boolean deleteSong(int songId);
-
-    /**
-     * Update commentary of song with given id
-     * @param songId If of song that will be updated
-     * @param commentary New commentary of the song
-     * @return True if song was found and update, false otherwise
-     */
-    Boolean updateSongCommentary(int songId, String commentary);
+    void updateSongCommentary(Song song);
 }
