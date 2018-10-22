@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Boolean AddUser(User user) {
+    public Boolean addUser(User user) {
         // TODO implement
         return null;
     }

@@ -35,7 +35,7 @@ public interface UserDao {
      * @param user User object to be added to database
      * @return True if user was added, false if there is already this user in database
      */
-    Boolean AddUser(User user);
+    Boolean addUser(User user);
 
     /**
      * Delete user with given id from databse

@@ -35,7 +35,7 @@ public interface ArtistDao {
      * @param artist New artists object to be added to database
      * @return True if artist was added, false if the artist already exists in database
      */
-    Boolean AddArtist(Artist artist);
+    Boolean addArtist(Artist artist);
 
     /**
      * Remove artist with given id from database

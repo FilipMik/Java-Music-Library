@@ -36,7 +36,7 @@ public class ArtistDaoImpl implements ArtistDao {
     }
 
     @Override
-    public Boolean AddArtist(Artist artist) {
+    public Boolean addArtist(Artist artist) {
         // TODO implement
         return null;
     }
