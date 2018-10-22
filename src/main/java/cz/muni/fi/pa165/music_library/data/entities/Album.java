@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public class Album {
-    private Integer albumId;
+    private Long albumId;
     private Date releaseDate;
     private String title;
     private String commentary;
@@ -17,11 +17,11 @@ public class Album {
     private Integer songsCount;
     private Image albumArt;
 
-    public Integer getAlbumId() {
+    public Long getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(Integer albumId) {
+    public void setAlbumId(Long albumId) {
         this.albumId = albumId;
     }
 

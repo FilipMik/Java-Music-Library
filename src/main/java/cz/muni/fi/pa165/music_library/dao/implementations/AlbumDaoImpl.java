@@ -4,67 +4,46 @@ import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Filip Mik on 21. 10. 2018
+ * @author //TODO your name here
  */
 
 public class AlbumDaoImpl implements AlbumDao {
 
-    private List<Album> albums = new ArrayList<>();
-
-    public AlbumDaoImpl() {
-        // TODO get from DB
+    @Override
+    public void createAlbum(Album album) {
+        // TODO implement
     }
 
     @Override
     public List<Album> getAllALbums() {
-        return albums;
+        // TODO implement
+        return new ArrayList<>();
     }
 
     @Override
-    public Album getAlbumById(int albumId) {
+    public Album getAlbumById(Long albumId) {
         // TODO implement
         return null;
     }
 
     @Override
-    public Album getAlbumByTitle(int title) {
+    public Album getAlbumByTitle(String title) {
         // TODO implement
         return null;
     }
 
     @Override
-    public List<Song> getAlbumSongs(int albumId) {
-        // TODO implement
-        return null;
-    }
-
-    @Override
-    public Boolean addAlbum(Album album) {
-        return false;
+    public void deleteAlbum(Album album) {
         // TODO implement
     }
 
     @Override
-    public Boolean deleteAlbum(int albumId) {
-        return false;
+    public void updateAlbum(Album album) {
         // TODO implement
-    }
-
-    @Override
-    public Boolean updateAlbumCommentary(int albumId, String commentary) {
-        return false;
-        // TODO implement
-    }
-
-    @Override
-    public Boolean updateAlbumArt(int albumId, Image albumArt) {
-        // TODO implement
-        return false;
     }
 
 }
