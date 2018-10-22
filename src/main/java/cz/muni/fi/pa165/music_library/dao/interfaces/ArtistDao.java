@@ -13,18 +13,21 @@ public interface ArtistDao {
 
     /**
      * Store artist to persistence
+     *
      * @param artist Artist to be stored in persistence
      */
     void createArtist(Artist artist);
 
     /**
      * Get all artist stored in system database
+     *
      * @return List of all artists
      */
     List<Artist> getAllArtists();
 
     /**
      * Get artist with given id
+     *
      * @param artistId Id of searched artist
      * @return Found artist with given id
      */
@@ -32,6 +35,7 @@ public interface ArtistDao {
 
     /**
      * Get artist with given name
+     *
      * @param artistName Name of searched artist
      * @return Found artist with given name
      */
@@ -40,12 +44,14 @@ public interface ArtistDao {
 
     /**
      * Remove given artist
+     *
      * @param artist Artist that will be removed from database
      */
     void deleteArtist(Artist artist);
 
     /**
      * Update artist
+     *
      * @param artist Artist that will be updated
      */
     void updateArtistInfo(Artist artist);
