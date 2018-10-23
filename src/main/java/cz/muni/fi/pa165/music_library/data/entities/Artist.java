@@ -1,12 +1,17 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
  * @author Jan Ficko
  */
+@Entity
 public class Artist {
 
+
+    @Id
     private Long artistId;
     private String name;
     private Integer songCreated;
