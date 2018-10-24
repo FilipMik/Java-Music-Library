@@ -2,7 +2,9 @@ package cz.muni.fi.pa165.music_library.data.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Jan Ficko
@@ -10,15 +12,20 @@ import java.util.Date;
 @Entity
 public class Artist {
 
-
     @Id
     private Long artistId;
+
     private String name;
-    private Integer songCreated;
+
     private Date birthDate;
+
     private String artistInfo;
 
-    public Artist() { }
+    @OneToMany()
+    private List<Song> songList;
+
+    public Artist() {
+    }
 
     public Long getArtistId() {
         return artistId;
@@ -34,14 +41,6 @@ public class Artist {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getSongCreated() {
-        return songCreated;
-    }
-
-    public void setSongCreated(Integer songCreated) {
-        this.songCreated = songCreated;
     }
 
     public Date getBirthDate() {
@@ -60,27 +59,32 @@ public class Artist {
         this.artistInfo = artistInfo;
     }
 
+    public List<Song> getSongList() {
+        return songList;
+    }
+
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Artist)) return false;
 
         Artist artist = (Artist) o;
 
-        if (artistId != null ? !artistId.equals(artist.artistId) : artist.artistId != null) return false;
-        if (name != null ? !name.equals(artist.name) : artist.name != null) return false;
-        if (songCreated != null ? !songCreated.equals(artist.songCreated) : artist.songCreated != null) return false;
-        if (birthDate != null ? !birthDate.equals(artist.birthDate) : artist.birthDate != null) return false;
-        return artistInfo != null ? artistInfo.equals(artist.artistInfo) : artist.artistInfo == null;
+        if (getName() != null ? !getName().equals(artist.getName()) : artist.getName() != null) return false;
+        if (getBirthDate() != null ? !getBirthDate().equals(artist.getBirthDate()) : artist.getBirthDate() != null)
+            return false;
+        return getArtistInfo() != null ? getArtistInfo().equals(artist.getArtistInfo()) : artist.getArtistInfo() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = artistId != null ? artistId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (songCreated != null ? songCreated.hashCode() : 0);
-        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-        result = 31 * result + (artistInfo != null ? artistInfo.hashCode() : 0);
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getBirthDate() != null ? getBirthDate().hashCode() : 0);
+        result = 31 * result + (getArtistInfo() != null ? getArtistInfo().hashCode() : 0);
         return result;
     }
 }
