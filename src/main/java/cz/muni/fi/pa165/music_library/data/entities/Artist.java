@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * @author Jan Ficko
  */
-
 @Entity
 public class Artist {
 
