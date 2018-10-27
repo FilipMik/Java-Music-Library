@@ -23,7 +23,7 @@ public class Album {
 
     private String commentary;
 
-    private Image albumArt;
+    private String albumArtUrl;
 
     @OneToMany()
     private List<Song> songList;
@@ -63,12 +63,12 @@ public class Album {
         this.commentary = commentary;
     }
 
-    public Image getAlbumArt() {
-        return albumArt;
+    public String getAlbumArtUrl() {
+        return albumArtUrl;
     }
 
-    public void setAlbumArt(Image albumArt) {
-        this.albumArt = albumArt;
+    public void setAlbumArtUrl(String albumArt) {
+        this.albumArtUrl = albumArt;
     }
 
     public List<Song> getSongList() {
@@ -91,7 +91,7 @@ public class Album {
         if (getTitle() != null ? !getTitle().equals(album.getTitle()) : album.getTitle() != null) return false;
         if (getCommentary() != null ? !getCommentary().equals(album.getCommentary()) : album.getCommentary() != null)
             return false;
-        return getAlbumArt() != null ? getAlbumArt().equals(album.getAlbumArt()) : album.getAlbumArt() == null;
+        return getAlbumArtUrl() != null ? getAlbumArtUrl().equals(album.getAlbumArtUrl()) : album.getAlbumArtUrl() == null;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class Album {
         int result = getReleaseDate() != null ? getReleaseDate().hashCode() : 0;
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         result = 31 * result + (getCommentary() != null ? getCommentary().hashCode() : 0);
-        result = 31 * result + (getAlbumArt() != null ? getAlbumArt().hashCode() : 0);
+        result = 31 * result + (getAlbumArtUrl() != null ? getAlbumArtUrl().hashCode() : 0);
         return result;
     }
 }
