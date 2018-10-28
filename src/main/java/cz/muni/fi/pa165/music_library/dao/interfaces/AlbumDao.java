@@ -22,7 +22,7 @@ public interface AlbumDao {
      *
      * @return List of albums, empty list if there was no album
      */
-    List<Album> getAllALbums();
+    List<Album> getAllAlbums();
 
     /**
      * Get album by id
