@@ -19,7 +19,7 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
-    public List<Album> getAllALbums() {
+    public List<Album> getAllAlbums() {
         // TODO implement
         return new ArrayList<>();
     }
