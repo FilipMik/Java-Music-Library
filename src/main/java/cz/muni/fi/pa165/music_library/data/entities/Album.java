@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class Album {
 
     private String albumArtUrl;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "album")
     private List<Song> songList;
 
     public Album() {
@@ -71,11 +72,15 @@ public class Album {
     }
 
     public List<Song> getSongList() {
-        return songList;
+        return Collections.unmodifiableList(songList);
     }
 
-    public void setSongList(List<Song> songList) {
-        this.songList = songList;
+    public void addSong(Song song) {
+        this.songList.add(song);
+    }
+
+    public void removeSong(Song song) {
+        this.songList.remove(song);
     }
 
     @Override

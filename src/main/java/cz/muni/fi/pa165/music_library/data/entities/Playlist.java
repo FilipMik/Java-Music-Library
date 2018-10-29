@@ -1,9 +1,7 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class Playlist {
 
     private Date dateCreated;
 
-    @OneToMany
+    @ManyToMany
     private List<Song> songList;
 
     @ManyToOne
@@ -56,11 +54,17 @@ public class Playlist {
     }
 
     public List<Song> getSongList() {
-        return songList;
+        return Collections.unmodifiableList(songList);
     }
 
-    public void setSongList(List<Song> songList) {
-        this.songList = songList;
+    public void addSong(Song song) {
+        songList.add(song);
+        song.addPlaylist(this);
+    }
+
+    public void removeSong(Song song) {
+        songList.remove(song);
+        song.removePlaylist(this);
     }
 
     public User getUser() {
