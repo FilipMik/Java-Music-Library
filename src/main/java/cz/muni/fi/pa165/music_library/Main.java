@@ -1,21 +1,19 @@
 package cz.muni.fi.pa165.music_library;
 
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
+@Repository
 public class Main {
 
+    @PersistenceUnit
     private static EntityManagerFactory emf;
 
     public static void main(String[] args) {
-
-        emf = Persistence.createEntityManagerFactory("default");
         System.out.println("Let's party!!");
 
         EntityManager emWork = emf.createEntityManager();
