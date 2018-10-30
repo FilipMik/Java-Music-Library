@@ -1,9 +1,7 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author Klara
@@ -24,7 +22,7 @@ public class User {
 
     private UserLevel userLevel;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     List<Playlist> playlists;
 
     public User() {
@@ -71,11 +69,15 @@ public class User {
     }
 
     public List<Playlist> getPlaylists() {
-        return playlists;
+        return Collections.unmodifiableList(playlists);
     }
 
-    public void setPlaylists(List<Playlist> playlists) {
-        this.playlists = playlists;
+    public void addPlaylist(Playlist playlist) {
+        this.playlists.add(playlist);
+    }
+
+    public void removePlaylist(Playlist playlist) {
+        this.playlists.remove(playlist);
     }
 
     @Override
