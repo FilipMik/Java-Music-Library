@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @ComponentScan(basePackageClasses = {AlbumDaoImpl.class}, basePackages = "cz.muni.fi.pa165.music_library")
-public class PersistenceApplicationContext {
+public class ApplicationContext {
 
     @Bean
     public JpaTransactionManager transactionManager() {
