@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.*;
 
 /**
- * @author Klara
+ * @author Klara Minsterova
  */
 
 @Entity
@@ -12,10 +12,13 @@ import java.util.*;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
-    private String userName;
+    @Column(nullable = false)
+    private String username;
 
+    @Column(nullable = false)
     private String email;
 
     private Date dateCreated;
@@ -36,12 +39,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getEmail() {
@@ -87,7 +90,7 @@ public class User {
 
         User user = (User) o;
 
-        if (getUserName() != null ? !getUserName().equals(user.getUserName()) : user.getUserName() != null)
+        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
             return false;
         if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
         if (getDateCreated() != null ? !getDateCreated().equals(user.getDateCreated()) : user.getDateCreated() != null)
@@ -97,7 +100,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = getUserName() != null ? getUserName().hashCode() : 0;
+        int result = getUsername() != null ? getUsername().hashCode() : 0;
         result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         result = 31 * result + (getDateCreated() != null ? getDateCreated().hashCode() : 0);
         result = 31 * result + (getUserLevel() != null ? getUserLevel().hashCode() : 0);
