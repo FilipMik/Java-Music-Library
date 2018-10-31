@@ -12,9 +12,10 @@ import java.util.List;
 public class Artist {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long artistId;
 
+    @Column(nullable=false)
     private String name;
 
     private Date birthDate;

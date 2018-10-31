@@ -14,13 +14,11 @@ import java.util.List;
  * @author Jan Ficko
  */
 
+@Repository
 public class ArtistDaoImpl implements ArtistDao {
 
+    @PersistenceContext
     private EntityManager em;
-
-    public ArtistDaoImpl(EntityManager em) {
-        this.em = em;
-    }
 
     @Override
     public void createArtist(Artist artist) {
