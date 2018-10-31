@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class Song {
 
     private Genre genre;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "songList")
     private List<Playlist> playlists;
 
     public Song() {
@@ -103,11 +104,15 @@ public class Song {
     }
 
     public List<Playlist> getPlaylists() {
-        return playlists;
+        return Collections.unmodifiableList(playlists);
     }
 
-    public void setPlaylists(List<Playlist> playlists) {
-        this.playlists = playlists;
+    public void addPlaylist(Playlist playlist) {
+        this.playlists.add(playlist);
+    }
+
+    public void removePlaylist(Playlist playlist) {
+        this.playlists.remove(playlist);
     }
 
     @Override

@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.music_library.data.entities;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Artist {
 
     private String artistInfo;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "artist")
     private List<Song> songList;
 
     public Artist() {
@@ -60,11 +61,15 @@ public class Artist {
     }
 
     public List<Song> getSongList() {
-        return songList;
+        return Collections.unmodifiableList(songList);
     }
 
-    public void setSongList(List<Song> songList) {
-        this.songList = songList;
+    public void addSong(Song song) {
+        this.songList.add(song);
+    }
+
+    public void removeSong(Song song) {
+        this.songList.remove(song);
     }
 
     @Override
