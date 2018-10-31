@@ -37,14 +37,10 @@ public class ArtistDaoImpl implements ArtistDao {
 
     @Override
     public List<Artist> getArtistByName(String artistName) {
-        try {
             return em
                     .createQuery("SELECT a from Artist a WHERE name = :name", Artist.class)
                     .setParameter("name", artistName)
                     .getResultList();
-        } catch (NoResultException nrf) {
-            return null;
-        }
     }
 
     @Override
