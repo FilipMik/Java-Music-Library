@@ -2,48 +2,56 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
-import cz.muni.fi.pa165.music_library.data.entities.Song;
-
-import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * @author //TODO your name here
+ * @author Filip Mik
  */
 
+@Repository
 public class AlbumDaoImpl implements AlbumDao {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public void createAlbum(Album album) {
-        // TODO implement
+        em.persist(album);
     }
 
     @Override
     public List<Album> getAllAlbums() {
-        // TODO implement
-        return new ArrayList<>();
+        return em.createQuery("select a from Album a", Album.class).getResultList();
     }
 
     @Override
     public Album getAlbumById(Long albumId) {
-        // TODO implement
-        return null;
+        return em.find(Album.class, albumId);
     }
 
     @Override
     public List<Album> getAlbumByTitle(String title) {
-        // TODO implement
-        return null;
+        try {
+            return em.createQuery("select a from Album a where title = :title", Album.class)
+                    .setParameter("title", title)
+                    .getResultList();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override
     public void deleteAlbum(Album album) {
-        // TODO implement
+        em.remove(album);
     }
 
     @Override
     public void updateAlbum(Album album) {
-        // TODO implement
+        em.merge(album);
     }
 
 }
