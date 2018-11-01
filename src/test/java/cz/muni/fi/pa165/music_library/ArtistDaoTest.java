@@ -15,8 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 import java.util.Date;
 import java.util.List;
 
@@ -59,11 +59,13 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         dynoroArtist.setArtistInfo("Hit maker");
     }
 
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = PersistenceException.class)
     public void nullArtistNameNotAllowedTest() {
         Artist artist = new Artist();
         artist.setName(null);
         artistDao.createArtist(artist);
+
+        Assert.assertNotEquals("There should be no data",0L, artistDao.getAllArtists().size());
     }
 
     /**
@@ -93,14 +95,15 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         artistDao.createArtist(dynoro2);
         dynoroFound = artistDao.getArtistByName("Dynoro");
 
-        Assert.assertEquals(2L,dynoroFound.size());
-        Assert.assertNotEquals(dynoro2,dynoroArtist);
+        Assert.assertEquals("There should be two artists with name Dynoro",2L,dynoroFound.size());
+        Assert.assertNotEquals("These two entities are not equal",dynoro2,dynoroArtist);
 
         dynoro2.setName("new Dynoro");
         artistDao.updateArtistInfo(dynoro2);
         dynoroFound = artistDao.getArtistByName("Dynoro");
 
-        Assert.assertEquals(1L,dynoroFound.size());
+        Assert.assertEquals("After name is changed there should be only one Dynoro artist",
+                1L,dynoroFound.size());
 
     }
 
@@ -137,12 +140,11 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         Artist foundArtist = artistDao.getArtistById(eminemArtist.getArtistId());
         Assert.assertNull("Eminem is not persisted enymore: should be NULL", foundArtist);
         Assert.assertEquals("After delete operation: Number of column should change - expected 2",
-                2L,
-                artistDao.getAllArtists().size());
+                2L, artistDao.getAllArtists().size());
 
         Assert.assertTrue("Database should contain Passenger", artistDao.getAllArtists().contains(passengerArtist));
         Assert.assertTrue("Database should contain Dynoro",artistDao.getAllArtists().contains(dynoroArtist));
-        Assert.assertFalse("Database should not contain Eminem",artistDao.getAllArtists().contains(eminemArtist));
+        Assert.assertFalse("Database should NOT contain Eminem",artistDao.getAllArtists().contains(eminemArtist));
 
     }
 
@@ -172,7 +174,10 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
 
     }
 
-
+    /**
+     * Checks that one to many relation between Song and Artist exists and works
+     *
+     */
     @Test()
     public void relationSongAndArtistTest() {
         Song firstSong = new Song();
