@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +12,10 @@ import java.util.List;
 public class Artist {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long artistId;
 
+    @Column(nullable=false)
     private String name;
 
     private Date birthDate;
