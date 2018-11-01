@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
-import cz.muni.fi.pa165.music_library.data.entities.Song;
 
 import java.util.ArrayList;
 import java.util.List;

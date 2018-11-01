@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>PA-165</groupId>
+    <groupId>cz.muni.fi.pa165.music_library</groupId>
     <artifactId>music-library</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
@@ -25,7 +25,11 @@
             <artifactId>javax.el</artifactId>
             <version>2.2.4</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.1.1.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -94,6 +98,13 @@
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>10.10.2.0</version>
+        </dependency>
+
+        <!-- TestNg -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
         </dependency>
 
         <dependency>
