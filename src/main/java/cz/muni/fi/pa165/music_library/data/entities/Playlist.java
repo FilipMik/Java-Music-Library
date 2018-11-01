@@ -14,10 +14,13 @@ import java.util.List;
 public class Playlist {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long playlistId;
 
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private Date dateCreated;
 
     @ManyToMany
