@@ -3,8 +3,8 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 
-import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -37,23 +37,19 @@ public class AlbumDaoImpl implements AlbumDao {
 
     @Override
     public List<Album> getAlbumByTitle(String title) {
-        try {
-            return em.createQuery("select a from Album a where title = :title", Album.class)
-                    .setParameter("title", title)
-                    .getResultList();
-        } catch (NoResultException nre) {
-            return null;
-        }
+        return em.createQuery("select a from Album a where title = :title", Album.class)
+                .setParameter("title", title)
+                .getResultList();
     }
 
     @Override
     public void deleteAlbum(Album album) {
-        em.remove(album);
+        // TODO implement
     }
 
     @Override
     public void updateAlbum(Album album) {
-        em.merge(album);
+        // TODO implement
     }
 
 }
