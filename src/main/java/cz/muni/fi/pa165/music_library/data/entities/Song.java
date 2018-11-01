@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Song {
     private Genre genre;
 
     @ManyToMany(mappedBy = "songList")
-    private List<Playlist> playlists;
+    private List<Playlist> playlists = new ArrayList<>();
 
     public Song() {
     }

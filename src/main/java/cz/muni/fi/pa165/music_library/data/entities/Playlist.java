@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Playlist {
     private Date dateCreated;
 
     @ManyToMany
-    private List<Song> songList;
+    private List<Song> songList = new ArrayList<>();
 
     @ManyToOne
     private User user;

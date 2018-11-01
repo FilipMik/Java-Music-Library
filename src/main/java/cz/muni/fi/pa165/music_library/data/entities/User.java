@@ -26,7 +26,7 @@ public class User {
     private UserLevel userLevel;
 
     @OneToMany(mappedBy = "user")
-    List<Playlist> playlists;
+    List<Playlist> playlists = new ArrayList<>();
 
     public User() {
     }
