@@ -3,9 +3,7 @@ package cz.muni.fi.pa165.music_library.data.entities;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 /**
  * @author Filip Mik on 16. 10. 2018
@@ -15,10 +13,13 @@ import javax.persistence.OneToMany;
 public class Album {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long albumId;
 
+    @Column(nullable = false)
     private Date releaseDate;
 
+    @Column(nullable = false)
     private String title;
 
     private String commentary;

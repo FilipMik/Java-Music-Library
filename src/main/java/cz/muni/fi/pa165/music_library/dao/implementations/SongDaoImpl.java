@@ -2,45 +2,56 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * @author //TODO YOUR NAME HERE
+ * @author Filip Mik
  */
 
+@Repository
 public class SongDaoImpl implements SongDao {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public void createSong(Song song) {
-        //TODO implement
+        em.persist(song);
     }
 
     @Override
     public List<Song> getAllSongs() {
-        //TODO implement
-        return null;
+        return em.createQuery("select s from Song s", Song.class).getResultList();
     }
 
     @Override
     public Song getSongById(Long songId) {
-        //TODO implement
-        return null;
+        return em.find(Song.class, songId);
     }
 
     @Override
     public List<Song> getSongByTitle(String title) {
-        //TODO implement
-        return null;
+        try {
+            return em.createQuery("select s from Song s where title = :title", Song.class)
+                    .setParameter("title", title)
+                    .getResultList();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override
     public void deleteSong(Song song) {
-        //TODO implement
+        em.remove(song);
     }
 
     @Override
     public void updateSong(Song song) {
-        //TODO implement
+        em.merge(song);
     }
 }

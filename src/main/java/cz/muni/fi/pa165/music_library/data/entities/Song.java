@@ -1,9 +1,6 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,8 +12,10 @@ import java.util.List;
 public class Song {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long songId;
 
+    @Column(nullable = false, updatable = false)
     private String title;
 
     private Integer bitRate;
