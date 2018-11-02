@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Artist {
     private String artistInfo;
 
     @OneToMany(mappedBy = "artist")
-    private List<Song> songList;
+    private List<Song> songList = new ArrayList<>();
 
     public Artist() {
     }
