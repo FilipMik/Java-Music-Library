@@ -44,12 +44,11 @@ public class AlbumDaoImpl implements AlbumDao {
 
     @Override
     public void deleteAlbum(Album album) {
-        // TODO implement
+        em.remove(album);
     }
 
     @Override
     public void updateAlbum(Album album) {
-        // TODO implement
+        em.merge(album);
     }
-
 }
