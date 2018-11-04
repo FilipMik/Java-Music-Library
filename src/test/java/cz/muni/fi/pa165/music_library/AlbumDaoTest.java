@@ -85,7 +85,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     public void testPersistenceWhenAlbumObjectIsNull_Exception() {
         albumDao.createAlbum(null);
 
-        assertNotEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
+        assertEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
     }
 
     /**
@@ -97,7 +97,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
 
         albumDao.createAlbum(albumOne);
 
-        assertNotEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
+        assertEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
     }
 
     /**
@@ -109,7 +109,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
 
         albumDao.createAlbum(albumOne);
 
-        assertNotEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
+        assertEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
     }
 
     /**
