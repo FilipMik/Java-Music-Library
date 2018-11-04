@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Jan Ficko
@@ -42,6 +42,9 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     private User userOne;
     private User userTwo;
 
+    private Playlist playListOne;
+    private Playlist playListTwo;
+
     /**
      * Instantiate two user objects that can be used throughout this test class.
      */
@@ -58,6 +61,14 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         userTwo.setEmail("test.two@mail.muni.cz");
         userTwo.setDateCreated(new Date());
         userTwo.setUserLevel(UserLevel.Admin);
+
+        playListOne = new Playlist();
+        playListOne.setTitle("Playlist One");
+        playListOne.setDateCreated(new Date());
+
+        playListTwo = new Playlist();
+        playListTwo.setTitle("Playlist Two");
+        playListTwo.setDateCreated(new Date());
     }
 
     /**
@@ -65,18 +76,9 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testUserPersistence() {
-        Playlist playlist = new Playlist();
-        playlist.setTitle("Playlist name");
-        playlist.setDateCreated(new Date());
-
-        playListDao.createPlaylist(playlist);
-
-        userOne.addPlaylist(playListDao.getAllPlaylists().get(0));
-
         userDao.createUser(userOne);
 
-        if (userDao.getAllUsers().size() != 1)
-            fail("Expected one user");
+        assertEquals("Expected one user", 1, userDao.getAllUsers().size());
     }
 
     /**
@@ -85,6 +87,8 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenUserObjectIsNull_Exception() {
         userDao.createUser(null);
+
+        assertEquals("Expected zero users", 0, userDao.getAllUsers().size());
     }
 
     /**
@@ -96,8 +100,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         userDao.createUser(userOne);
 
-        if (userDao.getAllUsers().size() != 0)
-            fail("Expected zero users");
+        assertEquals("Expected zero users", 0, userDao.getAllUsers().size());
     }
 
     /**
@@ -109,8 +112,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         userDao.createUser(userOne);
 
-        if (userDao.getAllUsers().size() != 0)
-            fail("Expected zero users");
+        assertEquals("Expected zero users", 0, userDao.getAllUsers().size());
     }
 
     /**
@@ -122,8 +124,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         userDao.createUser(userOne);
 
-        if (userDao.getAllUsers().size() != 1)
-            fail("Expected one user");
+        assertEquals("Expected one user", 1, userDao.getAllUsers().size());
     }
 
     /**
@@ -142,8 +143,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         List<User> users = userDao.getAllUsers();
 
-        if (users.size() != 2)
-            fail("Expected two users");
+        assertEquals("Expected two users", 2, users.size());
 
         assertEquals(users.get(0).getUsername(), "Test1");
         assertEquals(users.get(0).getEmail(), "test.one@mail.muni.cz");
@@ -165,13 +165,11 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         List<User> userList = userDao.getAllUsers();
 
-        if (userList.size() != 1)
-            fail("Expected one user");
+        assertEquals("Expected one user", 1, userList.size());
 
         User retrievedUser = userDao.getUserById(userList.get(0).getUserId());
 
-        if (retrievedUser == null)
-            fail("Expected to retrieve user by ID");
+        assertNotNull("Expected to retrieve user by ID", retrievedUser);
     }
 
     /**
@@ -183,7 +181,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         User retrievedUser = userDao.getUserByName("Test1");
 
-        assertEquals("Test1", retrievedUser.getUsername());
+        assertNotNull("Expected to retrieve at least one user", retrievedUser);
     }
 
     /**
@@ -203,8 +201,8 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         List<User> userList = userDao.getAllUsers();
 
-        if (userList.size() != 1)
-            fail("Expected one user");
+
+        assertEquals("Expected one user", 1, userList.size());
 
         User retrievedUser = userDao.getUserById(userList.get(0).getUserId());
 
@@ -214,8 +212,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         List<User> newUserList = userDao.getAllUsers();
 
-        if (newUserList.size() > 0)
-            fail("Expected zero users");
+        assertEquals("Expected zero users", 0, newUserList.size());
     }
 
     /**
@@ -229,8 +226,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         List<User> userList = userDao.getAllUsers();
 
-        if (userList.size() != 2)
-            fail("Expected two users");
+        assertEquals("Expected two users", 2, userList.size());
 
         User retrievedUser = userDao.getUserById(userList.get(1).getUserId());
 
@@ -240,8 +236,8 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         List<User> newUserList = userDao.getAllUsers();
 
-        if (newUserList.size() != 1)
-            fail("Expected one user");
+
+        assertEquals("Expected one user", 1, newUserList.size());
 
         assertEquals(userOne.getUsername(), newUserList.get(0).getUsername());
     }
@@ -260,11 +256,36 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         userDao.updateUser(firstUserRetrieve);
 
         List<User> userList = userDao.getAllUsers();
-
-        if (userList.size() != 2)
-            fail("Expected two users");
+        assertEquals("Expected two users", 2, userList.size());
 
         assertEquals(firstUserRetrieve.getUserId(), userList.get(0).getUserId());
+    }
+
+    /**
+     * Test that one to many relation between Playlist and User is correct.
+     */
+    @Test
+    public void testUserAndPlaylistRelation() {
+        userOne.addPlaylist(playListOne);
+        userOne.addPlaylist(playListTwo);
+
+        playListOne.setUser(userOne);
+        playListTwo.setUser(userTwo);
+
+        playListDao.createPlaylist(playListOne);
+        playListDao.createPlaylist(playListTwo);
+        userDao.createUser(userOne);
+
+        User retrievedUser = userDao.getUserById(userOne.getUserId());
+        assertEquals("Expected 2 playlists connected to user", 2, retrievedUser.getPlaylists().size());
+
+        Playlist retrievedPlaylistOne = retrievedUser.getPlaylists().get(0);
+        Playlist retrievedPlaylistTwo = retrievedUser.getPlaylists().get(1);
+        assertEquals("Expected reference to first playlist", playListOne, retrievedPlaylistOne);
+        assertEquals("Expected reference to second playlist", playListTwo, retrievedPlaylistTwo);
+
+        Playlist retrievedPlaylist = playListDao.getPlaylistById(playListOne.getPlaylistId());
+        assertEquals( "Test1", retrievedPlaylist.getUser().getUsername());
     }
 
 }
