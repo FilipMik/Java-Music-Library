@@ -19,8 +19,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * @author Jan Ficko
@@ -60,9 +59,11 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumTwo.setCommentary("Commentary two.");
         albumTwo.setAlbumArtUrl("https://album.two");
 
+        songOne = new Song();
         songOne.setTitle("Song One");
         songDao.createSong(songOne);
 
+        songTwo = new Song();
         songTwo.setTitle("Song Two");
         songDao.createSong(songTwo);
     }
@@ -75,8 +76,8 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumOne.addSong(songDao.getSongByTitle("Song One").get(0));
 
         albumDao.createAlbum(albumOne);
-        if (albumDao.getAllAlbums().size() != 1)
-            fail("Expected one album");
+
+        assertEquals("Expected one album", 1, albumDao.getAllAlbums().size());
     }
 
     /**
@@ -85,6 +86,8 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenAlbumObjectIsNull_Exception() {
         albumDao.createAlbum(null);
+
+        assertNotEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
     }
 
     /**
@@ -96,8 +99,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
 
         albumDao.createAlbum(albumOne);
 
-        if (albumDao.getAllAlbums().size() != 0)
-            fail("Expected zero albums");
+        assertNotEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
     }
 
     /**
@@ -109,8 +111,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
 
         albumDao.createAlbum(albumOne);
 
-        if (albumDao.getAllAlbums().size() != 0)
-            fail("Expected zero albums");
+        assertNotEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
     }
 
     /**
@@ -122,8 +123,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
 
         albumDao.createAlbum(albumOne);
 
-        if (albumDao.getAllAlbums().size() != 1)
-            fail("Expected one album");
+        assertEquals("Expected one album", 1, albumDao.getAllAlbums().size());
     }
 
     /**
@@ -140,8 +140,8 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.createAlbum(albumTwo);
 
         List<Album> albums = albumDao.getAllAlbums();
-        if (albums.size() != 2)
-            fail("Expected two albums");
+
+        assertEquals("Expected two albums", 2, albums.size());
 
         assertEquals(albums.get(0).getReleaseDate(), currentDate);
         assertEquals(albums.get(0).getTitle(), "Album One");
@@ -161,12 +161,11 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.createAlbum(albumOne);
 
         List<Album> albumList = albumDao.getAllAlbums();
-        if (albumList.size() != 1)
-            fail("Expected one album");
+        assertEquals("Expected one album", 1, albumList.size());
 
         Album retrievedAlbum = albumDao.getAlbumById(albumList.get(0).getAlbumId());
-        if (retrievedAlbum == null)
-            fail("Expected to retrieve album by ID");
+
+        assertNotNull("Expected to retrieve album by ID", retrievedAlbum);
     }
 
     /**
@@ -178,8 +177,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
 
         List<Album> retrievedAlbum = albumDao.getAlbumByTitle("Album One");
 
-        if (retrievedAlbum == null)
-            fail("Expected to retrieve at least one album");
+        assertNotNull("Expected to retrieve at least one album", retrievedAlbum);
     }
     /**
      * Test if exception is thrown when trying to delete null album object.
@@ -194,11 +192,10 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testDeleteOneAlbum() {
-        albumDao.createAlbum(albumOne)
-        ;
+        albumDao.createAlbum(albumOne);
+
         List<Album> albumList = albumDao.getAllAlbums();
-        if (albumList.size() != 1)
-            fail("Expected one album");
+        assertEquals("Expected one album", 1, albumList.size());
 
         Album retrievedAlbum = albumDao.getAlbumById(albumList.get(0).getAlbumId());
         assertEquals(albumOne.getTitle(), retrievedAlbum.getTitle());
@@ -206,8 +203,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.deleteAlbum(retrievedAlbum);
 
         List<Album> newAlbumList = albumDao.getAllAlbums();
-        if (newAlbumList.size() > 0)
-            fail("Expected zero albums");
+        assertEquals("Expected zero albums", 0, newAlbumList.size());
     }
 
     /**
@@ -219,8 +215,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.createAlbum(albumTwo);
 
         List<Album> albumList = albumDao.getAllAlbums();
-        if (albumList.size() != 2)
-            fail("Expected two albums");
+        assertEquals("Expected two albums", 2, albumList.size());
 
         Album retrievedAlbum = albumDao.getAlbumById(albumList.get(1).getAlbumId());
         assertEquals(albumTwo.getTitle(), retrievedAlbum.getTitle());
@@ -228,8 +223,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.deleteAlbum(retrievedAlbum);
 
         List<Album> newAlbumList = albumDao.getAllAlbums();
-        if (newAlbumList.size() != 1)
-            fail("Expected one album");
+        assertEquals("Expected one album", 1, newAlbumList.size());
 
         assertEquals(albumOne.getTitle(), newAlbumList.get(0).getTitle());
     }
@@ -247,8 +241,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.updateAlbum(firstAlbumRetrieve.get(0));
 
         List<Album> albumList = albumDao.getAllAlbums();
-        if (albumList.size() != 2)
-            fail("Expected two albums");
+        assertEquals("Expected two albums", 2, albumList.size());
 
         assertEquals(firstAlbumRetrieve.get(0).getAlbumId(), albumList.get(0).getAlbumId());
     }
