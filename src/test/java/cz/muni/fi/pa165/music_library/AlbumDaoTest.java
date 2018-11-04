@@ -73,8 +73,6 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testAlbumPersistence() {
-        albumOne.addSong(songDao.getSongByTitle("Song One").get(0));
-
         albumDao.createAlbum(albumOne);
 
         assertEquals("Expected one album", 1, albumDao.getAllAlbums().size());
@@ -244,6 +242,32 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         assertEquals("Expected two albums", 2, albumList.size());
 
         assertEquals(firstAlbumRetrieve.get(0).getAlbumId(), albumList.get(0).getAlbumId());
+    }
+
+    /**
+     * Test that one to many relation between Song and Album is correct.
+     */
+    @Test
+    public void testAlbumAndSongRelation() {
+        albumOne.addSong(songOne);
+        albumOne.addSong(songTwo);
+        songOne.setAlbum(albumOne);
+        songTwo.setAlbum(albumOne);
+
+        songDao.createSong(songOne);
+        songDao.createSong(songTwo);
+        albumDao.createAlbum(albumOne);
+
+        Album retrievedAlbum = albumDao.getAlbumById(albumOne.getAlbumId());
+        assertEquals("Expected 2 songs in album", 2L, retrievedAlbum.getSongList().size());
+
+        Song retrievedSongOne = retrievedAlbum.getSongList().get(0);
+        Song retrievedSongTwo = retrievedAlbum.getSongList().get(1);
+        assertEquals("Expected reference to first song", songOne, retrievedSongOne);
+        assertEquals("Expected reference to second song", songTwo, retrievedSongTwo);
+
+        Song retrievedSong = songDao.getSongById(songOne.getSongId());
+        assertEquals( "Album One", retrievedSong.getAlbum().getTitle());
     }
 
 }
