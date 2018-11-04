@@ -51,5 +51,4 @@ public class AlbumDaoImpl implements AlbumDao {
     public void updateAlbum(Album album) {
         em.merge(album);
     }
-
 }
