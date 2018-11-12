@@ -33,6 +33,14 @@ public class Album {
     public Album() {
     }
 
+    public Album(Date releaseDate, String title, String commentary, String albumArtUrl, List<Song> songList) {
+        setReleaseDate(releaseDate);
+        setTitle(title);
+        setCommentary(commentary);
+        setAlbumArtUrl(albumArtUrl);
+        setSongList(songList);
+    }
+
     public Long getAlbumId() {
         return albumId;
     }
@@ -79,6 +87,10 @@ public class Album {
         return Collections.unmodifiableList(songList);
     }
 
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
+    }
+
     public void addSong(Song song) {
         if (song == null) throw new IllegalArgumentException("Cannot add null Song!");
         if (!this.songList.contains(song)) {
@@ -97,12 +109,10 @@ public class Album {
 
         Album album = (Album) o;
 
-        if (getReleaseDate() != null ? !getReleaseDate().equals(album.getReleaseDate()) : album.getReleaseDate() != null)
-            return false;
-        if (getTitle() != null ? !getTitle().equals(album.getTitle()) : album.getTitle() != null) return false;
-        if (getCommentary() != null ? !getCommentary().equals(album.getCommentary()) : album.getCommentary() != null)
-            return false;
-        return getAlbumArtUrl() != null ? getAlbumArtUrl().equals(album.getAlbumArtUrl()) : album.getAlbumArtUrl() == null;
+        if (!getReleaseDate().equals(album.getReleaseDate())) return false;
+        if (!getTitle().equals(album.getTitle())) return false;
+        if (!getCommentary().equals(album.getCommentary())) return false;
+        return getAlbumArtUrl().equals(album.getAlbumArtUrl());
     }
 
     @Override
