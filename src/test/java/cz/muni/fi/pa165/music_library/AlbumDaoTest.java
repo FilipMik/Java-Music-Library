@@ -103,7 +103,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if exception is thrown if there is no title set.
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenTitleIsNull_Exception() {
         albumOne.setTitle(null);
 

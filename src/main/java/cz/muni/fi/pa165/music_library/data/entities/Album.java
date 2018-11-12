@@ -55,7 +55,7 @@ public class Album {
     }
 
     public void setTitle(String title) {
-        if (releaseDate == null) throw new IllegalArgumentException("Album title cannot be null!");
+        if (title == null) throw new IllegalArgumentException("Album title cannot be null!");
         this.title = title;
     }
 
