@@ -29,6 +29,13 @@ public class Artist {
     public Artist() {
     }
 
+    public Artist(String name, Date birthDate, String artistInfo, List<Song> songList) {
+        setName(name);
+        setBirthDate(birthDate);
+        setArtistInfo(artistInfo);
+        setSongList(songList);
+    }
+
     public Long getArtistId() {
         return artistId;
     }
@@ -66,6 +73,10 @@ public class Artist {
         return Collections.unmodifiableList(songList);
     }
 
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
+    }
+
     public void addSong(Song song) {
         if (song == null) throw new IllegalArgumentException("Cannot add null song!");
         if (!this.songList.contains(song)) {
@@ -84,10 +95,9 @@ public class Artist {
 
         Artist artist = (Artist) o;
 
-        if (getName() != null ? !getName().equals(artist.getName()) : artist.getName() != null) return false;
-        if (getBirthDate() != null ? !getBirthDate().equals(artist.getBirthDate()) : artist.getBirthDate() != null)
-            return false;
-        return getArtistInfo() != null ? getArtistInfo().equals(artist.getArtistInfo()) : artist.getArtistInfo() == null;
+        if (!getName().equals(artist.getName())) return false;
+        if (!getBirthDate().equals(artist.getBirthDate())) return false;
+        return getArtistInfo().equals(artist.getArtistInfo());
     }
 
     @Override
