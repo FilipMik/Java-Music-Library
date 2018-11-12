@@ -122,15 +122,12 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     /**
-     * Test if user object is inserted even though the playlist is null.
+     * Test if user when adding playlist that is null.
      */
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenPlaylistIsNull() {
         userOne.addPlaylist(null);
-
         userDao.createUser(userOne);
-
-        assertEquals("Expected one user", 1, userDao.getAllUsers().size());
     }
 
     /**
