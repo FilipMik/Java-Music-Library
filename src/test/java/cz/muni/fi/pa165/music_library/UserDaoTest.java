@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
  * @author Jan Ficko
  */
 
-@ContextConfiguration(classes=ApplicationContext.class)
+@ContextConfiguration(classes = ApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
@@ -179,7 +179,8 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     public void testGetUserByUsername() {
         userDao.createUser(userOne);
 
-        User retrievedUser = userDao.getUserByName("Test1");
+        List<User> userList = userDao.getUserByName("Test1");
+        User retrievedUser = userList.get(userList.size() - 1);
 
         assertNotNull("Expected to retrieve at least one user", retrievedUser);
     }
@@ -251,7 +252,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         userDao.createUser(userTwo);
 
-        User firstUserRetrieve = userDao.getUserByName("Test1");
+        User firstUserRetrieve = userDao.getUserByName("Test1").get(0);
         firstUserRetrieve.setUsername("Masarykova");
         userDao.updateUser(firstUserRetrieve);
 
@@ -285,7 +286,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         assertEquals("Expected reference to second playlist", playListTwo, retrievedPlaylistTwo);
 
         Playlist retrievedPlaylist = playListDao.getPlaylistById(playListOne.getPlaylistId());
-        assertEquals( "Test1", retrievedPlaylist.getUser().getUsername());
+        assertEquals("Test1", retrievedPlaylist.getUser().getUsername());
     }
 
 }

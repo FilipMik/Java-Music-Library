@@ -34,7 +34,7 @@ public interface UserDao {
      * @param username Id of searched user
      * @return User object with given username
      */
-    User getUserByName(String username);
+    List<User> getUserByName(String username);
 
     /**
      * Delete given user from persistence
