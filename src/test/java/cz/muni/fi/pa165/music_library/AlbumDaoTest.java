@@ -91,7 +91,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if exception is thrown if there is no release date set.
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenReleaseDateIsNull_Exception() {
         albumOne.setReleaseDate(null);
 
@@ -103,7 +103,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if exception is thrown if there is no title set.
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenTitleIsNull_Exception() {
         albumOne.setTitle(null);
 
@@ -115,13 +115,10 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if album object is inserted even though the song is null.
      */
-    @Test
-    public void testPersistenceWhenPlaylistIsNull() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNullSong() {
         albumOne.addSong(null);
-
         albumDao.createAlbum(albumOne);
-
-        assertEquals("Expected one album", 1, albumDao.getAllAlbums().size());
     }
 
     /**

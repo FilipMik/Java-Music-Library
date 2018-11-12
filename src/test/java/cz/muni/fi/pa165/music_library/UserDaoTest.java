@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
  * @author Jan Ficko
  */
 
-@ContextConfiguration(classes=ApplicationContext.class)
+@ContextConfiguration(classes = ApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
@@ -55,12 +55,14 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         userOne.setEmail("test.one@mail.muni.cz");
         userOne.setDateCreated(new Date());
         userOne.setUserLevel(UserLevel.BasicUser);
+        userOne.setPassword("halabala");
 
         userTwo = new User();
         userTwo.setUsername("Test2");
         userTwo.setEmail("test.two@mail.muni.cz");
         userTwo.setDateCreated(new Date());
         userTwo.setUserLevel(UserLevel.Admin);
+        userTwo.setPassword("halabala");
 
         playListOne = new Playlist();
         playListOne.setTitle("Playlist One");
@@ -94,37 +96,38 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if exception is thrown if there is no username set.
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenUsernameIsNull_Exception() {
         userOne.setUsername(null);
 
         userDao.createUser(userOne);
+    }
 
-        assertEquals("Expected zero users", 0, userDao.getAllUsers().size());
+    /**
+     * Test if exception is thrown if there is no username set.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testShortPassword() {
+        userOne.setPassword("rasca");
+        userDao.createUser(userOne);
     }
 
     /**
      * Test if exception is thrown if no email is set.
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenEmailIsNull_Exception() {
         userOne.setEmail(null);
-
         userDao.createUser(userOne);
-
-        assertEquals("Expected zero users", 0, userDao.getAllUsers().size());
     }
 
     /**
-     * Test if user object is inserted even though the playlist is null.
+     * Test if user when adding playlist that is null.
      */
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenPlaylistIsNull() {
         userOne.addPlaylist(null);
-
         userDao.createUser(userOne);
-
-        assertEquals("Expected one user", 1, userDao.getAllUsers().size());
     }
 
     /**
@@ -285,7 +288,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         assertEquals("Expected reference to second playlist", playListTwo, retrievedPlaylistTwo);
 
         Playlist retrievedPlaylist = playListDao.getPlaylistById(playListOne.getPlaylistId());
-        assertEquals( "Test1", retrievedPlaylist.getUser().getUsername());
+        assertEquals("Test1", retrievedPlaylist.getUser().getUsername());
     }
 
 }

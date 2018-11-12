@@ -59,13 +59,11 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         dynoroArtist.setArtistInfo("Hit maker");
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void nullArtistNameNotAllowedTest() {
         Artist artist = new Artist();
         artist.setName(null);
         artistDao.createArtist(artist);
-
-        Assert.assertNotEquals("There should be no data",0L, artistDao.getAllArtists().size());
     }
 
     /**
@@ -81,7 +79,7 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         artistDao.createArtist(passengerArtist);
         artistDao.createArtist(dynoroArtist);
 
-        List<Artist> dynoroFound = artistDao.getArtistByName("Dynoro");
+        List<Artist> dynoroFound = artistDao.getArtistsByName("Dynoro");
 
         Assert.assertEquals(1L,dynoroFound.size());
         Assert.assertEquals(dynoroArtist,dynoroFound.get(0));
@@ -93,14 +91,14 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         dynoro2.setArtistInfo("New Dynoro");
 
         artistDao.createArtist(dynoro2);
-        dynoroFound = artistDao.getArtistByName("Dynoro");
+        dynoroFound = artistDao.getArtistsByName("Dynoro");
 
         Assert.assertEquals("There should be two artists with name Dynoro",2L,dynoroFound.size());
         Assert.assertNotEquals("These two entities are not equal",dynoro2,dynoroArtist);
 
         dynoro2.setName("new Dynoro");
         artistDao.updateArtistInfo(dynoro2);
-        dynoroFound = artistDao.getArtistByName("Dynoro");
+        dynoroFound = artistDao.getArtistsByName("Dynoro");
 
         Assert.assertEquals("After name is changed there should be only one Dynoro artist",
                 1L,dynoroFound.size());

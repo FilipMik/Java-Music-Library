@@ -46,6 +46,7 @@ public class Playlist {
     }
 
     public void setTitle(String title) {
+        if (title == null) throw new IllegalArgumentException("Playlist title can not be null!");
         this.title = title;
     }
 
@@ -54,6 +55,7 @@ public class Playlist {
     }
 
     public void setDateCreated(Date dateCreated) {
+        if (dateCreated == null) throw new IllegalArgumentException("Creation date of playlist cannot be null!");
         this.dateCreated = dateCreated;
     }
 
@@ -62,6 +64,7 @@ public class Playlist {
     }
 
     public void addSong(Song song) {
+        if (song == null) throw new IllegalArgumentException("Added song cannot be null!");
         songList.add(song);
         song.addPlaylist(this);
     }

@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.music_library.dao.interfaces;
 
-import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
 
 import java.util.List;
@@ -39,8 +38,7 @@ public interface ArtistDao {
      * @param artistName Name of searched artist
      * @return Found artist with given name
      */
-    List<Artist> getArtistByName(String artistName);
-
+    List<Artist> getArtistsByName(String artistName);
 
     /**
      * Remove given artist
@@ -55,5 +53,4 @@ public interface ArtistDao {
      * @param artist Artist that will be updated
      */
     void updateArtistInfo(Artist artist);
-
 }

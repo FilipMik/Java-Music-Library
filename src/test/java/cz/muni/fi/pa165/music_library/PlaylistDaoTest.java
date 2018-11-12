@@ -60,24 +60,20 @@ public class PlaylistDaoTest extends AbstractTestNGSpringContextTests {
         travelPlaylist.setDateCreated(new Date());
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void nullNameTest() {
         Playlist playlist = new Playlist();
         playlist.setTitle(null);
         playlist.setDateCreated(new Date());
         playListDao.createPlaylist(playlist);
-
-        Assert.assertNotEquals("There should be no data", 0L, playListDao.getAllPlaylists().size());
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void nullDateTest() {
         Playlist playlist = new Playlist();
         playlist.setTitle("Sample title");
         playlist.setDateCreated(null);
         playListDao.createPlaylist(playlist);
-
-        Assert.assertNotEquals("There should be no data", 0L, playListDao.getAllPlaylists().size());
     }
 
     @Test(expected = IllegalArgumentException.class)
