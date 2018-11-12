@@ -67,7 +67,8 @@ public class User {
 
     public void setPassword(String password) {
         if (password == null) throw new IllegalArgumentException("User password can not be null!");
-        if (password.length() < 6) throw new IllegalArgumentException("User password must be at least 6 characters long");
+        if (password.length() < 6)
+            throw new IllegalArgumentException("User password must be at least 6 characters long");
         this.password = password;
     }
 
@@ -93,7 +94,10 @@ public class User {
     }
 
     public void addPlaylist(Playlist playlist) {
-        this.playlists.add(playlist);
+        if (playlist == null) throw new IllegalArgumentException("Can not add null playlist!");
+        if (!this.playlists.contains(playlist)) {
+            this.playlists.add(playlist);
+        }
     }
 
     public void removePlaylist(Playlist playlist) {
