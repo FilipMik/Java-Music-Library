@@ -46,6 +46,7 @@ public class Album {
     }
 
     public void setReleaseDate(Date releaseDate) {
+        if (releaseDate == null) throw new IllegalArgumentException("Release date cannot be null!");
         this.releaseDate = releaseDate;
     }
 
@@ -54,6 +55,7 @@ public class Album {
     }
 
     public void setTitle(String title) {
+        if (releaseDate == null) throw new IllegalArgumentException("Album title cannot be null!");
         this.title = title;
     }
 
@@ -78,7 +80,10 @@ public class Album {
     }
 
     public void addSong(Song song) {
-        this.songList.add(song);
+        if (song == null) throw new IllegalArgumentException("Cannot add null Song!");
+        if (!this.songList.contains(song)) {
+            this.songList.add(song);
+        }
     }
 
     public void removeSong(Song song) {
