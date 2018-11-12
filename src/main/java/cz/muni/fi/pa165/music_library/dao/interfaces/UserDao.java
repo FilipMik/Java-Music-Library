@@ -12,18 +12,21 @@ public interface UserDao {
 
     /**
      * Add new user to persistence
+     *
      * @param user User to be added to database(persistence)
      */
     void createUser(User user);
 
     /**
      * Get all users from the system database
+     *
      * @return List of all users found in database, empty list if there are no users
      */
     List<User> getAllUsers();
 
     /**
      * Find user with given id and return it
+     *
      * @param userId Id of searched user
      * @return User object with given id
      */
@@ -31,19 +34,22 @@ public interface UserDao {
 
     /**
      * Find user with given name and return it
+     *
      * @param username Id of searched user
      * @return User object with given username
      */
-    List<User> getUserByName(String username);
+    User getUserByName(String username);
 
     /**
      * Delete given user from persistence
+     *
      * @param user Searched user
      */
     void deleteUser(User user);
 
     /**
      * Update user
+     *
      * @param user User that will be updated
      */
     void updateUser(User user);
