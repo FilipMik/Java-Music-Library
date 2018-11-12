@@ -39,6 +39,17 @@ public class Song {
     public Song() {
     }
 
+    public Song(String title, Integer bitRate, Artist artist, Album album, Integer albumPosition, String commentary, Genre genre, List<Playlist> playlists) {
+        setTitle(title);
+        setBitRate(bitRate);
+        setArtist(artist);
+        setAlbum(album);
+        setAlbumPosition(albumPosition);
+        setCommentary(commentary);
+        setGenre(genre);
+        setPlaylists(playlists);
+    }
+
     public Long getSongId() {
         return songId;
     }
@@ -107,6 +118,10 @@ public class Song {
         return Collections.unmodifiableList(playlists);
     }
 
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
     public void addPlaylist(Playlist playlist) {
         this.playlists.add(playlist);
     }
@@ -122,13 +137,11 @@ public class Song {
 
         Song song = (Song) o;
 
-        if (getTitle() != null ? !getTitle().equals(song.getTitle()) : song.getTitle() != null) return false;
-        if (getBitRate() != null ? !getBitRate().equals(song.getBitRate()) : song.getBitRate() != null) return false;
-        if (getAlbumPosition() != null ? !getAlbumPosition().equals(song.getAlbumPosition()) : song.getAlbumPosition() != null)
-            return false;
-        if (getCommentary() != null ? !getCommentary().equals(song.getCommentary()) : song.getCommentary() != null)
-            return false;
-        return getGenre() == song.getGenre();
+        if (!getTitle().equals(song.getTitle())) return false;
+        if (!getBitRate().equals(song.getBitRate())) return false;
+        if (!getAlbumPosition().equals(song.getAlbumPosition())) return false;
+        if (!getCommentary().equals(song.getCommentary())) return false;
+        return getGenre().equals(song.getGenre());
     }
 
     @Override
