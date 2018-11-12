@@ -33,6 +33,13 @@ public class Playlist {
     public Playlist() {
     }
 
+    public Playlist(String title, Date dateCreated, List<Song> songList, User user) {
+        setTitle(title);
+        setDateCreated(dateCreated);
+        setSongList(songList);
+        setUser(user);
+    }
+
     public Long getPlaylistId() {
         return playlistId;
     }
@@ -63,6 +70,10 @@ public class Playlist {
         return Collections.unmodifiableList(songList);
     }
 
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
+    }
+
     public void addSong(Song song) {
         if (song == null) throw new IllegalArgumentException("Added song cannot be null!");
         songList.add(song);
@@ -89,8 +100,8 @@ public class Playlist {
 
         Playlist playlist = (Playlist) o;
 
-        if (getTitle() != null ? !getTitle().equals(playlist.getTitle()) : playlist.getTitle() != null) return false;
-        return getDateCreated() != null ? getDateCreated().equals(playlist.getDateCreated()) : playlist.getDateCreated() == null;
+        if (!getTitle().equals(playlist.getTitle())) return false;
+        return getDateCreated().equals(playlist.getDateCreated());
     }
 
     @Override
