@@ -59,13 +59,11 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         dynoroArtist.setArtistInfo("Hit maker");
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void nullArtistNameNotAllowedTest() {
         Artist artist = new Artist();
         artist.setName(null);
         artistDao.createArtist(artist);
-
-        Assert.assertNotEquals("There should be no data",0L, artistDao.getAllArtists().size());
     }
 
     /**

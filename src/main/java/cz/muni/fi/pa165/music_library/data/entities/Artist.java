@@ -13,10 +13,10 @@ import java.util.List;
 public class Artist {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long artistId;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String name;
 
     private Date birthDate;
@@ -42,6 +42,7 @@ public class Artist {
     }
 
     public void setName(String name) {
+        if (name == null) throw new IllegalArgumentException("Artist name cannot be null!");
         this.name = name;
     }
 
@@ -66,7 +67,10 @@ public class Artist {
     }
 
     public void addSong(Song song) {
-        this.songList.add(song);
+        if (song == null) throw new IllegalArgumentException("Cannot add null song!");
+        if (!this.songList.contains(song)) {
+            this.songList.add(song);
+        }
     }
 
     public void removeSong(Song song) {

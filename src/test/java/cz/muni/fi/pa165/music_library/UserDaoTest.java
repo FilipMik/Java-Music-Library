@@ -179,8 +179,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     public void testGetUserByUsername() {
         userDao.createUser(userOne);
 
-        List<User> userList = userDao.getUserByName("Test1");
-        User retrievedUser = userList.get(userList.size() - 1);
+        User retrievedUser = userDao.getUserByName("Test1");
 
         assertNotNull("Expected to retrieve at least one user", retrievedUser);
     }
@@ -252,7 +251,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
         userDao.createUser(userTwo);
 
-        User firstUserRetrieve = userDao.getUserByName("Test1").get(0);
+        User firstUserRetrieve = userDao.getUserByName("Test1");
         firstUserRetrieve.setUsername("Masarykova");
         userDao.updateUser(firstUserRetrieve);
 
