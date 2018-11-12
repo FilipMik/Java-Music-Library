@@ -55,12 +55,14 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         userOne.setEmail("test.one@mail.muni.cz");
         userOne.setDateCreated(new Date());
         userOne.setUserLevel(UserLevel.BasicUser);
+        userOne.setPassword("halabala");
 
         userTwo = new User();
         userTwo.setUsername("Test2");
         userTwo.setEmail("test.two@mail.muni.cz");
         userTwo.setDateCreated(new Date());
         userTwo.setUserLevel(UserLevel.Admin);
+        userTwo.setPassword("halabala");
 
         playListOne = new Playlist();
         playListOne.setTitle("Playlist One");
@@ -94,25 +96,29 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if exception is thrown if there is no username set.
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenUsernameIsNull_Exception() {
         userOne.setUsername(null);
 
         userDao.createUser(userOne);
+    }
 
-        assertEquals("Expected zero users", 0, userDao.getAllUsers().size());
+    /**
+     * Test if exception is thrown if there is no username set.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testShortPassword() {
+        userOne.setPassword("rasca");
+        userDao.createUser(userOne);
     }
 
     /**
      * Test if exception is thrown if no email is set.
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPersistenceWhenEmailIsNull_Exception() {
         userOne.setEmail(null);
-
         userDao.createUser(userOne);
-
-        assertEquals("Expected zero users", 0, userDao.getAllUsers().size());
     }
 
     /**

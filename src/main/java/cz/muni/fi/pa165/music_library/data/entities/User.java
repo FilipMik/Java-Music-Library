@@ -8,7 +8,7 @@ import java.util.*;
  */
 
 @Entity
-@Table(name="Users")
+@Table(name = "Users")
 public class User {
 
     @Id
@@ -21,6 +21,10 @@ public class User {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
     private Date dateCreated;
 
     private UserLevel userLevel;
@@ -44,6 +48,7 @@ public class User {
     }
 
     public void setUsername(String userName) {
+        if (userName == null) throw new IllegalArgumentException("Username can not be null!");
         this.username = userName;
     }
 
@@ -52,7 +57,18 @@ public class User {
     }
 
     public void setEmail(String email) {
+        if (email == null) throw new IllegalArgumentException("User email can not be null!");
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        if (password == null) throw new IllegalArgumentException("User password can not be null!");
+        if (password.length() < 6) throw new IllegalArgumentException("User password must be at least 6 characters long");
+        this.password = password;
     }
 
     public Date getDateCreated() {
@@ -60,6 +76,7 @@ public class User {
     }
 
     public void setDateCreated(Date dateCreated) {
+        if (dateCreated == null) throw new IllegalArgumentException("Date of creation can not be null!");
         this.dateCreated = dateCreated;
     }
 
