@@ -35,6 +35,15 @@ public class User {
     public User() {
     }
 
+    public User(String username, String email, String password, Date dateCreated, UserLevel userLevel, List<Playlist> playlists) {
+        setUsername(username);
+        setEmail(email);
+        setPassword(password);
+        setDateCreated(dateCreated);
+        setUserLevel(userLevel);
+        setPlaylists(playlists);
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -93,6 +102,10 @@ public class User {
         return Collections.unmodifiableList(playlists);
     }
 
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
     public void addPlaylist(Playlist playlist) {
         if (playlist == null) throw new IllegalArgumentException("Can not add null playlist!");
         if (!this.playlists.contains(playlist)) {
@@ -111,12 +124,10 @@ public class User {
 
         User user = (User) o;
 
-        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
-            return false;
-        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
-        if (getDateCreated() != null ? !getDateCreated().equals(user.getDateCreated()) : user.getDateCreated() != null)
-            return false;
-        return getUserLevel() == user.getUserLevel();
+        if (!getUsername().equals(user.getUsername())) return false;
+        if (!getEmail().equals(user.getEmail())) return false;
+        if (!getDateCreated().equals(user.getDateCreated())) return false;
+        return getUserLevel().equals(user.getUserLevel());
     }
 
     @Override
