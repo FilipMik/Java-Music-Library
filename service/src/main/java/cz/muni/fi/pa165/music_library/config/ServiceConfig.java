@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.music_library.config;
 
+import cz.muni.fi.pa165.music_library.ApplicationContext;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
