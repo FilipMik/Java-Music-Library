@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.music_library.config.ServiceConfig;
 import cz.muni.fi.pa165.music_library.service.BeanMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.testng.Assert;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
@@ -19,6 +20,6 @@ public class DozerInjectionTest extends AbstractTestNGSpringContextTests  {
 
     @Test
     public void testInjection() {
-
+        Assert.assertNotNull(beanMappingService.getMapper());
     }
 }
