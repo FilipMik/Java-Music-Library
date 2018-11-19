@@ -13,6 +13,7 @@ public interface AlbumService {
 
     /**
      * Returns list of albums with specified ID
+     *
      * @param albumId Id of Album
      * @return Album with album ID (unique)
      */

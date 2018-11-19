@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Peter Žiška
+ * ID: 487569
+ */
+
 @Service
 public class AlbumServiceImpl implements AlbumService{
 
