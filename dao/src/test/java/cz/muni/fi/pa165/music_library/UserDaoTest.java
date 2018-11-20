@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.music_library.dao.interfaces.UserDao;
 import cz.muni.fi.pa165.music_library.data.entities.Playlist;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -128,6 +129,12 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     public void testPersistenceWhenPlaylistIsNull() {
         userOne.addPlaylist(null);
         userDao.createUser(userOne);
+    }
+
+    @Test
+    public void findUserByIdTest() {
+        userDao.createUser(userTwo);
+        Assert.assertNotNull(userDao.getUserByEmail("test.two@mail.muni.cz"));
     }
 
     /**

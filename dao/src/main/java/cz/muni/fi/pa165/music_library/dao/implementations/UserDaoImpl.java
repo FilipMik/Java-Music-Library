@@ -44,6 +44,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        try {
+            return em.createQuery("select u from User u where email = :email", User.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+    @Override
     public void deleteUser(User user) {
         em.remove(user);
     }
