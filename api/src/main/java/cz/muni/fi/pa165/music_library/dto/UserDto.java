@@ -2,6 +2,10 @@ package cz.muni.fi.pa165.music_library.dto;
 
 import java.util.*;
 
+/**
+ * @author Klara Minsterova
+ */
+
 public class UserDto {
 
     private Long userId;
@@ -73,7 +77,6 @@ public class UserDto {
     public void setPlaylists(List<PlaylistDto> playlists) {
         this.playlists = playlists;
     }
-
 
     @Override
     public boolean equals(Object o) {
