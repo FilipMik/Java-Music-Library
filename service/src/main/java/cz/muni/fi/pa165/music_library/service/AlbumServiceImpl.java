@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.music_library.data.entities.Album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +19,9 @@ public class AlbumServiceImpl implements AlbumService{
 
     @Autowired
     private AlbumDao albumDao;
+
+    @Autowired
+    private TimeService timeService;
 
     @Override
     public Album getAlbumById(Long albumId) {
@@ -50,6 +55,10 @@ public class AlbumServiceImpl implements AlbumService{
 
     @Override
     public List<Album> getLastWeekAlbums() {
-        return null;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(timeService.getCurrentDate());
+        calendar.add(Calendar.DAY_OF_YEAR, -7);
+        Date lastWeek = calendar.getTime();
+        return albumDao.getAllAlbumsBetween(lastWeek,timeService.getCurrentDate());
     }
 }
