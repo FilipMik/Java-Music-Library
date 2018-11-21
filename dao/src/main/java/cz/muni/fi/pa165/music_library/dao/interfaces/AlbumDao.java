@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.music_library.dao.interfaces;
 
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,4 +55,11 @@ public interface AlbumDao {
      */
     void updateAlbum(Album album);
 
+    /**
+     * Get all albums between two dates
+     * @param fromDate
+     * @param toDate
+     * @return  Albums between dates
+     */
+    List<Album> getAllAlbumsBetween(Date fromDate, Date toDate);
 }

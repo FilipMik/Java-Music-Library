@@ -47,4 +47,9 @@ public class AlbumServiceImpl implements AlbumService{
     public void createAlbum(Album album) {
         albumDao.createAlbum(album);
     }
+
+    @Override
+    public List<Album> getLastWeekAlbums() {
+        return null;
+    }
 }
