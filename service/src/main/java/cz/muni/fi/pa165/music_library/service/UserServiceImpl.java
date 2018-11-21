@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.music_library.dao.interfaces.UserDao;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExsistsException;
+import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExsistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,12 +51,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void loginUser(User user, String password) {
+    public boolean loginUser(User user, String password) throws IncorrectPasswordException {
+        if (password.isEmpty() || userDao.getUserById(user.getUserId()) == null) {
+            throw new IncorrectPasswordException("Wrong name or password");
+        } else {
+            return slowEquals(user.getPassword().getBytes(), passwordEncoder.encode(password).getBytes());
+        }
+    }
 
+    private static boolean slowEquals(byte[] a, byte[] b) {
+        int diff = a.length ^ b.length;
+        for (int i = 0; i < a.length && i < b.length; i++)
+            diff |= a[i] ^ b[i];
+        return diff == 0;
     }
 
     @Override
-    public void changeUserPassword(User user, String oldPassword, String newPassword) {
-
+    public void changeUserPassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userDao.updateUser(user);
     }
 }
