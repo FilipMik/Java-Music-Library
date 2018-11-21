@@ -54,5 +54,4 @@ public interface AlbumService {
      * @param album Album to be created
      */
     void createAlbum(Album album);
-
 }

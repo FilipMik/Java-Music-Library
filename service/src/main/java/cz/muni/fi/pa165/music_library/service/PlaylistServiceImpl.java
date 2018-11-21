@@ -11,6 +11,7 @@ import java.util.List;
  * @author Peter Žiška
  * ID: 487569
  */
+
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
 
