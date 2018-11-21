@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author Jan Ficko
+ */
+
 public class PlaylistDto {
 
     private Long playlistId;
