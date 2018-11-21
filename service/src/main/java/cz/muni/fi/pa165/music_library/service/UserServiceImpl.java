@@ -37,6 +37,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
+    }
+
+    @Override
+    public boolean isUserAdmin(User user) {
+        return user.getUserLevel() == UserLevel.Admin;
+    }
+
+    @Override
     public void registerUser(User user, String password)
             throws EmailAlreadyExsistsException, UsernameAlreadyExsistsException {
         if (userDao.getUserByEmail(user.getEmail()) != null) {
@@ -44,7 +54,7 @@ public class UserServiceImpl implements UserService {
         } else if (userDao.getUserByName(user.getUsername()) != null) {
             throw new UsernameAlreadyExsistsException("Username already exists!");
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(password));
             user.setUserLevel(UserLevel.BasicUser);
             userDao.createUser(user);
         }
@@ -55,20 +65,23 @@ public class UserServiceImpl implements UserService {
         if (password.isEmpty() || userDao.getUserById(user.getUserId()) == null) {
             throw new IncorrectPasswordException("Wrong name or password");
         } else {
-            return slowEquals(user.getPassword().getBytes(), passwordEncoder.encode(password).getBytes());
+            return passwordEncoder.matches(password, user.getPassword());
         }
-    }
-
-    private static boolean slowEquals(byte[] a, byte[] b) {
-        int diff = a.length ^ b.length;
-        for (int i = 0; i < a.length && i < b.length; i++)
-            diff |= a[i] ^ b[i];
-        return diff == 0;
     }
 
     @Override
     public void changeUserPassword(User user, String newPassword) {
         user.setPassword(passwordEncoder.encode(newPassword));
         userDao.updateUser(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        userDao.deleteUser(user);
     }
 }

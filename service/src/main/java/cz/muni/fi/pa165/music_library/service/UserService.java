@@ -17,9 +17,17 @@ public interface UserService {
 
     User findUserByUsername(String username);
 
+    User findUserByEmail(String email);
+
+    boolean isUserAdmin(User user);
+
     boolean loginUser(User user, String password) throws IncorrectPasswordException;
 
     void registerUser(User user, String password) throws EmailAlreadyExsistsException, UsernameAlreadyExsistsException;
 
     void changeUserPassword(User user, String newPassword);
+
+    void updateUser(User user);
+
+    void deleteUser(User user);
 }
