@@ -37,7 +37,7 @@ public interface SongDao {
      * @param title Title of songs to be found
      * @return List of found songs
      */
-    List<Song> getSongByTitle(String title);
+    List<Song> getSongsByTitle(String title);
 
     /**
      * Remove given song from persistence(database)

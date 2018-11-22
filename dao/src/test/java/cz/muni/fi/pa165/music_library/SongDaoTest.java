@@ -68,21 +68,21 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     /**
-     * Test for method getSongByTitle - checks if the right song is retrieved
+     * Test for method getSongsByTitle - checks if the right song is retrieved
      */
     @Test
     public void findByTitle() {
-        List<Song> found = songDao.getSongByTitle("Michelle");
+        List<Song> found = songDao.getSongsByTitle("Michelle");
         Assert.assertEquals(found.size(), 1);
         Assert.assertEquals(found.get(0).getTitle(), "Michelle");
     }
 
     /**
-     * Test for method getSongByTitle - checks if nothing is retrieved for non existing title
+     * Test for method getSongsByTitle - checks if nothing is retrieved for non existing title
      */
     @Test
     public void findByNonExistentTitle() {
-        List<Song> found = songDao.getSongByTitle("Something");
+        List<Song> found = songDao.getSongsByTitle("Something");
         Assert.assertEquals(found.size(), 0);
     }
 
