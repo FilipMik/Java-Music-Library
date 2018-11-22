@@ -2,12 +2,12 @@ package cz.muni.fi.pa165.music_library.dao.implementations;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
-
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,5 +50,14 @@ public class AlbumDaoImpl implements AlbumDao {
     @Override
     public void updateAlbum(Album album) {
         em.merge(album);
+    }
+
+    @Override
+    public List<Album> getAllAlbumsBetween(Date fromDate, Date toDate) {
+        TypedQuery<Album> query = em.createQuery(
+                        "SELECT a FROM Album a WHERE a.releaseDate BETWEEN :fromDate AND :toDate ", Album.class);
+        query.setParameter("fromDate", fromDate);
+        query.setParameter("toDate", toDate);
+        return query.getResultList();
     }
 }

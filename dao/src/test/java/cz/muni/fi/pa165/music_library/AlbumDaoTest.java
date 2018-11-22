@@ -14,12 +14,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Jan Ficko
@@ -98,6 +99,25 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.createAlbum(albumOne);
 
         assertEquals("Expected zero albums", 0, albumDao.getAllAlbums().size());
+    }
+
+    /**
+     * Test if exception is thrown if there is no release date set.
+     */
+    @Test
+    public void testAlbumsBetween() {
+        albumDao.createAlbum(albumOne);
+        albumDao.createAlbum(albumTwo);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(getCurrentTime());
+        calendar.add(Calendar.DAY_OF_YEAR, -7);
+        Date lastWeek = calendar.getTime();
+        assertEquals("Expected Two albums", 2, albumDao.getAllAlbumsBetween(lastWeek,getCurrentTime()).size());
+    }
+
+    private Date getCurrentTime() {
+        return new Date();
     }
 
     /**
