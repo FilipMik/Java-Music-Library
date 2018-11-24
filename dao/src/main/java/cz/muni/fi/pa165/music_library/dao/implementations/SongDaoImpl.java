@@ -30,6 +30,11 @@ public class SongDaoImpl implements SongDao {
     }
 
     @Override
+    public List<Song> getAllSongsByRating() {
+        return em.createQuery("select s from Song s order by s.rating asc", Song.class).getResultList();
+    }
+
+    @Override
     public Song getSongById(Long songId) {
         return em.find(Song.class, songId);
     }

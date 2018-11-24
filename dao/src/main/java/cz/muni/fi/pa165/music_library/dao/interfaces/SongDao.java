@@ -25,6 +25,12 @@ public interface SongDao {
     List<Song> getAllSongs();
 
     /**
+     * Get all songs ordered by best rating
+     * @return List of all songs from database ordered by best rating
+     */
+    List<Song> getAllSongsByRating();
+
+    /**
      * Get given song
      *
      * @param songId Id Searched song
