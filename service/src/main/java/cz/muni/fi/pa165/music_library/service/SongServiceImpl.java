@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
+import cz.muni.fi.pa165.music_library.data.entities.Genre;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +33,23 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public List<Song> getAllTimeTopSongs(Integer numberOfSongs, Genre genre) {
+        List<Song> list = songDao.getAllSongsByRating(genre);
+        if (numberOfSongs > list.size()) {
+            return list;
+        } else {
+            return list.subList(0, numberOfSongs);
+        }
+    }
+
+    @Override
     public Song getSongById(Long songId) {
         return songDao.getSongById(songId);
+    }
+
+    @Override
+    public void createSong(Song song) {
+        songDao.createSong(song);
     }
 
     @Override

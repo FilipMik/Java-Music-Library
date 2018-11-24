@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.music_library.dao.interfaces;
 
+import cz.muni.fi.pa165.music_library.data.entities.Genre;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
 
 import java.util.List;
@@ -25,10 +26,11 @@ public interface SongDao {
     List<Song> getAllSongs();
 
     /**
-     * Get all songs ordered by best rating
-     * @return List of all songs from database ordered by best rating
+     * Get all songs ordered by rating in descending order
+     * @param genre Optional genre of songs what are requested
+     * @return List of songs with given optional genre ordered by their rating
      */
-    List<Song> getAllSongsByRating();
+    List<Song> getAllSongsByRating(Genre genre);
 
     /**
      * Get given song
