@@ -43,6 +43,4 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests {
         song = new Song();
         song.setTitle("Amazing song numero 1");
     }
-
-
 }
