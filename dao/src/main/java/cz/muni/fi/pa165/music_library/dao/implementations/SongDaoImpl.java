@@ -31,7 +31,7 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public List<Song> getAllSongsByRating() {
-        return em.createQuery("select s from Song s order by s.rating asc", Song.class).getResultList();
+        return em.createQuery("select s from Song s order by s.rating desc", Song.class).getResultList();
     }
 
     @Override

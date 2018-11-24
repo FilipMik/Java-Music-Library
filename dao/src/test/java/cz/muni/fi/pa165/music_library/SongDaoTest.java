@@ -166,4 +166,24 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
 
         Assert.assertEquals(song1.getRating(), 3.25);
     }
+
+    @Test
+    public void testGetSongsByRating() {
+        song1.addRating(4.5);
+        songDao.updateSong(song1);
+
+        song2.addRating(3.0);
+        songDao.updateSong(song2);
+
+        Song song3 = new Song();
+        song3.setTitle("song3");
+        song3.addRating(5.0);
+        songDao.createSong(song3);
+
+        List<Song> songs = songDao.getAllSongsByRating();
+        Assert.assertEquals(songs.size(), 3);
+        Assert.assertEquals(songs.get(0).getTitle(), song3.getTitle());
+        Assert.assertEquals(songs.get(1).getTitle(), song1.getTitle());
+        Assert.assertEquals(songs.get(2).getTitle(), song2.getTitle());
+    }
 }
