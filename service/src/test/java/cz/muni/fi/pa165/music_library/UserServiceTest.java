@@ -9,7 +9,6 @@ import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExsistsException
 import cz.muni.fi.pa165.music_library.service.UserService;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
