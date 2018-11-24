@@ -33,13 +33,16 @@ public class Song {
 
     private Genre genre;
 
+    private Double rating;
+
     @ManyToMany(mappedBy = "songList")
     private List<Playlist> playlists = new ArrayList<>();
 
     public Song() {
     }
 
-    public Song(String title, Integer bitRate, Artist artist, Album album, Integer albumPosition, String commentary, Genre genre, List<Playlist> playlists) {
+    public Song(String title, Integer bitRate, Artist artist, Album album, Integer albumPosition, String commentary,
+                Genre genre, Double rating, List<Playlist> playlists) {
         setTitle(title);
         setBitRate(bitRate);
         setArtist(artist);
@@ -114,6 +117,14 @@ public class Song {
         this.genre = genre;
     }
 
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
     public List<Playlist> getPlaylists() {
         return Collections.unmodifiableList(playlists);
     }
@@ -141,6 +152,7 @@ public class Song {
         if (!getBitRate().equals(song.getBitRate())) return false;
         if (!getAlbumPosition().equals(song.getAlbumPosition())) return false;
         if (!getCommentary().equals(song.getCommentary())) return false;
+        if (!getRating().equals(song.getRating())) return false;
         return getGenre().equals(song.getGenre());
     }
 
@@ -151,6 +163,7 @@ public class Song {
         result = 31 * result + (getAlbumPosition() != null ? getAlbumPosition().hashCode() : 0);
         result = 31 * result + (getCommentary() != null ? getCommentary().hashCode() : 0);
         result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
+        result = 31 * result + (getRating() != null ? getRating().hashCode() : 0);
         return result;
     }
 }

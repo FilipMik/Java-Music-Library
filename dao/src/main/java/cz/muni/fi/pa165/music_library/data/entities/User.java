@@ -125,6 +125,7 @@ public class User {
         User user = (User) o;
 
         if (!getUsername().equals(user.getUsername())) return false;
+        if (!getPassword().equals(user.getPassword())) return false;
         if (!getEmail().equals(user.getEmail())) return false;
         if (!getDateCreated().equals(user.getDateCreated())) return false;
         return getUserLevel().equals(user.getUserLevel());
@@ -133,6 +134,7 @@ public class User {
     @Override
     public int hashCode() {
         int result = getUsername() != null ? getUsername().hashCode() : 0;
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
         result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         result = 31 * result + (getDateCreated() != null ? getDateCreated().hashCode() : 0);
         result = 31 * result + (getUserLevel() != null ? getUserLevel().hashCode() : 0);
