@@ -68,21 +68,21 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     /**
-     * Test for method getSongByTitle - checks if the right song is retrieved
+     * Test for method getSongsByTitle - checks if the right song is retrieved
      */
     @Test
     public void findByTitle() {
-        List<Song> found = songDao.getSongByTitle("Michelle");
+        List<Song> found = songDao.getSongsByTitle("Michelle");
         Assert.assertEquals(found.size(), 1);
         Assert.assertEquals(found.get(0).getTitle(), "Michelle");
     }
 
     /**
-     * Test for method getSongByTitle - checks if nothing is retrieved for non existing title
+     * Test for method getSongsByTitle - checks if nothing is retrieved for non existing title
      */
     @Test
     public void findByNonExistentTitle() {
-        List<Song> found = songDao.getSongByTitle("Something");
+        List<Song> found = songDao.getSongsByTitle("Something");
         Assert.assertEquals(found.size(), 0);
     }
 
@@ -146,5 +146,44 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
         songDao.updateSong(song1);
         Song found = songDao.getSongById(song1.getSongId());
         Assert.assertEquals(found.getGenre(), Genre.POP);
+    }
+
+    @Test
+    public void testAddRating() {
+        Assert.assertEquals(song1.getRating(), 0.0);
+        song1.addRating(3.0);
+        songDao.updateSong(song1);
+        Assert.assertEquals(song1.getRating(), 3.0);
+
+        song1.addRating(5.0);
+        songDao.updateSong(song1);
+        Assert.assertEquals(song1.getRating(), 4.0);
+
+        song1.addRating(3.0);
+        songDao.updateSong(song1);
+        song1.addRating(2.0);
+        songDao.updateSong(song1);
+
+        Assert.assertEquals(song1.getRating(), 3.25);
+    }
+
+    @Test
+    public void testGetSongsByRating() {
+        song1.addRating(4.5);
+        songDao.updateSong(song1);
+
+        song2.addRating(3.0);
+        songDao.updateSong(song2);
+
+        Song song3 = new Song();
+        song3.setTitle("song3");
+        song3.addRating(5.0);
+        songDao.createSong(song3);
+
+        List<Song> songs = songDao.getAllSongsByRating(null);
+        Assert.assertEquals(songs.size(), 3);
+        Assert.assertEquals(songs.get(0).getTitle(), song3.getTitle());
+        Assert.assertEquals(songs.get(1).getTitle(), song1.getTitle());
+        Assert.assertEquals(songs.get(2).getTitle(), song2.getTitle());
     }
 }

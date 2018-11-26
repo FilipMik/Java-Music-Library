@@ -1,11 +1,11 @@
 package cz.muni.fi.pa165.music_library.dao.implementations;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
+import cz.muni.fi.pa165.music_library.data.entities.Genre;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -30,12 +30,26 @@ public class SongDaoImpl implements SongDao {
     }
 
     @Override
+    public List<Song> getAllSongsByRating(Genre genre) {
+        List<Song> list;
+        if (genre == null) {
+            list = em.createQuery("select s from Song s order by s.rating desc", Song.class)
+                    .getResultList();
+        } else {
+            list = em.createQuery("select s from Song s where genre = :genre order by s.rating desc", Song.class)
+                    .setParameter("genre", genre)
+                    .getResultList();
+        }
+        return list;
+    }
+
+    @Override
     public Song getSongById(Long songId) {
         return em.find(Song.class, songId);
     }
 
     @Override
-    public List<Song> getSongByTitle(String title) {
+    public List<Song> getSongsByTitle(String title) {
         return em.createQuery("select s from Song s where title = :title", Song.class)
                 .setParameter("title", title)
                 .getResultList();
