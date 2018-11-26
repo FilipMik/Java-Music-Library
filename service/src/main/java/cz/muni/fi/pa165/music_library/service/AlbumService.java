@@ -54,9 +54,4 @@ public interface AlbumService {
      * @param album Album to be created
      */
     void createAlbum(Album album);
-
-    /**
-     * Returns list of latest created albums (last week)
-     */
-    List<Album> getLastWeekAlbums();
 }
