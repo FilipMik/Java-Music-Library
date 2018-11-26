@@ -35,10 +35,17 @@ public interface UserDao {
     /**
      * Find user with given name and return it
      *
-     * @param username Id of searched user
+     * @param username Name of searched user
      * @return User object with given username
      */
     User getUserByName(String username);
+
+    /**
+     * Find user with given email and return it
+     * @param email Email of searched user
+     * @return Found user object
+     */
+    User getUserByEmail(String email);
 
     /**
      * Delete given user from persistence
