@@ -3,9 +3,9 @@ package cz.muni.fi.pa165.music_library.service;
 import cz.muni.fi.pa165.music_library.dao.interfaces.UserDao;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
-import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExsistsException;
+import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
-import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExsistsException;
+import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,11 +48,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(User user, String password)
-            throws EmailAlreadyExsistsException, UsernameAlreadyExsistsException {
+            throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
         if (userDao.getUserByEmail(user.getEmail()) != null) {
-            throw new EmailAlreadyExsistsException("Email already exists!");
+            throw new EmailAlreadyExistsException("Email already exists!");
         } else if (userDao.getUserByName(user.getUsername()) != null) {
-            throw new UsernameAlreadyExsistsException("Username already exists!");
+            throw new UsernameAlreadyExistsException("Username already exists!");
         } else {
             user.setPassword(passwordEncoder.encode(password));
             user.setUserLevel(UserLevel.BasicUser);

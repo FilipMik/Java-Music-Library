@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.data.entities.User;
-import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExsistsException;
+import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
-import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExsistsException;
+import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +23,7 @@ public interface UserService {
 
     boolean loginUser(User user, String password) throws IncorrectPasswordException;
 
-    void registerUser(User user, String password) throws EmailAlreadyExsistsException, UsernameAlreadyExsistsException;
+    void registerUser(User user, String password) throws EmailAlreadyExistsException, UsernameAlreadyExistsException;
 
     void changeUserPassword(User user, String newPassword);
 

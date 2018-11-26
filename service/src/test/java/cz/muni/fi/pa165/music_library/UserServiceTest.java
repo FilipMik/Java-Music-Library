@@ -3,9 +3,9 @@ package cz.muni.fi.pa165.music_library;
 import cz.muni.fi.pa165.music_library.config.ServiceConfig;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
-import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExsistsException;
+import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
-import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExsistsException;
+import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.UserService;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -53,7 +53,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     private void registerUserTest() {
         try {
             userService.registerUser(user, "heslo123");
-        } catch (EmailAlreadyExsistsException | UsernameAlreadyExsistsException e) {
+        } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {
             e.printStackTrace();
         }
     }
@@ -62,7 +62,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     private void loginUserTest() {
         try {
             userService.registerUser(user, "heslo123");
-        } catch (EmailAlreadyExsistsException | UsernameAlreadyExsistsException e) {
+        } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {
             e.printStackTrace();
         }
         try {
