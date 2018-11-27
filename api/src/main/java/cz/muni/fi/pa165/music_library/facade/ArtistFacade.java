@@ -17,6 +17,8 @@ public interface ArtistFacade {
 
     void createArtist(ArtistDto artist);
 
+    void updateArtist(ArtistDto artist);
+
     void deleteArtist(Long artistId);
 
 }

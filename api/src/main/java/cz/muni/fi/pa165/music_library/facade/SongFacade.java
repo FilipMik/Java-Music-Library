@@ -22,7 +22,11 @@ public interface SongFacade {
 
     List<SongDto> findSongsByAlbum(String albumTitle);
 
+    List<SongDto> getAllTimeTopSongs(Integer numberOfSongs, Genre genre);
+
     void createSong(SongDto song);
+
+    void updateSong(SongDto song);
 
     void deleteSong(Long songId);
 

@@ -19,6 +19,8 @@ public interface PlaylistFacade {
 
     void createPlaylist(PlaylistDto playlist);
 
+    void updatePlaylist(PlaylistDto playlist);
+
     void addSong(Long playlistId, Long songId);
 
     void removeSong(Long playlistId, Long songId);

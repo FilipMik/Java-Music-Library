@@ -20,7 +20,13 @@ public interface UserFacade {
 
     void registerUser(UserDto user);
 
+    void updateUser(UserDto user);
+
+    void deleteUser(Long userId);
+
     boolean authenticate(UserAuthenticateDto userAuthenticate);
+
+    void changeUserPassword(UserDto user, String newPassword);
 
     boolean isAdmin(UserDto user);
 

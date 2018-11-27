@@ -20,7 +20,11 @@ public interface AlbumFacade {
 
     List<AlbumDto> findAlbumsByArtist(String artistName);
 
+    List<AlbumDto> getLastWeekAlbums();
+
     void createAlbum(AlbumDto album);
+
+    void updateAlbum(AlbumDto album);
 
     void addSongs(Long albumId, Long[] songIds);
 
