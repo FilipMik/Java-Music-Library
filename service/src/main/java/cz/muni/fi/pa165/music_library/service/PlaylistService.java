@@ -56,6 +56,14 @@ public interface PlaylistService {
     void updatePlaylist(Playlist playlist);
 
     /**
+     * Add songs to playlist
+     *
+     * @param playlistId Id of playlist
+     * @param songIds    Ids of song
+     */
+    void addSongs(Long playlistId, List<Long> songIds);
+
+    /**
      * Add song to playlist
      *
      * @param playlistId Id of playlist

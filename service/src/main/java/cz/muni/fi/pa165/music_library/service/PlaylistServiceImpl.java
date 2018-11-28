@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.PlayListDao;
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
+import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Playlist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,15 @@ public class PlaylistServiceImpl implements PlaylistService {
 
     @Override
     public void updatePlaylist(Playlist playlist) {
+        playListDao.updatePlaylist(playlist);
+    }
+
+    @Override
+    public void addSongs(Long playlistId, List<Long> songIds) {
+        Playlist playlist = playListDao.getPlaylistById(playlistId);
+        for (Long songId : songIds) {
+            playlist.addSong(songDao.getSongById(songId));
+        }
         playListDao.updatePlaylist(playlist);
     }
 

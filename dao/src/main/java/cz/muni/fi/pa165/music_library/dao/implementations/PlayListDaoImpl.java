@@ -25,7 +25,7 @@ public class PlayListDaoImpl implements PlayListDao {
 
     @Override
     public List<Playlist> getAllPlaylists() {
-        return em.createQuery("SELECT p FROM Playlist p order by p", Playlist.class).getResultList();
+        return em.createQuery("SELECT p FROM Playlist p order by p.title", Playlist.class).getResultList();
     }
 
     @Override
