@@ -1,9 +1,12 @@
 package cz.muni.fi.pa165.music_library;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
+import cz.muni.fi.pa165.music_library.dao.interfaces.ArtistDao;
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
+import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +39,8 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     AlbumDao albumDao;
     @Autowired
     SongDao songDao;
+    @Autowired
+    ArtistDao artistDao;
 
     private Album albumOne;
     private Album albumTwo;
@@ -287,4 +292,17 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         assertEquals( "Album One", retrievedSong.getAlbum().getTitle());
     }
 
+    @Test
+    public void testAlbumAuthorPersistence() {
+        Artist artist = new Artist();
+        artist.setName("Peter");
+        artist.addAlbum(albumOne);
+        albumOne.setArtist(artist);
+
+        artistDao.createArtist(artist);
+        albumDao.createAlbum(albumOne);
+        Artist albumArtist = albumDao.getAlbumByTitle("Album One").get(0).getArtist();
+
+        Assert.assertEquals("Expected Peter artist", artist.getName(),albumArtist.getName());
+    }
 }
