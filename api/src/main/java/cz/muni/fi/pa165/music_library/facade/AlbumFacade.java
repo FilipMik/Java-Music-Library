@@ -14,7 +14,7 @@ public interface AlbumFacade {
 
     AlbumDto findAlbumById(Long albumId);
 
-    List<ArtistDto> findArtistsFromAlbum(Long albumId);
+    ArtistDto findAlbumArtist(Long albumId);
 
     List<AlbumDto> findAlbumsByTitle(String title);
 
@@ -26,7 +26,7 @@ public interface AlbumFacade {
 
     void updateAlbum(AlbumDto album);
 
-    void addSongs(Long albumId, Long[] songIds);
+    void addSongs(Long albumId, List<Long> songIds);
 
     void addSong(Long albumId, Long songId);
 
