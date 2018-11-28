@@ -46,10 +46,10 @@ public interface AlbumService {
 
     /**
      * Get all albums from given artist
-     * @param artistName Arists name
+     * @param artistId Arists id
      * @return All albums by given artist
      */
-    List<Album> getAlbumsByArtist(String artistName);
+    List<Album> getAlbumsByArtist(Long artistId);
 
     /**
      * Returns albums, which were created last week
@@ -77,19 +77,6 @@ public interface AlbumService {
      * @param songIds List of songs to be added
      */
     void addSongs(Long albumId, List<Long> songIds);
-
-    /**
-     * Returns artist of album
-     * @return albums's artist
-     */
-    Artist getAlbumArtist(Album album);
-
-    /**
-     * Finds Albums with given artist
-     * @param artist
-     * @return albums of artist
-     */
-    List<Album> getAlbumsByArtist(Artist artist);
 
     /**
      * Add song to album

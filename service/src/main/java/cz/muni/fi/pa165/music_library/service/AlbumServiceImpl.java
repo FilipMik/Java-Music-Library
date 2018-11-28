@@ -39,8 +39,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public Artist getAlbumArtist(Long albumId) {
-        // TODO
-        return new Artist();
+        return albumDao.getAlbumById(albumId).getArtist();
     }
 
     @Override
@@ -49,9 +48,8 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> getAlbumsByArtist(String artistName) {
-        // TODO
-        return null;
+    public List<Album> getAlbumsByArtist(Long artistId) {
+        return artistDao.getArtistById(artistId).getAlbumList();
     }
 
     @Override
@@ -104,15 +102,5 @@ public class AlbumServiceImpl implements AlbumService {
         calendar.add(Calendar.DAY_OF_YEAR, -7);
         Date lastWeek = calendar.getTime();
         return albumDao.getAllAlbumsBetween(lastWeek, timeService.getCurrentDate());
-    }
-
-    @Override
-    public Artist getAlbumArtist(Album album) {
-        return albumDao.getAlbumById(album.getAlbumId()).getArtist();
-    }
-
-    @Override
-    public List<Album> getAlbumsByArtist(Artist artist) {
-        return artistDao.getArtistById(artist.getArtistId()).getAlbumList();
     }
 }
