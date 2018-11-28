@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.music_library.service;
 
+import cz.muni.fi.pa165.music_library.data.entities.Playlist;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
@@ -20,6 +21,8 @@ public interface UserService {
     User findUserByUsername(String username);
 
     User findUserByEmail(String email);
+
+    List<Playlist> getUsersPlaylist(Long userId);
 
     List<User> getAllUsers();
 

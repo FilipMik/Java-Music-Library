@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.UserDao;
+import cz.muni.fi.pa165.music_library.data.entities.Playlist;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
@@ -41,6 +42,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userDao.getUserByEmail(email);
+    }
+
+    @Override
+    public List<Playlist> getUsersPlaylist(Long userId) {
+        return userDao.getUserById(userId).getPlaylists();
     }
 
     @Override

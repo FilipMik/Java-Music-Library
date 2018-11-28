@@ -25,6 +25,13 @@ public interface PlayListDao {
     List<Playlist> getAllPlaylists();
 
     /**
+     * Get all playlists with given title
+     * @param playlistTitle Playlists name
+     * @return All playlists with given name
+     */
+    List<Playlist> getPlaylistsByTitle(String playlistTitle);
+
+    /**
      * Get playlist with given id
      *
      * @param playlistId Id of searched playlist

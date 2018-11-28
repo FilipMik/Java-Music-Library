@@ -29,8 +29,15 @@ public class PlayListDaoImpl implements PlayListDao {
     }
 
     @Override
+    public List<Playlist> getPlaylistsByTitle(String playlistTitle) {
+        return em.createQuery("SELECT p FROM Playlist p where title = :playListTitle", Playlist.class)
+                .setParameter("playListTitle", playlistTitle)
+                .getResultList();
+    }
+
+    @Override
     public Playlist getPlaylistById(Long playlistId) {
-        return em.find(Playlist.class,playlistId);
+        return em.find(Playlist.class, playlistId);
     }
 
     @Override
