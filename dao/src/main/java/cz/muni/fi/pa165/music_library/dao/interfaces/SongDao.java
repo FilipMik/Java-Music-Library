@@ -47,10 +47,25 @@ public interface SongDao {
      */
     List<Song> getSongsByTitle(String title);
 
+    /**
+     * Get all songs created by given artist
+     * @param artistName Artist name
+     * @return All artists songs
+     */
     List<Song> getSongsByArtist(String artistName);
 
+    /**
+     * Get all songs created from given genre
+     * @param genre Given genre
+     * @return All genre songs
+     */
     List<Song> getSongsByGenre(Genre genre);
 
+    /**
+     * Get all songs in given album
+     * @param albumTitle Albums name
+     * @return All album songs
+     */
     List<Song> getSongsByAlbum(String albumTitle);
 
     /**
