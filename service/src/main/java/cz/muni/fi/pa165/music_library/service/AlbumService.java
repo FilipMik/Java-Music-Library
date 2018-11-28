@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.data.entities.Album;
+import cz.muni.fi.pa165.music_library.data.entities.Artist;
 
 import java.util.List;
 
@@ -60,4 +61,17 @@ public interface AlbumService {
      * @return list of albums
      */
     List<Album> getLastWeekAlbums();
+
+    /**
+     * Returns artist of album
+     * @return albums's artist
+     */
+    Artist getAlbumArtist(Album album);
+
+    /**
+     * Finds Albums with given artist
+     * @param artist
+     * @return albums of artist
+     */
+    List<Album> getAlbumsByArtist(Artist artist);
 }

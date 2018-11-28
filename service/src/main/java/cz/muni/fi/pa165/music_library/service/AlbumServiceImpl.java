@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
+import cz.muni.fi.pa165.music_library.dao.interfaces.ArtistDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
+import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class AlbumServiceImpl implements AlbumService{
 
     @Autowired
     private AlbumDao albumDao;
+
+    @Autowired
+    private ArtistDao artistDao;
 
     @Autowired
     private TimeService timeService;
@@ -60,5 +65,15 @@ public class AlbumServiceImpl implements AlbumService{
         calendar.add(Calendar.DAY_OF_YEAR, -7);
         Date lastWeek = calendar.getTime();
         return albumDao.getAllAlbumsBetween(lastWeek,timeService.getCurrentDate());
+    }
+
+    @Override
+    public Artist getAlbumArtist(Album album) {
+        return albumDao.getAlbumById(album.getAlbumId()).getArtist();
+    }
+
+    @Override
+    public List<Album> getAlbumsByArtist(Artist artist) {
+        return artistDao.getArtistById(artist.getArtistId()).getAlbumList();
     }
 }
