@@ -6,6 +6,8 @@ import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Filip Mik on 20. 11. 2018
  */
@@ -18,6 +20,8 @@ public interface UserService {
     User findUserByUsername(String username);
 
     User findUserByEmail(String email);
+
+    List<User> getAllUsers();
 
     boolean isUserAdmin(User user);
 
