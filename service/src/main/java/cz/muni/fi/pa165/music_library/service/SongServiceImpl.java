@@ -33,6 +33,21 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public List<Song> getSongsByArtist(String artistName) {
+        return songDao.getSongsByArtist(artistName);
+    }
+
+    @Override
+    public List<Song> getSongsByGenre(Genre genre) {
+        return songDao.getSongsByGenre(genre);
+    }
+
+    @Override
+    public List<Song> getSongsByAlbum(String albumTitle) {
+        return songDao.getSongsByAlbum(albumTitle);
+    }
+
+    @Override
     public List<Song> getAllTimeTopSongs(Integer numberOfSongs, Genre genre) {
         List<Song> list = songDao.getAllSongsByRating(genre);
         if (numberOfSongs > list.size()) {

@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.UserDao;
+import cz.muni.fi.pa165.music_library.data.entities.Playlist;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
@@ -9,6 +10,8 @@ import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Filip Mik on 20. 11. 2018
@@ -39,6 +42,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userDao.getUserByEmail(email);
+    }
+
+    @Override
+    public List<Playlist> getUsersPlaylist(Long userId) {
+        return userDao.getUserById(userId).getPlaylists();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
     }
 
     @Override

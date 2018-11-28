@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.dao.interfaces;
 
 import cz.muni.fi.pa165.music_library.data.entities.Album;
+import cz.muni.fi.pa165.music_library.data.entities.Artist;
 
 import java.util.Date;
 import java.util.List;
