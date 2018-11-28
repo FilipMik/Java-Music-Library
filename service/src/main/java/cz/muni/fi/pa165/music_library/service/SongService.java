@@ -17,6 +17,12 @@ public interface SongService {
 
     List<Song> getSongsByTitle(String title);
 
+    List<Song> getSongsByArtist(String artistName);
+
+    List<Song> getSongsByGenre(Genre genre);
+
+    List<Song> getSongsByAlbum(String albumTitle);
+
     List<Song> getAllTimeTopSongs(Integer numberOfSongs, Genre genre);
 
     Song getSongById(Long songId);

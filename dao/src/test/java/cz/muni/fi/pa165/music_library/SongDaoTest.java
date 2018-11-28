@@ -186,4 +186,25 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(songs.get(1).getTitle(), song1.getTitle());
         Assert.assertEquals(songs.get(2).getTitle(), song2.getTitle());
     }
+
+    @Test
+    public void getSongsByArtist() {
+        songDao.createSong(song1);
+
+        Assert.assertEquals(songDao.getSongsByArtist("The Beatles").size(), 1);
+    }
+
+    @Test
+    public void getSongsByAlbum() {
+        songDao.createSong(song1);
+
+        Assert.assertEquals(songDao.getSongsByAlbum("Abbey Road").size(), 1);
+    }
+
+    @Test
+    public void getSongsByGenre() {
+        songDao.createSong(song1);
+
+        Assert.assertEquals(songDao.getSongsByGenre(Genre.ROCK).size(), 1);
+    }
 }

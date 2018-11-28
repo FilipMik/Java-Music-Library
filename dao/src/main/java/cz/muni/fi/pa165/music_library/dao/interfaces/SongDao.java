@@ -47,6 +47,12 @@ public interface SongDao {
      */
     List<Song> getSongsByTitle(String title);
 
+    List<Song> getSongsByArtist(String artistName);
+
+    List<Song> getSongsByGenre(Genre genre);
+
+    List<Song> getSongsByAlbum(String albumTitle);
+
     /**
      * Remove given song from persistence(database)
      *

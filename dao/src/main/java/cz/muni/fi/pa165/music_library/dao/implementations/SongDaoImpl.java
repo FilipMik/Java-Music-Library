@@ -56,6 +56,27 @@ public class SongDaoImpl implements SongDao {
     }
 
     @Override
+    public List<Song> getSongsByArtist(String artistName) {
+        return em.createQuery("select s from Song s where artist.name = :artistName", Song.class)
+                .setParameter("artistName", artistName)
+                .getResultList();
+    }
+
+    @Override
+    public List<Song> getSongsByGenre(Genre genre) {
+        return em.createQuery("select s from Song s where genre = :genre", Song.class)
+                .setParameter("genre", genre)
+                .getResultList();
+    }
+
+    @Override
+    public List<Song> getSongsByAlbum(String albumTitle) {
+        return em.createQuery("select s from Song s where album.title = :albumTitle", Song.class)
+                .setParameter("albumTitle", albumTitle)
+                .getResultList();
+    }
+
+    @Override
     public void deleteSong(Song song) {
         em.remove(song);
     }
