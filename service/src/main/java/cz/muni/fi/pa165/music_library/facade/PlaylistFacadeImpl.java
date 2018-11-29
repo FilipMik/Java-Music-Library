@@ -29,7 +29,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
 
     @Autowired
     private BeanMappingService beanMappingService;
-    
+
     @Override
     public List<PlaylistDto> getAllPlaylists() {
         List<Playlist> playlists = playlistService.getAllPlaylists();
