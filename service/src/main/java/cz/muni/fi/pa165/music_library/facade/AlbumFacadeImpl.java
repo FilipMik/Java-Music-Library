@@ -25,49 +25,49 @@ public class AlbumFacadeImpl implements AlbumFacade{
     private AlbumService albumService;
 
     @Autowired
-    private BeanMappingService mapper;
+    private BeanMappingService beanMappingService;
 
     @Override
     public List<AlbumDto> getAllAlbums() {
         List<Album> albums = albumService.getAllAlbums();
-        return (albums == null) ? null : mapper.mapTo(albums,AlbumDto.class);
+        return (albums == null) ? null : beanMappingService.mapTo(albums,AlbumDto.class);
     }
 
     @Override
     public AlbumDto findAlbumById(Long albumId) {
         Album album = albumService.getAlbumById(albumId);
-        return (album == null) ? null : mapper.mapTo(album,AlbumDto.class);
+        return (album == null) ? null : beanMappingService.mapTo(album,AlbumDto.class);
     }
 
     @Override
     public ArtistDto findAlbumArtist(Long albumId) {
         Album album = albumService.getAlbumById(albumId);
         Artist artist = album.getArtist();
-        return (artist == null) ? null : mapper.mapTo(artist,ArtistDto.class);
+        return (artist == null) ? null : beanMappingService.mapTo(artist,ArtistDto.class);
     }
 
     @Override
     public List<AlbumDto> findAlbumsByTitle(String title) {
         List<Album> albums = albumService.getAlbumsByTitle(title);
-        return (albums == null) ? null : mapper.mapTo(albums,AlbumDto.class);
+        return (albums == null) ? null : beanMappingService.mapTo(albums,AlbumDto.class);
     }
 
     @Override
     public List<AlbumDto> findAlbumsByArtist(String artistName) {
         List<Album> albums = albumService.getAlbumsByArtistName(artistName);
-        return (albums == null) ? null : mapper.mapTo(albums,AlbumDto.class);
+        return (albums == null) ? null : beanMappingService.mapTo(albums,AlbumDto.class);
     }
 
     @Override
     public List<AlbumDto> findAlbumsByArtistId(Long artistId) {
         List<Album> albums = albumService.getAlbumsByArtist(artistId);
-        return (albums == null) ? null : mapper.mapTo(albums,AlbumDto.class);
+        return (albums == null) ? null : beanMappingService.mapTo(albums,AlbumDto.class);
     }
 
     @Override
     public List<AlbumDto> getLastWeekAlbums() {
         List<Album> albums = albumService.getLastWeekAlbums();
-        return (albums == null) ? null : mapper.mapTo(albums,AlbumDto.class);
+        return (albums == null) ? null : beanMappingService.mapTo(albums,AlbumDto.class);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class AlbumFacadeImpl implements AlbumFacade{
         if (album == null) {
             throw new IllegalArgumentException("Album DTO shouldn't be null");
         }
-        Album albumUpdate = mapper.mapTo(album,Album.class);
+        Album albumUpdate = beanMappingService.mapTo(album,Album.class);
         albumService.createAlbum(albumUpdate);
     }
 
@@ -84,7 +84,7 @@ public class AlbumFacadeImpl implements AlbumFacade{
         if (album == null) {
             throw new IllegalArgumentException("Album DTO shouldn't be null");
         }
-        Album albumUpdate = mapper.mapTo(album,Album.class);
+        Album albumUpdate = beanMappingService.mapTo(album,Album.class);
         albumService.updateAlbum(albumUpdate);
     }
 
