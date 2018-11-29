@@ -18,7 +18,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
     private AlbumFacade albumFacade;
 
     @Test
-    public void createArtistTest() {
+    public void createAlbumTest() {
         AlbumDto albumDto = new AlbumDto();
         albumDto.setTitle("Test");
         albumDto.setReleaseDate(new Date());

@@ -70,7 +70,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
             throw new IllegalArgumentException("Updated playlist shouldn't be null");
         }
         Playlist playlistUpdate = beanMappingService.mapTo(playlist,Playlist.class);
-        playlistService.createPlaylist(playlistUpdate);
+        playlistService.updatePlaylist(playlistUpdate);
     }
 
     @Override
