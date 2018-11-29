@@ -26,14 +26,18 @@ public class Artist {
     @OneToMany(mappedBy = "artist")
     private List<Song> songList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "artist")
+    private List<Album> albumList = new ArrayList<>();
+
     public Artist() {
     }
 
-    public Artist(String name, Date birthDate, String artistInfo, List<Song> songList) {
+    public Artist(String name, Date birthDate, String artistInfo, List<Song> songList, List<Album> albumList) {
         setName(name);
         setBirthDate(birthDate);
         setArtistInfo(artistInfo);
         setSongList(songList);
+        setAlbumList(albumList);
     }
 
     public Long getArtistId() {
@@ -81,6 +85,21 @@ public class Artist {
         if (song == null) throw new IllegalArgumentException("Cannot add null song!");
         if (!this.songList.contains(song)) {
             this.songList.add(song);
+        }
+    }
+
+    public List<Album> getAlbumList() {
+        return albumList;
+    }
+
+    public void setAlbumList(List<Album> albumList) {
+        this.albumList = albumList;
+    }
+
+    public void addAlbum(Album album) {
+        if (album == null) throw new IllegalArgumentException("Cannot add null album!");
+        if (!this.albumList.contains(album)) {
+            this.albumList.add(album);
         }
     }
 

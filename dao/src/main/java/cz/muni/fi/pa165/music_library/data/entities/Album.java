@@ -27,17 +27,21 @@ public class Album {
 
     private String albumArtUrl;
 
+    @ManyToOne
+    private Artist artist;
+
     @OneToMany(mappedBy = "album")
     private List<Song> songList = new ArrayList<>();
 
     public Album() {
     }
 
-    public Album(Date releaseDate, String title, String commentary, String albumArtUrl, List<Song> songList) {
+    public Album(Date releaseDate, String title, String commentary, String albumArtUrl, Artist artist, List<Song> songList) {
         setReleaseDate(releaseDate);
         setTitle(title);
         setCommentary(commentary);
         setAlbumArtUrl(albumArtUrl);
+        setArtist(artist);
         setSongList(songList);
     }
 
@@ -83,6 +87,14 @@ public class Album {
         this.albumArtUrl = albumArt;
     }
 
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
     public List<Song> getSongList() {
         return Collections.unmodifiableList(songList);
     }
@@ -112,6 +124,7 @@ public class Album {
         if (!getReleaseDate().equals(album.getReleaseDate())) return false;
         if (!getTitle().equals(album.getTitle())) return false;
         if (!getCommentary().equals(album.getCommentary())) return false;
+        if (!getArtist().equals(album.getArtist())) return false;
         return getAlbumArtUrl().equals(album.getAlbumArtUrl());
     }
 
@@ -121,6 +134,7 @@ public class Album {
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         result = 31 * result + (getCommentary() != null ? getCommentary().hashCode() : 0);
         result = 31 * result + (getAlbumArtUrl() != null ? getAlbumArtUrl().hashCode() : 0);
+        result = 31 * result + (getArtist() != null ? getArtist().hashCode() : 0);
         return result;
     }
 }

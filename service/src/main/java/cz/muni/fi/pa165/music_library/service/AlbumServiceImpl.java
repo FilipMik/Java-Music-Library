@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
+import cz.muni.fi.pa165.music_library.dao.interfaces.ArtistDao;
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
@@ -23,6 +24,9 @@ public class AlbumServiceImpl implements AlbumService {
     private AlbumDao albumDao;
 
     @Autowired
+    private ArtistDao artistDao;
+
+    @Autowired
     private SongDao songDao;
 
     @Autowired
@@ -35,8 +39,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public Artist getAlbumArtist(Long albumId) {
-        // TODO
-        return new Artist();
+        return albumDao.getAlbumById(albumId).getArtist();
     }
 
     @Override
@@ -45,9 +48,8 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> getAlbumsByArtist(String artistName) {
-        // TODO
-        return null;
+    public List<Album> getAlbumsByArtist(Long artistId) {
+        return artistDao.getArtistById(artistId).getAlbumList();
     }
 
     @Override

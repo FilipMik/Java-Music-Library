@@ -16,6 +16,7 @@ public class AlbumDto {
     private String title;
     private String commentary;
     private String albumArtUrl;
+    private ArtistDto artist;
     private List<SongDto> songList = new ArrayList<>();
 
     public Long getAlbumId() {
@@ -58,6 +59,14 @@ public class AlbumDto {
         this.albumArtUrl = albumArtUrl;
     }
 
+    public ArtistDto getArtist() {
+        return artist;
+    }
+
+    public void setArtist(ArtistDto artist) {
+        this.artist = artist;
+    }
+
     public List<SongDto> getSongList() {
         return songList;
     }
@@ -77,11 +86,12 @@ public class AlbumDto {
         if (!getReleaseDate().equals(album.getReleaseDate())) return false;
         if (!getTitle().equals(album.getTitle())) return false;
         if (!getCommentary().equals(album.getCommentary())) return false;
+        if (!getArtist().equals(album.getArtist())) return false;
         return getAlbumArtUrl().equals(album.getAlbumArtUrl());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getReleaseDate(), getTitle(), getCommentary(), getAlbumArtUrl());
+        return Objects.hash(getReleaseDate(), getTitle(), getCommentary(), getAlbumArtUrl(), getArtist());
     }
 }

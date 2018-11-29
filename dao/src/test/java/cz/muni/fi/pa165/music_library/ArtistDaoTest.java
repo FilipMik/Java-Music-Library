@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.music_library;
 
+import cz.muni.fi.pa165.music_library.dao.interfaces.AlbumDao;
 import cz.muni.fi.pa165.music_library.dao.interfaces.ArtistDao;
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
+import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
 import org.junit.Assert;
@@ -36,6 +38,9 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private SongDao songDao;
+
+    @Autowired
+    private AlbumDao albumDao;
 
     private Artist eminemArtist;
     private Artist passengerArtist;
@@ -201,5 +206,29 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
 
         Song songFound = songDao.getSongById(firstSong.getSongId());
         Assert.assertEquals("Song should belong to Eminem","Eminem", songFound.getArtist().getName());
+    }
+    
+    @Test
+    public void relationArtistAndAlbumTest() {
+        Album album1 = new Album();
+        album1.setTitle("First album");
+        album1.setArtist(eminemArtist);
+        album1.setReleaseDate(new Date());
+        Album album2 = new Album();
+        album2.setTitle("Second album");
+        album2.setArtist(eminemArtist);
+        album2.setReleaseDate(new Date());
+
+        eminemArtist.addAlbum(album1);
+        eminemArtist.addAlbum(album2);
+
+        artistDao.createArtist(eminemArtist);
+        albumDao.createAlbum(album1);
+        albumDao.createAlbum(album2);
+
+        List<Album> eminemAlbums = artistDao.getArtistById(eminemArtist.getArtistId()).getAlbumList();
+
+        Assert.assertEquals("Expected 2 albums", 2, eminemAlbums.size());
+        Assert.assertEquals("Expected 2 albums", album1, eminemAlbums.get(0));
     }
 }

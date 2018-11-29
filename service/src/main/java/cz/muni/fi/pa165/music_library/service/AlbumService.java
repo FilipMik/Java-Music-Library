@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
 
+
 import java.util.List;
 
 /**
@@ -45,10 +46,10 @@ public interface AlbumService {
 
     /**
      * Get all albums from given artist
-     * @param artistName Arists name
+     * @param artistId Arists id
      * @return All albums by given artist
      */
-    List<Album> getAlbumsByArtist(String artistName);
+    List<Album> getAlbumsByArtist(Long artistId);
 
     /**
      * Returns albums, which were created last week
