@@ -18,16 +18,16 @@ public interface UserFacade {
 
     UserDto findUserByEmail(String email);
 
-    void registerUser(UserDto user);
+    void registerUser(UserDto userDto, String password);
 
-    void updateUser(UserDto user);
+    void updateUser(UserDto userDto);
 
     void deleteUser(Long userId);
 
     boolean authenticate(UserAuthenticateDto userAuthenticate);
 
-    void changeUserPassword(UserDto user, String newPassword);
+    void changeUserPassword(UserDto userDto, String newPassword);
 
-    boolean isAdmin(UserDto user);
+    boolean isAdmin(UserDto userDto);
 
 }

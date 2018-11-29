@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.music_library.facade;
 
-import cz.muni.fi.pa165.music_library.dto.Genre;
+import cz.muni.fi.pa165.music_library.dto.GenreDto;
 import cz.muni.fi.pa165.music_library.dto.SongDto;
 
 import java.util.List;
@@ -18,11 +18,11 @@ public interface SongFacade {
 
     List<SongDto> findSongsByArtist(String artistName);
 
-    List<SongDto> findSongsByGenre(Genre genre);
+    List<SongDto> findSongsByGenre(GenreDto genreDTO);
 
     List<SongDto> findSongsByAlbum(String albumTitle);
 
-    List<SongDto> getAllTimeTopSongs(Integer numberOfSongs, Genre genre);
+    List<SongDto> getAllTimeTopSongs(Integer numberOfSongs, GenreDto genreDTO);
 
     void createSong(SongDto song);
 

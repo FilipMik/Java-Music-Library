@@ -22,7 +22,7 @@ public class SongDto {
 
     private String commentary;
 
-    private Genre genre;
+    private GenreDto genreDTO;
 
     private List<PlaylistDto> playlists = new ArrayList<>();
 
@@ -82,12 +82,12 @@ public class SongDto {
         this.commentary = commentary;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public GenreDto getGenreDTO() {
+        return genreDTO;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenreDTO(GenreDto genreDTO) {
+        this.genreDTO = genreDTO;
     }
 
     public List<PlaylistDto> getPlaylists() {
@@ -112,7 +112,7 @@ public class SongDto {
             return false;
         if (getCommentary() != null ? !getCommentary().equals(songDto.getCommentary()) : songDto.getCommentary() != null)
             return false;
-        return getGenre() == songDto.getGenre();
+        return getGenreDTO() == songDto.getGenreDTO();
     }
 
     @Override
@@ -121,7 +121,7 @@ public class SongDto {
         result = 31 * result + (getBitRate() != null ? getBitRate().hashCode() : 0);
         result = 31 * result + (getAlbumPosition() != null ? getAlbumPosition().hashCode() : 0);
         result = 31 * result + (getCommentary() != null ? getCommentary().hashCode() : 0);
-        result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
+        result = 31 * result + (getGenreDTO() != null ? getGenreDTO().hashCode() : 0);
         return result;
     }
 }
