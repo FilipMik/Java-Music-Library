@@ -52,6 +52,13 @@ public interface AlbumService {
     List<Album> getAlbumsByArtist(Long artistId);
 
     /**
+     * Get all albums from given artist name
+     * @param artistName Arists name
+     * @return All albums by given artist name
+     */
+    List<Album> getAlbumsByArtistName(String artistName);
+
+    /**
      * Returns albums, which were created last week
      * @return list of albums
      */

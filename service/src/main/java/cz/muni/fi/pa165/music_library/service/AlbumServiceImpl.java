@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +51,16 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public List<Album> getAlbumsByArtist(Long artistId) {
         return artistDao.getArtistById(artistId).getAlbumList();
+    }
+
+    @Override
+    public List<Album> getAlbumsByArtistName(String artistName) {
+        List<Artist> artists = artistDao.getArtistsByName(artistName);
+        List<Album> albums = new ArrayList<>();
+        for (Artist artist : artists) {
+            albums.addAll(artist.getAlbumList());
+        }
+        return albums;
     }
 
     @Override
@@ -99,7 +110,7 @@ public class AlbumServiceImpl implements AlbumService {
     public List<Album> getLastWeekAlbums() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(timeService.getCurrentDate());
-        calendar.add(Calendar.DAY_OF_YEAR, -7);
+        calendar.add(Calendar.DAY_OF_YEAR, -Calendar.DAY_OF_WEEK);
         Date lastWeek = calendar.getTime();
         return albumDao.getAllAlbumsBetween(lastWeek, timeService.getCurrentDate());
     }
