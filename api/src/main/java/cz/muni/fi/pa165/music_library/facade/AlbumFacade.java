@@ -20,6 +20,8 @@ public interface AlbumFacade {
 
     List<AlbumDto> findAlbumsByArtist(String artistName);
 
+    List<AlbumDto> findAlbumsByArtistId(Long artistId);
+
     List<AlbumDto> getLastWeekAlbums();
 
     void createAlbum(AlbumDto album);
