@@ -7,6 +7,8 @@ import cz.muni.fi.pa165.music_library.dto.ArtistDto;
 import cz.muni.fi.pa165.music_library.service.AlbumService;
 import cz.muni.fi.pa165.music_library.service.BeanMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
  * ID: 487569
  */
 
+@Service
+@Transactional
 public class AlbumFacadeImpl implements AlbumFacade{
 
     @Autowired
