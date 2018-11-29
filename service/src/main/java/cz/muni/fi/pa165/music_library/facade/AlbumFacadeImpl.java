@@ -75,8 +75,8 @@ public class AlbumFacadeImpl implements AlbumFacade{
         if (album == null) {
             throw new IllegalArgumentException("Album DTO shouldn't be null");
         }
-        Album albumUpdate = beanMappingService.mapTo(album,Album.class);
-        albumService.createAlbum(albumUpdate);
+        Album albumCreate = beanMappingService.mapTo(album,Album.class);
+        albumService.createAlbum(albumCreate);
     }
 
     @Override
