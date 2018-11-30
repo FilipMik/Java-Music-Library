@@ -21,11 +21,14 @@ import java.util.List;
 @Transactional
 public class AlbumFacadeImpl implements AlbumFacade{
 
-    @Autowired
-    private AlbumService albumService;
+    private final AlbumService albumService;
+    private final BeanMappingService beanMappingService;
 
     @Autowired
-    private BeanMappingService beanMappingService;
+    public AlbumFacadeImpl(AlbumService albumService, BeanMappingService beanMappingService) {
+        this.albumService = albumService;
+        this.beanMappingService = beanMappingService;
+    }
 
     @Override
     public List<AlbumDto> getAllAlbums() {
