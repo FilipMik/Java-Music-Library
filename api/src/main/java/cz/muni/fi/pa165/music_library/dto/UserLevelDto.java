@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.music_library.dto;
 
-public enum UserLevel {
+public enum UserLevelDto {
     BasicUser,
     Admin
 }
