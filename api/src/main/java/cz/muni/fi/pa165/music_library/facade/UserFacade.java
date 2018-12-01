@@ -22,7 +22,7 @@ public interface UserFacade {
 
     void updateUser(UserDto userDto);
 
-    void deleteUser(Long userId);
+    void deleteUser(UserDto userDto);
 
     boolean authenticate(UserAuthenticateDto userAuthenticate);
 
