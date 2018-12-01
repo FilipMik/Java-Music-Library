@@ -3,10 +3,8 @@ package cz.muni.fi.pa165.music_library.facade;
 import cz.muni.fi.pa165.music_library.base.BaseFacadeTest;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
-import cz.muni.fi.pa165.music_library.data.entities.Song;
 import cz.muni.fi.pa165.music_library.dto.AlbumDto;
 import cz.muni.fi.pa165.music_library.dto.ArtistDto;
-import cz.muni.fi.pa165.music_library.dto.SongDto;
 import cz.muni.fi.pa165.music_library.service.AlbumService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -37,12 +35,10 @@ public class AlbumFacadeTest extends BaseFacadeTest {
 
     private Album album;
     private Artist artist;
-    private List<Song> songList = new ArrayList<>();
     private List<Album> albumList = new ArrayList<>();
 
     private AlbumDto albumDto;
     private ArtistDto artistDto;
-    private List<SongDto> songDtoList = new ArrayList<>();
     private List<AlbumDto> albumDtoList = new ArrayList<>();
 
     private Long albumId = 1L;
@@ -64,13 +60,6 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         artist = new Artist();
         artist.setName("Artist");
         album.setArtist(artist);
-        Song songOne = new Song();
-        songOne.setTitle("Song One");
-        Song songTwo = new Song();
-        songTwo.setTitle("Song Two");
-        songList.add(songOne);
-        songList.add(songTwo);
-        album.setSongList(songList);
 
         albumDto = new AlbumDto();
         albumDto.setAlbumId(albumId);
@@ -80,13 +69,6 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         artistDto = new ArtistDto();
         artistDto.setName("Artist");
         albumDto.setArtist(artistDto);
-        SongDto songDtoOne = new SongDto();
-        songDtoOne.setTitle("Song One");
-        SongDto songDtoTwo = new SongDto();
-        songDtoTwo.setTitle("Song Two");
-        songDtoList.add(songDtoOne);
-        songDtoList.add(songDtoTwo);
-        albumDto.setSongList(songDtoList);
 
         albumList.add(album);
         albumDtoList.add(albumDto);
@@ -99,6 +81,7 @@ public class AlbumFacadeTest extends BaseFacadeTest {
 
         List<AlbumDto> albums = albumFacade.getAllAlbums();
 
+        assertThat(albums).isNotNull();
         assertThat(album.getTitle()).isEqualTo(albums.get(0).getTitle());
         verify(albumService).getAllAlbums();
         assertNotEquals(albums.size(), 0);

@@ -62,8 +62,7 @@ public class ArtistFacadeImpl implements ArtistFacade {
     }
 
     @Override
-    public void deleteArtist(Long artistId) {
-        Artist artist = artistService.getArtistById(artistId);
-        artistService.deleteArtist(artist);
+    public void deleteArtist(ArtistDto artist) {
+        artistService.deleteArtist(beanMappingService.mapTo(artist, Artist.class));
     }
 }
