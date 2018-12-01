@@ -1,8 +1,12 @@
 package cz.muni.fi.pa165.music_library.facade;
 
 import cz.muni.fi.pa165.music_library.base.BaseFacadeTest;
+import cz.muni.fi.pa165.music_library.data.entities.Album;
+import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import cz.muni.fi.pa165.music_library.data.entities.Genre;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
+import cz.muni.fi.pa165.music_library.dto.AlbumDto;
+import cz.muni.fi.pa165.music_library.dto.ArtistDto;
 import cz.muni.fi.pa165.music_library.dto.GenreDto;
 import cz.muni.fi.pa165.music_library.dto.SongDto;
 import cz.muni.fi.pa165.music_library.service.SongService;
@@ -51,10 +55,17 @@ public class SongFacadeTest extends BaseFacadeTest {
         song = new Song();
         song.setSongId(songId);
         song.setTitle(songTitle);
+
         song.setAlbumPosition(1);
         song.setGenre(Genre.ROCK);
         song.setBitRate(320);
         song.setCommentary("Commentary");
+        Album album = new Album();
+        album.setTitle("Album Title");
+        song.setAlbum(album);
+        Artist artist = new Artist();
+        artist.setName("Artist");
+        song.setArtist(artist);
 
         songDto = new SongDto();
         songDto.setSongId(songId);
@@ -63,6 +74,12 @@ public class SongFacadeTest extends BaseFacadeTest {
         songDto.setGenre(GenreDto.ROCK);
         songDto.setBitRate(320);
         songDto.setCommentary("Commentary");
+        AlbumDto albumDto = new AlbumDto();
+        albumDto.setTitle("Album Title");
+        songDto.setAlbum(albumDto);
+        ArtistDto artistDto = new ArtistDto();
+        artistDto.setName("Artist");
+        songDto.setArtist(artistDto);
 
         songList.add(song);
         songDtoList.add(songDto);
@@ -90,7 +107,7 @@ public class SongFacadeTest extends BaseFacadeTest {
         SongDto songDto = songFacade.findSongById(songId);
 
         assertThat(songDto).isNotNull();
-        assertThat(songDto.getTitle()).isEqualTo(song.getTitle());
+        assertThat(songDto.getSongId()).isEqualTo(songId);
         verify(songService).getSongById(songId);
         verify(beanMappingService).mapTo(song, SongDto.class);
     }
@@ -119,7 +136,7 @@ public class SongFacadeTest extends BaseFacadeTest {
         assertThat(songs).isNotNull();
         assertNotEquals(songs.size(), 0);
         assertThat(song.getArtist().getName()).isEqualTo(songs.get(0).getArtist().getName());
-        verify(songService).getSongsByAlbum("Artist");
+        verify(songService).getSongsByArtist("Artist");
     }
 
     @Test
@@ -157,7 +174,7 @@ public class SongFacadeTest extends BaseFacadeTest {
 
         assertThat(songs).isNotNull();
         assertNotEquals(songs.size(), 0);
-        verify(songService).getSongsByAlbum("Album Title");
+        verify(songService).getAllTimeTopSongs(1, Genre.ROCK);
     }
 
     @Test

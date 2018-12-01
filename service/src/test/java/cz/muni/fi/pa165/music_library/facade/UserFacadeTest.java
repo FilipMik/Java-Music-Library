@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,6 +35,9 @@ public class UserFacadeTest extends BaseFacadeTest {
 
     @Mock
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private User user;
     private List<User> userList = new ArrayList<>();
@@ -73,7 +77,7 @@ public class UserFacadeTest extends BaseFacadeTest {
 
         userAuthenticateDto = new UserAuthenticateDto();
         userAuthenticateDto.setUserId(userId);
-        userAuthenticateDto.setPassword(password);
+        userAuthenticateDto.setPassword(passwordEncoder.encode(password));
 
         userList.add(user);
         userDtoList.add(userDto);
@@ -98,10 +102,10 @@ public class UserFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
         when(userService.findUserById(userId)).thenReturn(user);
 
-        UserDto userDto = userFacade.findUserById(userId);
+        UserDto foundUser = userFacade.findUserById(userId);
 
-        assertThat(userDto).isNotNull();
-        assertThat(userDto.getUserId()).isEqualTo(user.getUserId());
+        assertThat(foundUser).isNotNull();
+        assertThat(foundUser.getUserId()).isEqualTo(user.getUserId());
         verify(userService).findUserById(userId);
         verify(beanMappingService).mapTo(user, UserDto.class);
     }
@@ -111,10 +115,10 @@ public class UserFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
         when(userService.findUserByUsername(username)).thenReturn(user);
 
-        UserDto userDto = userFacade.findUserByUsername(username);
+        UserDto foundUser = userFacade.findUserByUsername(username);
 
-        assertThat(userDto).isNotNull();
-        assertThat(userDto.getUsername()).isEqualTo(user.getUsername());
+        assertThat(foundUser).isNotNull();
+        assertThat(foundUser.getUsername()).isEqualTo(username);
         verify(userService).findUserByUsername(username);
         verify(beanMappingService).mapTo(user, UserDto.class);
     }
@@ -124,10 +128,10 @@ public class UserFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
         when(userService.findUserByEmail(email)).thenReturn(user);
 
-        UserDto userDto = userFacade.findUserByEmail(email);
+        UserDto foundUser = userFacade.findUserByEmail(email);
 
-        assertThat(userDto).isNotNull();
-        assertThat(userDto.getEmail()).isEqualTo(user.getEmail());
+        assertThat(foundUser).isNotNull();
+        assertThat(foundUser.getEmail()).isEqualTo(email);
         verify(userService).findUserByEmail(email);
         verify(beanMappingService).mapTo(user, UserDto.class);
     }
@@ -168,7 +172,8 @@ public class UserFacadeTest extends BaseFacadeTest {
 
     @Test
     public void authenticationTest() {
-        when(beanMappingService.mapTo(userAuthenticateDto, User.class)).thenReturn(user);
+        when(beanMappingService.mapTo(userDto, UserAuthenticateDto.class)).thenReturn(userAuthenticateDto);
+        when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
 
         assertEquals(true, userFacade.authenticate(userAuthenticateDto));
     }

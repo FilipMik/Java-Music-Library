@@ -85,7 +85,7 @@ public class PlaylistFacadeTest extends BaseFacadeTest {
         PlaylistDto playlistDto = playlistFacade.findPlaylistById(playlistId);
 
         assertThat(playlistDto).isNotNull();
-        assertThat(playlistDto.getTitle()).isEqualTo(playlist.getTitle());
+        assertThat(playlistDto.getPlaylistId()).isEqualTo(playlist.getPlaylistId());
         verify(playlistService).getPlaylistById(playlistId);
         verify(beanMappingService).mapTo(playlist, PlaylistDto.class);
     }
@@ -146,8 +146,6 @@ public class PlaylistFacadeTest extends BaseFacadeTest {
 
         verify(playlistService).addSong(playlistId, 1L);
     }
-
-
 
     @Test
     public void removeSongTest() {

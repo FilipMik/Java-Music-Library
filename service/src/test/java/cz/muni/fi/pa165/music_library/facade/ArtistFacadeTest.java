@@ -38,6 +38,7 @@ public class ArtistFacadeTest extends BaseFacadeTest {
     private List<ArtistDto> artistDtoList = new ArrayList<>();
 
     private Long artistId = 1L;
+    private String artistName = "Name";
 
     @BeforeMethod
     public void init() {
@@ -50,13 +51,13 @@ public class ArtistFacadeTest extends BaseFacadeTest {
 
         artist = new Artist();
         artist.setArtistId(artistId);
-        artist.setName("Artist");
+        artist.setName(artistName);
         artist.setBirthDate(date);
         artist.setArtistInfo("Info");
 
         artistDto = new ArtistDto();
         artistDto.setArtistId(artistId);
-        artistDto.setName("Artist");
+        artistDto.setName(artistName);
         artistDto.setBirthDate(date);
         artistDto.setArtistInfo("Info");
 
@@ -86,23 +87,23 @@ public class ArtistFacadeTest extends BaseFacadeTest {
         ArtistDto artistDto = artistFacade.findArtistById(artistId);
 
         assertThat(artistDto).isNotNull();
-        assertThat(artistDto.getName()).isEqualTo(artist.getName());
+        assertThat(artistDto.getArtistId()).isEqualTo(artist.getArtistId());
         verify(artistService).getArtistById(artistId);
         verify(beanMappingService).mapTo(artist, ArtistDto.class);
     }
 
     @Test
     public void findArtistsByNameTest() {
-        when(artistService.getArtistsByName("Name")).thenReturn(artistList);
+        when(artistService.getArtistsByName(artistName)).thenReturn(artistList);
         when(beanMappingService.mapTo(artistList, ArtistDto.class)).thenReturn(artistDtoList);
 
-        List<ArtistDto> artists = artistFacade.findArtistsByName("Name");
+        List<ArtistDto> artists = artistFacade.findArtistsByName(artistName);
 
         assertThat(artists).isNotNull();
         assertNotEquals(artists.size(), 0);
         assertThat(artist.getName()).isEqualTo(artists.get(0).getName());
         assertTrue(artists.contains(artistDto));
-        verify(artistService).getArtistsByName("Name");
+        verify(artistService).getArtistsByName(artistName);
     }
 
     @Test

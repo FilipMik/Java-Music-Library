@@ -93,10 +93,10 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(album, AlbumDto.class)).thenReturn(albumDto);
         when(albumService.getAlbumById(albumId)).thenReturn(album);
 
-        AlbumDto albumDto = albumFacade.findAlbumById(albumId);
+        AlbumDto foundAlbum = albumFacade.findAlbumById(albumId);
 
-        assertThat(albumDto).isNotNull();
-        assertThat(albumDto.getTitle()).isEqualTo(album.getTitle());
+        assertThat(foundAlbum).isNotNull();
+        assertThat(foundAlbum.getAlbumId()).isEqualTo(album.getAlbumId());
         verify(albumService).getAlbumById(albumId);
         verify(beanMappingService).mapTo(album, AlbumDto.class);
     }
@@ -107,11 +107,11 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(artist, ArtistDto.class)).thenReturn(artistDto);
         when(albumService.getAlbumArtist(albumId)).thenReturn(artist);
 
-        ArtistDto artistDto = albumFacade.findAlbumArtist(albumId);
+        ArtistDto foundArtist = albumFacade.findAlbumArtist(albumId);
 
-        assertThat(artistDto).isNotNull();
-        assertThat(artistDto.getName()).isEqualTo(artist.getName());
-        verify(albumService).getAlbumsByArtist(albumId);
+        assertThat(foundArtist).isNotNull();
+        assertThat(foundArtist.getName()).isEqualTo(artist.getName());
+        verify(albumService).getAlbumArtist(albumId);
         verify(beanMappingService).mapTo(artist, ArtistDto.class);
     }
 
