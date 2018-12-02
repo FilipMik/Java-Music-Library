@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.music_library.dto.UserAuthenticateDto;
 import cz.muni.fi.pa165.music_library.dto.UserDto;
 import cz.muni.fi.pa165.music_library.dto.UserLevelDto;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
+import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.UserService;
 import org.mockito.InjectMocks;
@@ -54,7 +55,6 @@ public class UserFacadeTest extends BaseFacadeTest {
     private Long userId = 1L;
     private String username = "Username";
     private String email = "user@mail.muni.cz";
-    private String password = "Password";
 
     @BeforeMethod
     public void init() {
@@ -65,23 +65,27 @@ public class UserFacadeTest extends BaseFacadeTest {
 
         Date date = new Date();
 
+        String encodedPassword = passwordEncoder.encode("Password");
+
         user = new User();
+        user.setUserId(userId);
         user.setUsername(username);
         user.setEmail(email);
         user.setDateCreated(date);
         user.setUserLevel(UserLevel.BasicUser);
-        user.setPassword(password);
+        user.setPassword(encodedPassword);
 
         userDto = new UserDto();
+        userDto.setUserId(userId);
         userDto.setUsername(username);
         userDto.setEmail(email);
         userDto.setDateCreated(date);
         userDto.setUserLevel(UserLevelDto.BasicUser);
-        userDto.setPassword(password);
+        userDto.setPassword(encodedPassword);
 
         userAuthenticateDto = new UserAuthenticateDto();
         userAuthenticateDto.setUserId(userId);
-        userAuthenticateDto.setPassword(passwordEncoder.encode(password));
+        userAuthenticateDto.setPassword(encodedPassword);
 
         userList.add(user);
         userDtoList.add(userDto);
@@ -103,13 +107,13 @@ public class UserFacadeTest extends BaseFacadeTest {
 
     @Test
     public void findUserByIdTest() {
-        when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
         when(userService.findUserById(userId)).thenReturn(user);
+        when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
 
         UserDto foundUser = userFacade.findUserById(userId);
 
         assertThat(foundUser).isNotNull();
-        assertThat(foundUser.getUserId()).isEqualTo(user.getUserId());
+        assertThat(foundUser.getUserId()).isEqualTo(userId);
         verify(userService).findUserById(userId);
         verify(beanMappingService).mapTo(user, UserDto.class);
     }
@@ -144,9 +148,9 @@ public class UserFacadeTest extends BaseFacadeTest {
     public void registerUserTest() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
         when(beanMappingService.mapTo(userDto, User.class)).thenReturn(user);
 
-        userFacade.registerUser(userDto, password);
+        userFacade.registerUser(userDto, "Password");
 
-        verify(userService).registerUser(user, password);
+        verify(userService).registerUser(user, "Password");
         verify(beanMappingService).mapTo(userDto, User.class);
     }
 
@@ -175,11 +179,14 @@ public class UserFacadeTest extends BaseFacadeTest {
     }
 
     @Test
-    public void authenticationTest() {
+    public void authenticationTest() throws IncorrectPasswordException {
+        when(userService.findUserById(userId)).thenReturn(user);
+        when(userService.loginUser(user, user.getPassword())).thenReturn(true);
+
         when(beanMappingService.mapTo(userDto, UserAuthenticateDto.class)).thenReturn(userAuthenticateDto);
         when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
 
-        assertEquals(true, userFacade.authenticate(userAuthenticateDto));
+        assertTrue(userFacade.authenticate(userAuthenticateDto));
     }
 
     @Test
@@ -196,7 +203,7 @@ public class UserFacadeTest extends BaseFacadeTest {
     public void isAdminTest() {
         when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
 
-        assertEquals(false, userFacade.isAdmin(userDto));
+        assertFalse(userFacade.isAdmin(userDto));
     }
 
 }

@@ -145,8 +145,8 @@ public class SongFacadeTest extends BaseFacadeTest {
 
     @Test
     public void findSongsByGenreTest() {
-        when(songService.getSongsByGenre(Genre.ROCK)).thenReturn(songList);
         when(beanMappingService.mapTo(songList, SongDto.class)).thenReturn(songDtoList);
+        when(songService.getSongsByGenre(Genre.ROCK)).thenReturn(songList);
 
         List<SongDto> songs = songFacade.findSongsByGenre(GenreDto.ROCK);
 
@@ -158,8 +158,8 @@ public class SongFacadeTest extends BaseFacadeTest {
 
     @Test
     public void findSongsByAlbumTest() {
-        when(songService.getSongsByAlbum("Album Title")).thenReturn(songList);
         when(beanMappingService.mapTo(songList, SongDto.class)).thenReturn(songDtoList);
+        when(songService.getSongsByAlbum("Album Title")).thenReturn(songList);
 
         List<SongDto> songs = songFacade.findSongsByAlbum("Album Title");
 
@@ -171,8 +171,8 @@ public class SongFacadeTest extends BaseFacadeTest {
 
     @Test
     public void getAllTimeTopSongsTest() {
-        when(songService.getAllTimeTopSongs(1, Genre.ROCK)).thenReturn(songList);
         when(beanMappingService.mapTo(songList, SongDto.class)).thenReturn(songDtoList);
+        when(songService.getAllTimeTopSongs(1, Genre.ROCK)).thenReturn(songList);
 
         List<SongDto> songs = songFacade.getAllTimeTopSongs(1, GenreDto.ROCK);
 
