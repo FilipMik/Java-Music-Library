@@ -19,9 +19,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
 
 @ContextConfiguration(classes = ServiceConfig.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
@@ -37,6 +41,8 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     private Album album;
 
+    private List<Album> albumList = new ArrayList<>();
+
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
@@ -44,11 +50,23 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void init() {
+        MockitoAnnotations.initMocks(this);
+
         album = new Album();
         album.setAlbumId(1L);
         album.setTitle("Test");
         album.setReleaseDate(new Date());
         album.setCommentary("Comment");
+
+        albumList.add(album);
+    }
+
+    @Test
+    public void getAllAlbumsTest() {
+        when(albumDao.getAllAlbums()).thenReturn(albumList);
+        List<Album> albums = albumService.getAllAlbums();
+        verify(albumDao).getAllAlbums();
+        assertEquals(albums, albumList);
     }
 
     @Test

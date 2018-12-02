@@ -21,18 +21,14 @@ import java.util.List;
 @Service
 public class AlbumServiceImpl implements AlbumService {
 
-    private final AlbumDao albumDao;
-    private final ArtistDao artistDao;
-    private final SongDao songDao;
-    private final TimeService timeService;
-
     @Autowired
-    public AlbumServiceImpl(AlbumDao albumDao, ArtistDao artistDao, SongDao songDao, TimeService timeService) {
-        this.albumDao = albumDao;
-        this.artistDao = artistDao;
-        this.songDao = songDao;
-        this.timeService = timeService;
-    }
+    private AlbumDao albumDao;
+    @Autowired
+    private ArtistDao artistDao;
+    @Autowired
+    private SongDao songDao;
+    @Autowired
+    private TimeService timeService;
 
     @Override
     public Album getAlbumById(Long albumId) {
