@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class ArtistServiceImpl implements ArtistService{
 
+    private final ArtistDao artistDao;
+
     @Autowired
-    private ArtistDao artistDao;
+    public ArtistServiceImpl(ArtistDao artistDao) {
+        this.artistDao = artistDao;
+    }
 
     @Override
     public void createArtist(Artist artist) {

@@ -21,7 +21,6 @@ import java.util.List;
 public class SongFacadeImpl implements SongFacade {
 
     private final BeanMappingService beanMappingService;
-
     private final SongService songService;
 
     @Autowired

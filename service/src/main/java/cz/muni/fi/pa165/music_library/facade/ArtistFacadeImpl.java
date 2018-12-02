@@ -19,11 +19,14 @@ import java.util.List;
 @Transactional
 public class ArtistFacadeImpl implements ArtistFacade {
 
-    @Autowired
-    private ArtistService artistService;
+    private final ArtistService artistService;
+    private final BeanMappingService beanMappingService;
 
     @Autowired
-    private BeanMappingService beanMappingService;
+    public ArtistFacadeImpl(ArtistService artistService, BeanMappingService beanMappingService) {
+        this.artistService = artistService;
+        this.beanMappingService = beanMappingService;
+    }
 
     @Override
     public List<ArtistDto> getAllArtists() {
@@ -46,7 +49,7 @@ public class ArtistFacadeImpl implements ArtistFacade {
     @Override
     public void createArtist(ArtistDto artist) {
         if (artist == null) {
-            throw new IllegalArgumentException("Album DTO shouldn't be null");
+            throw new IllegalArgumentException("Artist DTO shouldn't be null");
         }
         Artist artistCreate = beanMappingService.mapTo(artist,Artist.class);
         artistService.createArtist(artistCreate);
@@ -55,7 +58,7 @@ public class ArtistFacadeImpl implements ArtistFacade {
     @Override
     public void updateArtist(ArtistDto artist) {
         if (artist == null) {
-            throw new IllegalArgumentException("Album DTO shouldn't be null");
+            throw new IllegalArgumentException("Artist DTO shouldn't be null");
         }
         Artist artistUpdate = beanMappingService.mapTo(artist,Artist.class);
         artistService.updateArtistInfo(artistUpdate);
