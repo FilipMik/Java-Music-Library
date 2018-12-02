@@ -17,11 +17,14 @@ import java.util.List;
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
 
-    @Autowired
-    private PlayListDao playListDao;
+    private final PlayListDao playListDao;
+    private final SongDao songDao;
 
     @Autowired
-    private SongDao songDao;
+    public PlaylistServiceImpl(PlayListDao playListDao, SongDao songDao) {
+        this.playListDao = playListDao;
+        this.songDao = songDao;
+    }
 
     @Override
     public void createPlaylist(Playlist playlist) {
