@@ -24,6 +24,10 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
+/**
+ * @author Jan Ficko
+ */
+
 public class AlbumFacadeTest extends BaseFacadeTest {
 
     @Autowired

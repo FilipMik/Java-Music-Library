@@ -27,6 +27,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
 
+/**
+ * @author Jan Ficko
+ */
+
 public class UserFacadeTest extends BaseFacadeTest {
 
     @Autowired
