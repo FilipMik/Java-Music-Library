@@ -25,6 +25,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -88,7 +89,6 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         }
 
         album.setArtist(artist);
-        //album.setSongList(songList);
 
         albumList.add(album);
         artist.setAlbumList(albumList);
@@ -231,18 +231,26 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         futureAlbum.setReleaseDate(futureDate);
         Album currentAlbum = new Album();
         currentAlbum.setReleaseDate(timeService.getCurrentDate());
+        Album currentAlbum2 = new Album();
+        currentAlbum2.setReleaseDate(new Date());
 
         List<Album> albums = new ArrayList<>();
         albums.add(oldAlbum);
         albums.add(futureAlbum);
         albums.add(currentAlbum);
+        albums.add(currentAlbum2);
 
-        when(albumService.getLastWeekAlbums()).thenReturn(albums);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(timeService.getCurrentDate());
+        calendar.add(Calendar.DAY_OF_YEAR, -Calendar.DAY_OF_WEEK);
+        Date lastWeek = calendar.getTime();
+
+        when(albumDao.getAllAlbumsBetween(lastWeek, timeService.getCurrentDate())).thenReturn(albums);
 
         List<Album> lastWeekAlbums = albumService.getLastWeekAlbums();
 
         assertThat(lastWeekAlbums).isNotNull();
-        assertEquals(lastWeekAlbums.size(), 2);
+        assertEquals(lastWeekAlbums.size(), 1);
         assertEquals(lastWeekAlbums, albumList);
         assertTrue(lastWeekAlbums.contains(album));
     }
