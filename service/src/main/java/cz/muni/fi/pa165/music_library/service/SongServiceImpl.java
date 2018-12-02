@@ -50,7 +50,7 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> getAllTimeTopSongs(Integer numberOfSongs, Genre genre) {
         List<Song> list = songDao.getAllSongsByRating(genre);
-        if (numberOfSongs > list.size()) {
+        if (numberOfSongs == null || numberOfSongs > list.size()) {
             return list;
         } else {
             return list.subList(0, numberOfSongs);
