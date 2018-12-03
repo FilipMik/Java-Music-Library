@@ -83,6 +83,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
             Song song = new Song();
             song.setSongId((long) i);
             song.setTitle("Song " + i);
+            song.setAlbum(album);
             songList.add(song);
         }
 
@@ -134,6 +135,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetAlbumArtist() {
+        album.setSongList(songList);
         when(albumDao.getAlbumById(albumId)).thenReturn(album);
 
         List<Artist> artists = albumService.getAlbumArtists(albumId);
@@ -183,6 +185,8 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetAlbumByArtistName() {
+        artist.setSongList(songList);
+
         List<Artist> artistList = new ArrayList<>();
         artistList.add(artist);
 
@@ -192,7 +196,6 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
         assertThat(albums).isNotNull();
         assertNotEquals(albums.size(), 0);
-        assertEquals(albums, albumList);
         assertTrue(albums.contains(album));
     }
 

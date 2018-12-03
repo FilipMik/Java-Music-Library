@@ -30,7 +30,6 @@ import static org.testng.Assert.*;
  * @author Jan Ficko
  */
 
-
 @ContextConfiguration(classes = ServiceConfig.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
@@ -55,6 +54,7 @@ public class ArtistServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void init() {
         artist = new Artist();
+        artist.setArtistId(artistId);
         artist.setName(artistName);
         artist.setBirthDate(new Date());
         artist.setArtistInfo("Artist Info");
@@ -107,7 +107,7 @@ public class ArtistServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testGetArtistByName() {
+    public void testGetArtistsByName() {
         List<Artist> artistList = new ArrayList<>();
         artistList.add(artist);
 
@@ -120,7 +120,7 @@ public class ArtistServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testGetArtistByNameNull() {
+    public void testGetArtistsByNameNull() {
         when(artistService.getArtistsByName(null)).thenReturn(new ArrayList<>());
 
         List<Artist> artists = artistService.getArtistsByName(null);
@@ -130,7 +130,7 @@ public class ArtistServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testGetArtistByNameNonExistent() {
+    public void testGetArtistsByNameNonExistent() {
         when(artistService.getArtistsByName("Random Name")).thenReturn(new ArrayList<>());
 
         List<Artist> artists = artistService.getArtistsByName("Random Name");
@@ -164,13 +164,13 @@ public class ArtistServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testDeleteAlbum() {
+    public void testDeleteArtist() {
         artistService.deleteArtist(artist);
         verify(artistDao, atLeastOnce()).deleteArtist(artist);
     }
 
     @Test
-    public void testDeleteAlbumNull() {
+    public void testDeleteArtistNull() {
         artistService.deleteArtist(null);
         verify(artistDao, atLeastOnce()).deleteArtist(null);
     }
