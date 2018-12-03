@@ -14,7 +14,7 @@ public interface AlbumFacade {
 
     AlbumDto findAlbumById(Long albumId);
 
-    ArtistDto findAlbumArtist(Long albumId);
+    List<ArtistDto> findAlbumArtists(Long albumId);
 
     List<AlbumDto> findAlbumsByTitle(String title);
 
