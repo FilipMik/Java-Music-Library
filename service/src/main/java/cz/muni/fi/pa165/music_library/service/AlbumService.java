@@ -34,7 +34,7 @@ public interface AlbumService {
      * @param albumId Id of searched album
      * @return Artists of album
      */
-    public List<Artist> getAlbumArtists(Long albumId);
+    List<Artist> getAlbumArtists(Long albumId);
 
     /**
      * Returns list of albums with specified title
