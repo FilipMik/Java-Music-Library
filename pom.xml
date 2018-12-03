@@ -20,6 +20,7 @@
         <module>dao</module>
         <module>api</module>
         <module>service</module>
+        <module>rest</module>
     </modules>
 
     <dependencyManagement>
