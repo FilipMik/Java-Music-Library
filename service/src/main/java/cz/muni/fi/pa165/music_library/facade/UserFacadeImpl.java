@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.BeanMappingService;
+import cz.muni.fi.pa165.music_library.service.TimeService;
 import cz.muni.fi.pa165.music_library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class UserFacadeImpl implements UserFacade {
 
     @Autowired
     private BeanMappingService beanMappingService;
+
+    @Autowired
+    private TimeService timeService;
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -54,6 +58,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void registerUser(UserDto userDto, String password) {
         User user = beanMappingService.mapTo(userDto, User.class);
+        user.setDateCreated(timeService.getCurrentDate());
         try {
             userService.registerUser(user, password);
         } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {

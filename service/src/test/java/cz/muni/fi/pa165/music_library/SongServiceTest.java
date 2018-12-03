@@ -1,97 +1,175 @@
 package cz.muni.fi.pa165.music_library;
 
 import cz.muni.fi.pa165.music_library.config.ServiceConfig;
+import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
 import cz.muni.fi.pa165.music_library.data.entities.Genre;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
-import cz.muni.fi.pa165.music_library.data.entities.User;
-import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
 import cz.muni.fi.pa165.music_library.service.SongService;
-import cz.muni.fi.pa165.music_library.service.UserService;
+import cz.muni.fi.pa165.music_library.service.SongServiceImpl;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 /**
- * @author Filip Mik on 24. 11. 2018
+ * Tests for Song service implementation.
+ * @author Klara Minsterova
  */
 
 @ContextConfiguration(classes = ServiceConfig.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class SongServiceTest extends AbstractTestNGSpringContextTests {
+
+    @Mock
+    private SongDao songDao;
 
     @Autowired
     @InjectMocks
     private SongService songService;
 
-    private Song song;
+    private Song song1;
+    private Song song2;
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
 
     @BeforeMethod
     public void initSong() {
-        song = new Song();
-        song.setTitle("song");
+        song1 = new Song();
+        song1.setSongId(1l);
+        song1.setTitle("Octopus's Garden");
+
+        song2 = new Song();
+        song2.setTitle("Michelle");
     }
 
     @Test
-    public void getTopSongsTest() {
-        songService.createSong(song);
-        song.addRating(1.0);
-        songService.updateSong(song);
+    public void testGetAllSongs() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getAllSongs()).thenReturn(allSongs);
+        List<Song> result = songService.getAllSongs();
 
-        Song song2 = new Song();
-        song2.setTitle("song2");
-        song2.addRating(4.5);
-        songService.createSong(song2);
-
-        Song song3 = new Song();
-        song3.setTitle("song3");
-        song3.addRating(3.0);
-        songService.createSong(song3);
-
-        Assert.assertEquals(songService.getAllTimeTopSongs(5, null).size(), 3);
-        Assert.assertEquals(songService.getAllTimeTopSongs(1, null).size(), 1);
-        Assert.assertEquals(songService.getAllTimeTopSongs(1, null).get(0).getTitle(), "song2");
+        verify(songDao).getAllSongs();
+        Assert.assertEquals(result.size(), 2);
+        Assert.assertEquals(result.get(0), song1);
     }
 
     @Test
-    public void getTopSongByGenreTest() {
-        songService.createSong(song);
-        song.addRating(1.0);
-        song.setGenre(Genre.ROCK);
-        songService.updateSong(song);
+    public void testGetSongsByArtist() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getSongsByArtist(anyString())).thenReturn(allSongs);
+        List<Song> result = songService.getSongsByArtist("artist");
 
-        Song song2 = new Song();
-        song2.setTitle("song2");
-        song2.addRating(4.5);
-        song2.setGenre(Genre.ROCK);
-        songService.createSong(song2);
+        verify(songDao).getSongsByArtist("artist");
+        Assert.assertEquals(result.size(), 2);
+        Assert.assertEquals(result.get(0), song1);
+    }
 
-        Song song3 = new Song();
-        song3.setTitle("song3");
-        song3.addRating(3.0);
-        song3.setGenre(Genre.POP);
-        songService.createSong(song3);
-        Assert.assertEquals(songService.getAllTimeTopSongs(5, null).size(), 3);
-        Assert.assertEquals(songService.getAllTimeTopSongs(5, Genre.ROCK).size(), 2);
+    @Test
+    public void testGetSongsByTitle() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getSongsByTitle(anyString())).thenReturn(allSongs);
+        List<Song> result = songService.getSongsByTitle("title");
 
-        Assert.assertEquals(
-                songService.getAllTimeTopSongs(5, Genre.ROCK).get(0).getTitle(), song2.getTitle());
-        Assert.assertEquals(
-                songService.getAllTimeTopSongs(5, Genre.ROCK).get(1).getTitle(), song.getTitle());
+        verify(songDao).getSongsByTitle("title");
+        Assert.assertEquals(result.size(), 2);
+        Assert.assertEquals(result.get(0), song1);
+    }
+
+    @Test
+    public void testGetSongsByGenre() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getSongsByGenre(anyObject())).thenReturn(allSongs);
+        List<Song> result = songService.getSongsByGenre(Genre.ROCK);
+
+        verify(songDao).getSongsByGenre(Genre.ROCK);
+        Assert.assertEquals(result.size(), 2);
+        Assert.assertEquals(result.get(0), song1);
+    }
+
+    @Test
+    public void testGetSongsByAlbum() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getSongsByAlbum(anyString())).thenReturn(allSongs);
+        List<Song> result = songService.getSongsByAlbum("album");
+
+        verify(songDao).getSongsByAlbum("album");
+        Assert.assertEquals(result.size(), 2);
+        Assert.assertEquals(result.get(0), song1);
+    }
+
+    @Test
+    public void testGetAllTimeTopSongsNoConditions() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getAllSongsByRating(null)).thenReturn(allSongs);
+        List<Song> result = songService.getAllTimeTopSongs(null, null);
+
+        verify(songDao).getAllSongsByRating(null);
+        Assert.assertEquals(result.size(), 2);
+        Assert.assertEquals(result.get(0), song1);
+    }
+
+    @Test
+    public void testGetAllTimeTopSongsLimitedNumber() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getAllSongsByRating(null)).thenReturn(allSongs);
+        List<Song> result = songService.getAllTimeTopSongs(1, null);
+
+        verify(songDao).getAllSongsByRating(null);
+        Assert.assertEquals(result.size(), 1);
+        Assert.assertEquals(result.get(0), song1);
+    }
+
+    @Test
+    public void testGetAllTimeTopSongsLimitedGenre() {
+        List<Song> allSongs = Arrays.asList(song1, song2);
+        when(songDao.getAllSongsByRating(anyObject())).thenReturn(allSongs);
+        List<Song> result = songService.getAllTimeTopSongs(null, Genre.ROCK);
+
+        verify(songDao).getAllSongsByRating(Genre.ROCK);
+        Assert.assertEquals(result.size(), 2);
+        Assert.assertEquals(result.get(0), song1);
+    }
+
+    @Test
+    public void testGetSongById() {
+        when(songDao.getSongById(song1.getSongId())).thenReturn(song1);
+        Song result = songService.getSongById(1l);
+
+        verify(songDao).getSongById(1l);
+        Assert.assertEquals(result, song1);
+    }
+
+    @Test
+    public void testCreateSong() {
+        songService.createSong(song1);
+        verify(songDao).createSong(song1);
+    }
+
+    @Test
+    public void testDeleteSong() {
+        songService.deleteSong(song1);
+        verify(songDao).deleteSong(song1);
+    }
+
+    @Test
+    public void testUpdateSong() {
+        songService.updateSong(song1);
+        verify(songDao).updateSong(song1);
     }
 }

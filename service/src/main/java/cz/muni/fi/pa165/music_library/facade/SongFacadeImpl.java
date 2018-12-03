@@ -20,6 +20,8 @@ import java.util.List;
 @Transactional
 public class SongFacadeImpl implements SongFacade {
 
+    private static final Integer NORMAL_QUALITY_RATE = 96;   //kbit/s
+
     @Autowired
     private BeanMappingService beanMappingService;
 
@@ -71,6 +73,7 @@ public class SongFacadeImpl implements SongFacade {
     public void createSong(SongDto songDto) {
         if (songDto == null) throw new IllegalArgumentException("Can not create null object");
         Song song = beanMappingService.mapTo(songDto, Song.class);
+        song.setBitRate(NORMAL_QUALITY_RATE);
         songService.createSong(song);
     }
 

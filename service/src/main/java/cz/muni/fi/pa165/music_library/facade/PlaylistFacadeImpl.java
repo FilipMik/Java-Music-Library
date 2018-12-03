@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.dto.PlaylistDto;
 import cz.muni.fi.pa165.music_library.service.BeanMappingService;
 import cz.muni.fi.pa165.music_library.service.PlaylistService;
+import cz.muni.fi.pa165.music_library.service.TimeService;
 import cz.muni.fi.pa165.music_library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
 
     @Autowired
     private PlaylistService playlistService;
+
+    @Autowired
+    private TimeService timeService;
 
     @Autowired
     private UserService userService;
@@ -61,6 +65,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
             throw new IllegalArgumentException("Playlist shouldn't be null");
         }
         Playlist playlistCreate = beanMappingService.mapTo(playlist,Playlist.class);
+        playlistCreate.setDateCreated(timeService.getCurrentDate());
         playlistService.createPlaylist(playlistCreate);
     }
 
