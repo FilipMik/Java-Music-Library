@@ -44,6 +44,7 @@ public class AlbumServiceImpl implements AlbumService {
     public List<Artist> getAlbumArtists(Long albumId) {
         Album album = albumDao.getAlbumById(albumId);
         List<Artist> artists = new ArrayList<>();
+
         for (Song song : album.getSongList()) {
             Artist artist = song.getArtist();
             if (!artists.contains(artist)) {
@@ -53,7 +54,6 @@ public class AlbumServiceImpl implements AlbumService {
         return artists;
     }
 
-
     @Override
     public List<Album> getAlbumsByTitle(String title) {
         return albumDao.getAlbumByTitle(title);
@@ -61,7 +61,16 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<Album> getAlbumsByArtist(Long artistId) {
-        return null;
+        Artist artist = artistDao.getArtistById(artistId);
+        List<Album> albums = new ArrayList<>();
+
+        for (Song song : artist.getSongList()) {
+            Album album = song.getAlbum();
+            if (!albums.contains(album)) {
+                albums.add(album);
+            }
+        }
+        return albums;
     }
 
     @Override

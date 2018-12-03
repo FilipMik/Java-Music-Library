@@ -3,8 +3,10 @@ package cz.muni.fi.pa165.music_library.facade;
 import cz.muni.fi.pa165.music_library.base.BaseFacadeTest;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
+import cz.muni.fi.pa165.music_library.data.entities.Song;
 import cz.muni.fi.pa165.music_library.dto.AlbumDto;
 import cz.muni.fi.pa165.music_library.dto.ArtistDto;
+import cz.muni.fi.pa165.music_library.dto.SongDto;
 import cz.muni.fi.pa165.music_library.service.AlbumService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -63,7 +65,6 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         album.setCommentary("Comment");
         artist = new Artist();
         artist.setName("Artist");
-        album.setArtist(artist);
 
         albumDto = new AlbumDto();
         albumDto.setAlbumId(albumId);
@@ -72,8 +73,27 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         albumDto.setCommentary("Comment");
         artistDto = new ArtistDto();
         artistDto.setName("Artist");
-        albumDto.setArtist(artistDto);
 
+        Song song = new Song();
+        song.setTitle("Title");
+        song.setArtist(artist);
+        song.setAlbum(album);
+
+        SongDto songDto = new SongDto();
+        songDto.setTitle("Title");
+        songDto.setArtist(artistDto);
+        songDto.setAlbum(albumDto);
+
+        List<Song> songs = new ArrayList<>();
+        songs.add(song);
+
+        List<SongDto> songDtos = new ArrayList<>();
+        songDtos.add(songDto);
+
+        album.setSongList(songs);
+        artist.setSongList(songs);
+        albumDto.setSongList(songDtos);
+        artistDto.setSongList(songDtos);
         albumList.add(album);
         albumDtoList.add(albumDto);
     }
@@ -110,10 +130,11 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(artist, ArtistDto.class)).thenReturn(artistDto);
         when(albumService.getAlbumById(albumId)).thenReturn(album);
 
-        ArtistDto foundArtist = albumFacade.findAlbumArtist(albumId);
+        List<ArtistDto> foundArtists = albumFacade.findAlbumArtists(albumId);
 
-        assertThat(foundArtist).isNotNull();
-        assertThat(foundArtist.getName()).isEqualTo(artist.getName());
+        assertThat(foundArtists).isNotNull();
+        assertThat(foundArtists.size()).isEqualTo(1);
+        assertThat(foundArtists.get(0).getName()).isEqualTo(artist.getName());
         verify(beanMappingService).mapTo(artist, ArtistDto.class);
     }
 
@@ -137,10 +158,9 @@ public class AlbumFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(albumList, AlbumDto.class)).thenReturn(albumDtoList);
 
         List<AlbumDto> albums = albumFacade.findAlbumsByArtist("Artist");
-
         assertThat(albums).isNotNull();
         assertNotEquals(albums.size(), 0);
-        assertThat(album.getArtist().getName()).isEqualTo(albums.get(0).getArtist().getName());
+        assertThat(album.getSongList().get(0).getArtist().getName()).isEqualTo(albums.get(0).getSongList().get(0).getArtist().getName());
         verify(albumService).getAlbumsByArtistName("Artist");
     }
 
@@ -153,7 +173,7 @@ public class AlbumFacadeTest extends BaseFacadeTest {
 
         assertThat(albums).isNotNull();
         assertNotEquals(albums.size(), 0);
-        assertThat(album.getArtist().getArtistId()).isEqualTo(albums.get(0).getArtist().getArtistId());
+        assertThat(album.getSongList().get(0).getArtist().getArtistId()).isEqualTo(albums.get(0).getSongList().get(0).getArtist().getArtistId());
         verify(albumService).getAlbumsByArtist(1L);
     }
 
