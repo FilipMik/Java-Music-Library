@@ -43,10 +43,9 @@ public class AlbumFacadeImpl implements AlbumFacade{
     }
 
     @Override
-    public ArtistDto findAlbumArtist(Long albumId) {
-        Album album = albumService.getAlbumById(albumId);
-        Artist artist = album.getArtist();
-        return (artist == null) ? null : beanMappingService.mapTo(artist,ArtistDto.class);
+    public List<ArtistDto> findAlbumArtists(Long albumId) {
+        List<Artist> artists = albumService.getAlbumArtists(albumId);
+        return (artists.isEmpty()) ? null : beanMappingService.mapTo(artists,ArtistDto.class);
     }
 
     @Override
