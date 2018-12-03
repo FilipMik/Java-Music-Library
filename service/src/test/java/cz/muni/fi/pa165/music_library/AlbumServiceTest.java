@@ -86,10 +86,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
             songList.add(song);
         }
 
-        album.setArtist(artist);
-
         albumList.add(album);
-        artist.setAlbumList(albumList);
     }
 
     @Test
@@ -139,19 +136,19 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     public void testGetAlbumArtist() {
         when(albumDao.getAlbumById(albumId)).thenReturn(album);
 
-        Artist artist = albumService.getAlbumArtist(albumId);
+        List<Artist> artists = albumService.getAlbumArtists(albumId);
 
-        assertThat(artist).isNotNull();
-        assertEquals(artist.getName(), "Artist");
+        assertThat(artists).isNotNull();
+        assertNotEquals(artists.size(), 0);
     }
 
     @Test(expectedExceptions = NullPointerException.class)
     public void testGetAlbumArtistNonExistent() {
         when(albumDao.getAlbumById(2L)).thenReturn(null);
 
-        Artist artist = albumService.getAlbumArtist(2L);
+        List<Artist> artists = albumService.getAlbumArtists(2L);
 
-        assertThat(artist).isNull();
+        assertThat(artists).isNull();
     }
 
     @Test
