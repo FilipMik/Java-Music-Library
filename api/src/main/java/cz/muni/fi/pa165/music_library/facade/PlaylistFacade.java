@@ -27,6 +27,6 @@ public interface PlaylistFacade {
 
     void removeSong(Long playlistId, Long songId);
 
-    void deletePlaylist(Long playlistId);
+    void deletePlaylist(PlaylistDto playlist);
 
 }

@@ -28,6 +28,6 @@ public interface SongFacade {
 
     void updateSong(SongDto song);
 
-    void deleteSong(Long songId);
+    void deleteSong(SongDto song);
 
 }
