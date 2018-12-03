@@ -22,14 +22,11 @@ import java.util.List;
 @Transactional
 public class UserFacadeImpl implements UserFacade {
 
-    private final UserService userService;
-    private final BeanMappingService beanMappingService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
-    public UserFacadeImpl(BeanMappingService beanMappingService, UserService userService) {
-        this.beanMappingService = beanMappingService;
-        this.userService = userService;
-    }
+    private BeanMappingService beanMappingService;
 
     @Override
     public List<UserDto> getAllUsers() {
