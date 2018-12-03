@@ -83,7 +83,7 @@ public class SongFacadeImpl implements SongFacade {
     }
 
     @Override
-    public void deleteSong(Long songId) {
-        songService.deleteSong(songService.getSongById(songId));
+    public void deleteSong(SongDto songDto) {
+        songService.deleteSong(beanMappingService.mapTo(songDto, Song.class));
     }
 }

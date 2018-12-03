@@ -70,8 +70,8 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void deleteUser(Long userId) {
-        userService.deleteUser(userService.findUserById(userId));
+    public void deleteUser(UserDto userDto) {
+        userService.deleteUser(beanMappingService.mapTo(userDto, User.class));
     }
 
     @Override
