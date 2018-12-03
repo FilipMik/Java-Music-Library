@@ -131,7 +131,7 @@ public class PlaylistFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
         when(beanMappingService.mapTo(playlistList, PlaylistDto.class)).thenReturn(playlistDtoList);
 
-        List<PlaylistDto> playlists = playlistFacade.findUsersPlaylists(1L);
+        List<PlaylistDto> playlists = playlistFacade.findUserPlaylists(1L);
 
         assertThat(playlists).isNotNull();
         assertNotEquals(playlists.size(), 0);

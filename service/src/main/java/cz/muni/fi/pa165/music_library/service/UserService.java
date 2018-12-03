@@ -22,8 +22,6 @@ public interface UserService {
 
     User findUserByEmail(String email);
 
-    List<Playlist> getUsersPlaylist(Long userId);
-
     List<User> getAllUsers();
 
     boolean isUserAdmin(User user);

@@ -53,7 +53,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
     }
 
     @Override
-    public List<PlaylistDto> findUsersPlaylists(Long userId) {
+    public List<PlaylistDto> findUserPlaylists(Long userId) {
         User user = userService.findUserById(userId);
         List<Playlist> playlists = user.getPlaylists();
         return (playlists == null) ? null : beanMappingService.mapTo(playlists,PlaylistDto.class);

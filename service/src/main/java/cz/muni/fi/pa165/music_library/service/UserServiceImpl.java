@@ -42,11 +42,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Playlist> getUsersPlaylist(Long userId) {
-        return userDao.getUserById(userId).getPlaylists();
-    }
-
-    @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }

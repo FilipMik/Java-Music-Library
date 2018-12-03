@@ -15,7 +15,7 @@ public interface PlaylistFacade {
 
     List<PlaylistDto> findPlaylistsByTitle(String title);
 
-    List<PlaylistDto> findUsersPlaylists(Long userId);
+    List<PlaylistDto> findUserPlaylists(Long userId);
 
     void createPlaylist(PlaylistDto playlist);
 
