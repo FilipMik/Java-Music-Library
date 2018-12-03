@@ -21,10 +21,10 @@ import java.util.List;
 @Service
 public class AlbumServiceImpl implements AlbumService {
 
-    private AlbumDao albumDao;
-    private ArtistDao artistDao;
-    private SongDao songDao;
-    private TimeService timeService;
+    private final AlbumDao albumDao;
+    private final ArtistDao artistDao;
+    private final SongDao songDao;
+    private final TimeService timeService;
 
     @Autowired
     public AlbumServiceImpl(AlbumDao albumDao, ArtistDao artistDao, SongDao songDao, TimeService timeService) {
