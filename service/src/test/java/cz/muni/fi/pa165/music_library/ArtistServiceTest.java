@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.music_library.config.ServiceConfig;
 import cz.muni.fi.pa165.music_library.dao.interfaces.ArtistDao;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import cz.muni.fi.pa165.music_library.service.ArtistService;
-import cz.muni.fi.pa165.music_library.service.ArtistServiceImpl;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,12 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
+import static org.mockito.Mockito.*;
+import static org.testng.Assert.*;
 
 /**
  * @author Jan Ficko
@@ -55,7 +50,6 @@ public class ArtistServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
-        artistService = new ArtistServiceImpl(artistDao);
     }
 
     @BeforeMethod

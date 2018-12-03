@@ -8,7 +8,6 @@ import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
 import cz.muni.fi.pa165.music_library.data.entities.Song;
 import cz.muni.fi.pa165.music_library.service.AlbumService;
-import cz.muni.fi.pa165.music_library.service.AlbumServiceImpl;
 import cz.muni.fi.pa165.music_library.service.TimeService;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -24,7 +23,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -63,7 +64,6 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
-        albumService = new AlbumServiceImpl(albumDao, artistDao, songDao, timeService);
     }
 
     @BeforeMethod
