@@ -16,7 +16,6 @@ public class ArtistDto {
     private Date birthDate;
     private String artistInfo;
     private List<SongDto> songList = new ArrayList<>();
-    private List<AlbumDto> albumList = new ArrayList<>();
 
     public Long getArtistId() {
         return artistId;
@@ -48,14 +47,6 @@ public class ArtistDto {
 
     public void setArtistInfo(String artistInfo) {
         this.artistInfo = artistInfo;
-    }
-
-    public List<AlbumDto> getAlbumList() {
-        return albumList;
-    }
-
-    public void setAlbumList(List<AlbumDto> albumList) {
-        this.albumList = albumList;
     }
 
     public List<SongDto> getSongList() {

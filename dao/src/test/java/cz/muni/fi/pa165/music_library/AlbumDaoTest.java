@@ -291,18 +291,4 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         Song retrievedSong = songDao.getSongById(songOne.getSongId());
         assertEquals( "Album One", retrievedSong.getAlbum().getTitle());
     }
-
-    @Test
-    public void testAlbumAuthorPersistence() {
-        Artist artist = new Artist();
-        artist.setName("Peter");
-        artist.addAlbum(albumOne);
-        albumOne.setArtist(artist);
-
-        artistDao.createArtist(artist);
-        albumDao.createAlbum(albumOne);
-        Artist albumArtist = albumDao.getAlbumByTitle("Album One").get(0).getArtist();
-
-        Assert.assertEquals("Expected Peter artist", artist.getName(),albumArtist.getName());
-    }
 }

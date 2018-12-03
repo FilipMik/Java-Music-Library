@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.music_library.dao.interfaces.ArtistDao;
 import cz.muni.fi.pa165.music_library.dao.interfaces.SongDao;
 import cz.muni.fi.pa165.music_library.data.entities.Album;
 import cz.muni.fi.pa165.music_library.data.entities.Artist;
+import cz.muni.fi.pa165.music_library.data.entities.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +40,17 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Artist getAlbumArtist(Long albumId) {
-        return albumDao.getAlbumById(albumId).getArtist();
+    public List<Artist> getAlbumArtists(Long albumId) {
+        Album album = albumDao.getAlbumById(albumId);
+        List<Artist> artists = new ArrayList<>();
+
+        for (Song song : album.getSongList()) {
+            Artist artist = song.getArtist();
+            if (!artists.contains(artist)) {
+                artists.add(artist);
+            }
+        }
+        return artists;
     }
 
     @Override
@@ -50,7 +60,16 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<Album> getAlbumsByArtist(Long artistId) {
-        return artistDao.getArtistById(artistId).getAlbumList();
+        Artist artist = artistDao.getArtistById(artistId);
+        List<Album> albums = new ArrayList<>();
+
+        for (Song song : artist.getSongList()) {
+            Album album = song.getAlbum();
+            if (!albums.contains(album)) {
+                albums.add(album);
+            }
+        }
+        return albums;
     }
 
     @Override
@@ -58,7 +77,11 @@ public class AlbumServiceImpl implements AlbumService {
         List<Artist> artists = artistDao.getArtistsByName(artistName);
         List<Album> albums = new ArrayList<>();
         for (Artist artist : artists) {
-            albums.addAll(artist.getAlbumList());
+            for (Song song : artist.getSongList()) {
+                if (!albums.contains(song.getAlbum())) {
+                    albums.add(song.getAlbum());
+                }
+            }
         }
         return albums;
     }
