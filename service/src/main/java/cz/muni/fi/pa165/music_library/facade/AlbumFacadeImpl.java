@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.music_library.dto.AlbumDto;
 import cz.muni.fi.pa165.music_library.dto.ArtistDto;
 import cz.muni.fi.pa165.music_library.service.AlbumService;
 import cz.muni.fi.pa165.music_library.service.BeanMappingService;
+import cz.muni.fi.pa165.music_library.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,9 @@ public class AlbumFacadeImpl implements AlbumFacade{
 
     @Autowired
     private AlbumService albumService;
+
+    @Autowired
+    private TimeService timeService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -75,6 +79,7 @@ public class AlbumFacadeImpl implements AlbumFacade{
             throw new IllegalArgumentException("Album DTO shouldn't be null");
         }
         Album albumCreate = beanMappingService.mapTo(album,Album.class);
+        albumCreate.setReleaseDate(timeService.getCurrentDate());
         albumService.createAlbum(albumCreate);
     }
 
