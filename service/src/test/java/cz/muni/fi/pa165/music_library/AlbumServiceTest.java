@@ -24,10 +24,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -52,6 +49,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
     private SongDao songDao;
     @Autowired
+    @Mock
     private TimeService timeService;
 
     private Album album;
@@ -73,7 +71,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         album = new Album();
         album.setAlbumId(albumId);
         album.setTitle("Title");
-        album.setReleaseDate(timeService.getCurrentDate());
+        album.setReleaseDate(new Date());
         album.setCommentary("Comment");
 
         artist = new Artist();
@@ -203,7 +201,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetAlbumByArtistNameNonExsistent() {
-        when(albumService.getAlbumsByArtistName("Random Artist")).thenReturn(new ArrayList<>());
+        when(artistDao.getArtistsByName("Random Artist")).thenReturn(new ArrayList<>());
 
         List<Album> albums = albumService.getAlbumsByArtistName("Random Artist");
 
@@ -223,36 +221,30 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetLastWeeksAlbums() {
-        Album oldAlbum = new Album();
-        Date oldDate = new Date(System.currentTimeMillis() - 604800001);
-        oldAlbum.setReleaseDate(oldDate);
-        Album futureAlbum = new Album();
-        Date futureDate = new Date(System.currentTimeMillis() + 604800001);
-        futureAlbum.setReleaseDate(futureDate);
-        Album currentAlbum = new Album();
-        currentAlbum.setReleaseDate(timeService.getCurrentDate());
-        Album currentAlbum2 = new Album();
-        currentAlbum2.setReleaseDate(new Date());
-
         List<Album> albums = new ArrayList<>();
-        albums.add(oldAlbum);
-        albums.add(futureAlbum);
+
+        Album currentAlbum = new Album();
+        currentAlbum.setAlbumId(1L);
+        currentAlbum.setReleaseDate(new Date());
+        Album currentAlbum2 = new Album();
+        currentAlbum2.setAlbumId(2L);
+        currentAlbum2.setReleaseDate(new Date(System.currentTimeMillis() - 304800001));
+        Album currentAlbum3 = new Album();
+        currentAlbum2.setAlbumId(3L);
+        currentAlbum2.setReleaseDate(new Date());
         albums.add(currentAlbum);
         albums.add(currentAlbum2);
+        albums.add(currentAlbum3);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(timeService.getCurrentDate());
-        calendar.add(Calendar.DAY_OF_YEAR, -Calendar.DAY_OF_WEEK);
-        Date lastWeek = calendar.getTime();
-
-        when(albumDao.getAllAlbumsBetween(lastWeek, timeService.getCurrentDate())).thenReturn(albums);
+        when(albumDao.getAllAlbumsBetween(any(Date.class), any(Date.class))).thenReturn(albums);
+        when(timeService.getCurrentDate()).thenReturn(new Date());
 
         List<Album> lastWeekAlbums = albumService.getLastWeekAlbums();
 
         assertThat(lastWeekAlbums).isNotNull();
-        assertEquals(lastWeekAlbums.size(), 1);
-        assertEquals(lastWeekAlbums, albumList);
-        assertTrue(lastWeekAlbums.contains(album));
+        assertEquals(lastWeekAlbums.size(), 3);
+        assertEquals(lastWeekAlbums, albums);
+        assertTrue(lastWeekAlbums.contains(currentAlbum));
     }
 
     @Test
