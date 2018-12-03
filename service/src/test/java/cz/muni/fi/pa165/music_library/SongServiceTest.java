@@ -46,7 +46,6 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
-        songService = new SongServiceImpl(songDao);
     }
 
     @BeforeMethod

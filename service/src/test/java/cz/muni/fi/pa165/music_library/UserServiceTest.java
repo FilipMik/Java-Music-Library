@@ -8,7 +8,7 @@ import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.UserService;
-import cz.muni.fi.pa165.music_library.service.UserServiceImpl;
+import org.dozer.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -39,7 +39,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     UserDao userDao;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     @InjectMocks
@@ -51,7 +51,6 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
-        userService = new UserServiceImpl(userDao, passwordEncoder);
     }
 
     @BeforeMethod
