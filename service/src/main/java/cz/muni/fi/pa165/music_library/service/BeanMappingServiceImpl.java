@@ -15,12 +15,8 @@ import java.util.List;
 @Service
 public class BeanMappingServiceImpl implements BeanMappingService {
 
-    private final Mapper dozer;
-
     @Autowired
-    public BeanMappingServiceImpl(Mapper dozer) {
-        this.dozer = dozer;
-    }
+    private Mapper dozer;
 
     @Override
     public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {

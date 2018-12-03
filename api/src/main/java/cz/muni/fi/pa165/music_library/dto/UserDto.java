@@ -18,7 +18,7 @@ public class UserDto {
 
     private Date dateCreated;
 
-    private UserLevelDto userLevelDto;
+    private UserLevelDto userLevel;
 
     List<PlaylistDto> playlists = new ArrayList<>();
 
@@ -62,12 +62,12 @@ public class UserDto {
         this.dateCreated = dateCreated;
     }
 
-    public UserLevelDto getUserLevelDto() {
-        return userLevelDto;
+    public UserLevelDto getUserLevel() {
+        return userLevel;
     }
 
-    public void setUserLevelDto(UserLevelDto userLevelDto) {
-        this.userLevelDto = userLevelDto;
+    public void setUserLevel(UserLevelDto userLevel) {
+        this.userLevel = userLevel;
     }
 
     public List<PlaylistDto> getPlaylists() {
@@ -88,7 +88,7 @@ public class UserDto {
         if (!getUsername().equals(userDto.getUsername())) return false;
         if (!getEmail().equals(userDto.getEmail())) return false;
         if (!getDateCreated().equals(userDto.getDateCreated())) return false;
-        return getUserLevelDto() == userDto.getUserLevelDto();
+        return getUserLevel() == userDto.getUserLevel();
     }
 
     @Override
@@ -96,7 +96,7 @@ public class UserDto {
         int result = getUsername().hashCode();
         result = 31 * result + getEmail().hashCode();
         result = 31 * result + getDateCreated().hashCode();
-        result = 31 * result + getUserLevelDto().hashCode();
+        result = 31 * result + getUserLevel().hashCode();
         return result;
     }
 }
