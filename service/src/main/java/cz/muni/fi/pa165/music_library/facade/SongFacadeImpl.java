@@ -20,14 +20,11 @@ import java.util.List;
 @Transactional
 public class SongFacadeImpl implements SongFacade {
 
-    private final BeanMappingService beanMappingService;
-    private final SongService songService;
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    public SongFacadeImpl(SongService songService, BeanMappingService beanMappingService) {
-        this.songService = songService;
-        this.beanMappingService = beanMappingService;
-    }
+    private SongService songService;
 
     @Override
     public List<SongDto> getAllSongs() {

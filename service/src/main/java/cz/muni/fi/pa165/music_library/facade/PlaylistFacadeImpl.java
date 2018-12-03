@@ -21,16 +21,14 @@ import java.util.List;
 @Transactional
 public class PlaylistFacadeImpl implements PlaylistFacade{
 
-    private final PlaylistService playlistService;
-    private final UserService userService;
-    private final BeanMappingService beanMappingService;
+    @Autowired
+    private PlaylistService playlistService;
 
     @Autowired
-    public PlaylistFacadeImpl(PlaylistService playlistService, UserService userService, BeanMappingService beanMappingService) {
-        this.playlistService = playlistService;
-        this.userService = userService;
-        this.beanMappingService = beanMappingService;
-    }
+    private UserService userService;
+
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Override
     public List<PlaylistDto> getAllPlaylists() {

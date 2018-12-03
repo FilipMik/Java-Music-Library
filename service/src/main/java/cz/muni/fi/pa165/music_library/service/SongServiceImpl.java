@@ -15,12 +15,8 @@ import java.util.List;
 @Service
 public class SongServiceImpl implements SongService {
 
-    private final SongDao songDao;
-
     @Autowired
-    public SongServiceImpl(SongDao songDao) {
-        this.songDao = songDao;
-    }
+    private SongDao songDao;
 
     @Override
     public List<Song> getAllSongs() {

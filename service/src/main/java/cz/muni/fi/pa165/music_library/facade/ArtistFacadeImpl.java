@@ -19,14 +19,11 @@ import java.util.List;
 @Transactional
 public class ArtistFacadeImpl implements ArtistFacade {
 
-    private final ArtistService artistService;
-    private final BeanMappingService beanMappingService;
+    @Autowired
+    private ArtistService artistService;
 
     @Autowired
-    public ArtistFacadeImpl(ArtistService artistService, BeanMappingService beanMappingService) {
-        this.artistService = artistService;
-        this.beanMappingService = beanMappingService;
-    }
+    private BeanMappingService beanMappingService;
 
     @Override
     public List<ArtistDto> getAllArtists() {
