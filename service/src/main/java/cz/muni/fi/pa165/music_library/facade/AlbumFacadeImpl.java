@@ -106,8 +106,7 @@ public class AlbumFacadeImpl implements AlbumFacade{
     }
 
     @Override
-    public void deleteAlbum(Long albumId) {
-        Album album = albumService.getAlbumById(albumId);
-        albumService.deleteAlbum(album);
+    public void deleteAlbum(AlbumDto album) {
+        albumService.deleteAlbum(beanMappingService.mapTo(album, Album.class));
     }
 }

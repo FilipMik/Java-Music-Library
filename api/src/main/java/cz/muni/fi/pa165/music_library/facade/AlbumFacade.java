@@ -34,6 +34,6 @@ public interface AlbumFacade {
 
     void removeSong(Long albumId, Long songId);
 
-    void deleteAlbum(Long albumId);
+    void deleteAlbum(AlbumDto album);
 
 }

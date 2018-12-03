@@ -91,8 +91,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
     }
 
     @Override
-    public void deletePlaylist(Long playlistId) {
-        Playlist playlistDelete = playlistService.getPlaylistById(playlistId);
-        playlistService.deletePlaylist(playlistDelete);
+    public void deletePlaylist(PlaylistDto playlist) {
+        playlistService.deletePlaylist(beanMappingService.mapTo(playlist, Playlist.class));
     }
 }
