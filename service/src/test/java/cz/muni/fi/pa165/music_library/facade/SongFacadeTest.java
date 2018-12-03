@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertNotEquals;
@@ -146,14 +147,13 @@ public class SongFacadeTest extends BaseFacadeTest {
     @Test
     public void findSongsByGenreTest() {
         when(beanMappingService.mapTo(songList, SongDto.class)).thenReturn(songDtoList);
-        when(songService.getSongsByGenre(Genre.ROCK)).thenReturn(songList);
+        when(songService.getSongsByGenre(any(Genre.class))).thenReturn(songList);
 
         List<SongDto> songs = songFacade.findSongsByGenre(GenreDto.ROCK);
 
         assertThat(songs).isNotNull();
         assertNotEquals(songs.size(), 0);
-        assertThat(song.getGenre()).isEqualTo(songs.get(0).getGenre());
-        verify(songService).getSongsByGenre(Genre.ROCK);
+        verify(songService).getSongsByGenre(any(Genre.class));
     }
 
     @Test
@@ -172,13 +172,13 @@ public class SongFacadeTest extends BaseFacadeTest {
     @Test
     public void getAllTimeTopSongsTest() {
         when(beanMappingService.mapTo(songList, SongDto.class)).thenReturn(songDtoList);
-        when(songService.getAllTimeTopSongs(1, Genre.ROCK)).thenReturn(songList);
+        when(songService.getAllTimeTopSongs(any(), any(Genre.class))).thenReturn(songList);
 
         List<SongDto> songs = songFacade.getAllTimeTopSongs(1, GenreDto.ROCK);
 
         assertThat(songs).isNotNull();
         assertNotEquals(songs.size(), 0);
-        verify(songService).getAllTimeTopSongs(1, Genre.ROCK);
+        verify(songService).getAllTimeTopSongs(any(), any(Genre.class));
     }
 
     @Test
