@@ -2,8 +2,11 @@ package cz.muni.fi.pa165.music_library.facade;
 
 import cz.muni.fi.pa165.music_library.base.BaseFacadeTest;
 import cz.muni.fi.pa165.music_library.data.entities.Playlist;
+import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.dto.PlaylistDto;
+import cz.muni.fi.pa165.music_library.dto.UserDto;
 import cz.muni.fi.pa165.music_library.service.PlaylistService;
+import cz.muni.fi.pa165.music_library.service.UserService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -17,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertNotEquals;
@@ -35,6 +39,9 @@ public class PlaylistFacadeTest extends BaseFacadeTest {
     @Mock
     private PlaylistService playlistService;
 
+    @Mock
+    private UserService userService;
+
     private Playlist playlist;
     private List<Playlist> playlistList = new ArrayList<>();
 
@@ -47,8 +54,8 @@ public class PlaylistFacadeTest extends BaseFacadeTest {
     @BeforeMethod
     public void init() {
         MockitoAnnotations.initMocks(this);
-
         ReflectionTestUtils.setField(playlistFacade, "playlistService", playlistService);
+        ReflectionTestUtils.setField(playlistFacade, "userService", userService);
         ReflectionTestUtils.setField(playlistFacade, "beanMappingService", beanMappingService);
 
         Date date = new Date();
@@ -106,6 +113,31 @@ public class PlaylistFacadeTest extends BaseFacadeTest {
         assertThat(playlist.getTitle()).isEqualTo(playlists.get(0).getTitle());
         assertTrue(playlists.contains(playlistDto));
         verify(playlistService).getPlaylistsByTitle(playlistTitle);
+    }
+
+    @Test
+    public void findUsersPlaylistsTest() {
+        User user = new User();
+        user.setUserId(1L);
+        user.setPlaylists(playlistList);
+        playlist.setUser(user);
+
+        UserDto userDto = new UserDto();
+        userDto.setUserId(1L);
+        userDto.setPlaylists(playlistDtoList);
+        playlistDto.setUser(userDto);
+
+        when(userService.findUserById(any())).thenReturn(user);
+        when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
+        when(beanMappingService.mapTo(playlistList, PlaylistDto.class)).thenReturn(playlistDtoList);
+
+        List<PlaylistDto> playlists = playlistFacade.findUsersPlaylists(1L);
+
+        assertThat(playlists).isNotNull();
+        assertNotEquals(playlists.size(), 0);
+        assertThat(playlist.getUser().getUserId()).isEqualTo(1L);
+        assertTrue(playlists.contains(playlistDto));
+        verify(userService).findUserById(any());
     }
 
     @Test
