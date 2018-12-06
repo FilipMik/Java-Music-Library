@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.music_library.rest;
+package cz.muni.fi.pa165.music_library.rest;
 
 public abstract class ApiUris {
     public static final String ROOT_URI_ALBUM   = "/album";
