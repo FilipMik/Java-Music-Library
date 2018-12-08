@@ -20,14 +20,11 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User findUserById(Long userId) {
@@ -42,11 +39,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userDao.getUserByEmail(email);
-    }
-
-    @Override
-    public List<Playlist> getUsersPlaylist(Long userId) {
-        return userDao.getUserById(userId).getPlaylists();
     }
 
     @Override

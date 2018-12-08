@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.dto.PlaylistDto;
 import cz.muni.fi.pa165.music_library.service.BeanMappingService;
 import cz.muni.fi.pa165.music_library.service.PlaylistService;
+import cz.muni.fi.pa165.music_library.service.TimeService;
 import cz.muni.fi.pa165.music_library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,16 +22,17 @@ import java.util.List;
 @Transactional
 public class PlaylistFacadeImpl implements PlaylistFacade{
 
-    private final PlaylistService playlistService;
-    private final UserService userService;
-    private final BeanMappingService beanMappingService;
+    @Autowired
+    private PlaylistService playlistService;
 
     @Autowired
-    public PlaylistFacadeImpl(PlaylistService playlistService, UserService userService, BeanMappingService beanMappingService) {
-        this.playlistService = playlistService;
-        this.userService = userService;
-        this.beanMappingService = beanMappingService;
-    }
+    private TimeService timeService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Override
     public List<PlaylistDto> getAllPlaylists() {
@@ -51,7 +53,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
     }
 
     @Override
-    public List<PlaylistDto> findUsersPlaylists(Long userId) {
+    public List<PlaylistDto> findUserPlaylists(Long userId) {
         User user = userService.findUserById(userId);
         List<Playlist> playlists = user.getPlaylists();
         return (playlists == null) ? null : beanMappingService.mapTo(playlists,PlaylistDto.class);
@@ -63,6 +65,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
             throw new IllegalArgumentException("Playlist shouldn't be null");
         }
         Playlist playlistCreate = beanMappingService.mapTo(playlist,Playlist.class);
+        playlistCreate.setDateCreated(timeService.getCurrentDate());
         playlistService.createPlaylist(playlistCreate);
     }
 
@@ -91,8 +94,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
     }
 
     @Override
-    public void deletePlaylist(Long playlistId) {
-        Playlist playlistDelete = playlistService.getPlaylistById(playlistId);
-        playlistService.deletePlaylist(playlistDelete);
+    public void deletePlaylist(PlaylistDto playlist) {
+        playlistService.deletePlaylist(beanMappingService.mapTo(playlist, Playlist.class));
     }
 }

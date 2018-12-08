@@ -15,12 +15,8 @@ import java.util.List;
 @Service
 public class SongServiceImpl implements SongService {
 
-    private final SongDao songDao;
-
     @Autowired
-    public SongServiceImpl(SongDao songDao) {
-        this.songDao = songDao;
-    }
+    private SongDao songDao;
 
     @Override
     public List<Song> getAllSongs() {
@@ -50,7 +46,7 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> getAllTimeTopSongs(Integer numberOfSongs, Genre genre) {
         List<Song> list = songDao.getAllSongsByRating(genre);
-        if (numberOfSongs > list.size()) {
+        if (numberOfSongs == null || numberOfSongs > list.size()) {
             return list;
         } else {
             return list.subList(0, numberOfSongs);

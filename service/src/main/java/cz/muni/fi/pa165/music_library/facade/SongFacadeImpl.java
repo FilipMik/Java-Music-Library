@@ -20,14 +20,13 @@ import java.util.List;
 @Transactional
 public class SongFacadeImpl implements SongFacade {
 
-    private final BeanMappingService beanMappingService;
-    private final SongService songService;
+    private static final Integer NORMAL_QUALITY_RATE = 96;   //kbit/s
 
     @Autowired
-    public SongFacadeImpl(SongService songService, BeanMappingService beanMappingService) {
-        this.songService = songService;
-        this.beanMappingService = beanMappingService;
-    }
+    private BeanMappingService beanMappingService;
+
+    @Autowired
+    private SongService songService;
 
     @Override
     public List<SongDto> getAllSongs() {
@@ -74,6 +73,7 @@ public class SongFacadeImpl implements SongFacade {
     public void createSong(SongDto songDto) {
         if (songDto == null) throw new IllegalArgumentException("Can not create null object");
         Song song = beanMappingService.mapTo(songDto, Song.class);
+        song.setBitRate(NORMAL_QUALITY_RATE);
         songService.createSong(song);
     }
 
@@ -83,7 +83,7 @@ public class SongFacadeImpl implements SongFacade {
     }
 
     @Override
-    public void deleteSong(Long songId) {
-        songService.deleteSong(songService.getSongById(songId));
+    public void deleteSong(SongDto songDto) {
+        songService.deleteSong(beanMappingService.mapTo(songDto, Song.class));
     }
 }

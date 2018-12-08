@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.BeanMappingService;
+import cz.muni.fi.pa165.music_library.service.TimeService;
 import cz.muni.fi.pa165.music_library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +23,14 @@ import java.util.List;
 @Transactional
 public class UserFacadeImpl implements UserFacade {
 
-    private final UserService userService;
-    private final BeanMappingService beanMappingService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
-    public UserFacadeImpl(BeanMappingService beanMappingService, UserService userService) {
-        this.beanMappingService = beanMappingService;
-        this.userService = userService;
-    }
+    private BeanMappingService beanMappingService;
+
+    @Autowired
+    private TimeService timeService;
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -57,6 +58,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void registerUser(UserDto userDto, String password) {
         User user = beanMappingService.mapTo(userDto, User.class);
+        user.setDateCreated(timeService.getCurrentDate());
         try {
             userService.registerUser(user, password);
         } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {
@@ -70,8 +72,8 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void deleteUser(Long userId) {
-        userService.deleteUser(userService.findUserById(userId));
+    public void deleteUser(UserDto userDto) {
+        userService.deleteUser(beanMappingService.mapTo(userDto, User.class));
     }
 
     @Override

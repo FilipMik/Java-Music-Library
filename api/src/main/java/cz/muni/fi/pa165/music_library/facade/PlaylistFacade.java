@@ -15,7 +15,7 @@ public interface PlaylistFacade {
 
     List<PlaylistDto> findPlaylistsByTitle(String title);
 
-    List<PlaylistDto> findUsersPlaylists(Long userId);
+    List<PlaylistDto> findUserPlaylists(Long userId);
 
     void createPlaylist(PlaylistDto playlist);
 
@@ -27,6 +27,6 @@ public interface PlaylistFacade {
 
     void removeSong(Long playlistId, Long songId);
 
-    void deletePlaylist(Long playlistId);
+    void deletePlaylist(PlaylistDto playlist);
 
 }

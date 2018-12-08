@@ -14,7 +14,7 @@ public interface AlbumFacade {
 
     AlbumDto findAlbumById(Long albumId);
 
-    ArtistDto findAlbumArtist(Long albumId);
+    List<ArtistDto> findAlbumArtists(Long albumId);
 
     List<AlbumDto> findAlbumsByTitle(String title);
 
@@ -34,6 +34,6 @@ public interface AlbumFacade {
 
     void removeSong(Long albumId, Long songId);
 
-    void deleteAlbum(Long albumId);
+    void deleteAlbum(AlbumDto album);
 
 }
