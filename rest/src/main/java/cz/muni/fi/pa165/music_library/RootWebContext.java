@@ -18,7 +18,7 @@ import java.util.Locale;
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfig.class})
-@ComponentScan(basePackages = {"cz.muni.fi.pa165.music_library.rest.controllers", "cz.muni.fi.pa165.music_library.rest.assemblers"})
+@ComponentScan(basePackages = {"cz.muni.fi.pa165.music_library.rest.controllers"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override

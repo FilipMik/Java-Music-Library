@@ -9,19 +9,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Jan Ficko
+ */
 
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_ALBUM)
 public class AlbumController {
 
-    final static Logger logger = LoggerFactory.getLogger(AlbumController.class);
+    private final static Logger logger = LoggerFactory.getLogger(AlbumController.class);
 
     @Autowired
     private AlbumFacade albumFacade;
@@ -34,62 +34,123 @@ public class AlbumController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final AlbumDto findAlbumById(@PathVariable("id") Long id) throws Exception {
-        logger.debug("GET getAlbum({})", id);
+    public final AlbumDto findAlbumById(@PathVariable("id") Long albumId)  {
+        logger.debug("GET findAlbumById({})", albumId);
 
-        try {
-            AlbumDto albumDto = albumFacade.findAlbumById(id);
+        AlbumDto albumDto = albumFacade.findAlbumById(albumId);
+
+        if (albumDto != null) {
             return albumDto;
-        } catch (Exception ex) {
+        } else {
             throw new ResourceNotFoundException();
         }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArtistDto findAlbumArtist(Long albumId) {
-        return null;
+    @RequestMapping(value = "/{id}/artists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ArtistDto> findAlbumArtists(Long albumId) {
+        logger.debug("GET findAlbumArtists({})", albumId);
+
+        List<ArtistDto> listArtistDto = albumFacade.findAlbumArtists(albumId);
+
+        if(!listArtistDto.isEmpty()) {
+            return listArtistDto;
+        } else {
+            throw new ResourceNotFoundException();
+        }
     }
 
-    public List<AlbumDto> findAlbumsByTitle(String title) {
-        return null;
-    }
-
+    @RequestMapping(value = "/artist/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<AlbumDto> findAlbumsByArtist(String artistName) {
-        return null;
+        logger.debug("GET findAlbumsByArtist({})", artistName);
+
+        List<AlbumDto> listAlbumDto = albumFacade.findAlbumsByArtist(artistName);
+
+        if(!listAlbumDto.isEmpty()) {
+            return listAlbumDto;
+        } else {
+            throw new ResourceNotFoundException();
+        }
     }
 
+    @RequestMapping(value = "/artist/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<AlbumDto> findAlbumsByArtistId(Long artistId) {
-        return null;
+        logger.debug("GET findAlbumsByArtistId({})", artistId);
+
+        List<AlbumDto> listAlbumDto = albumFacade.findAlbumsByArtistId(artistId);
+
+        if (!listAlbumDto.isEmpty()) {
+            return listAlbumDto;
+        } else {
+            throw new ResourceNotFoundException();
+        }
     }
 
+    @RequestMapping(value = "/lastweek", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<AlbumDto> getLastWeekAlbums() {
-        return null;
+        logger.debug("GET getLastWeekAlbums()");
+
+        return albumFacade.getLastWeekAlbums();
     }
 
-    public void createAlbum(AlbumDto album) {
+    @RequestMapping(value = "/{title}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<AlbumDto> findAlbumsByTitle(@PathVariable("title") String title) {
+        logger.debug("GET findAlbumsByTitle({})", title);
 
+        List<AlbumDto> listAlbumDto = albumFacade.findAlbumsByTitle(title);
+
+        if(!listAlbumDto.isEmpty()) {
+            return listAlbumDto;
+        } else {
+            throw new ResourceNotFoundException();
+        }
     }
 
-    public void updateAlbum(AlbumDto album) {
+    @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void createAlbum(@RequestBody AlbumDto album) {
+        logger.debug("POST createAlbum({})", album);
 
+        albumFacade.createAlbum(album);
     }
 
-    public void addSongs(Long albumId, List<Long> songIds) {
+    @RequestMapping(value = "/", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateAlbum(@RequestBody AlbumDto album) {
+        logger.debug("PUT updateAlbum({})", album);
 
+        albumFacade.updateAlbum(album);
     }
 
-    public void addSong(Long albumId, Long songId) {
+    @RequestMapping(value = "/{id}/song", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void addSongs(@PathVariable("id") Long albumId, @RequestBody List<Long> songIds) {
+        logger.debug("POST addSongs({})", albumId, songIds);
 
+        albumFacade.addSongs(albumId, songIds);
     }
 
+    @RequestMapping(value = "/{albumId}/song/{songId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void addSong(@PathVariable("albumId") Long albumId, @PathVariable("songId") Long songId) {
+        logger.debug("GET addSong({})", albumId, songId);
+
+        albumFacade.addSong(albumId, songId);
+    }
+
+    @RequestMapping(value = "/{albumId}/song/{songId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void removeSong(Long albumId, Long songId) {
+        logger.debug("DELETE removeSong({})", albumId, songId);
 
+        albumFacade.removeSong(albumId, songId);
     }
 
-    public void deleteAlbum(Long albumId) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteAlbum(Long id) {
+        logger.debug("DELETE deleteAlbum({})", id);
 
+        AlbumDto albumDto = albumFacade.findAlbumById(id);
+
+        if (albumDto != null) {
+            albumFacade.deleteAlbum(albumDto);
+        } else {
+            throw new ResourceNotFoundException();
+        }
     }
-
-
 
 }
