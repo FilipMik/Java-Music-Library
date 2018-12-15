@@ -15,6 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * @author Jan Ficko
+ */
+
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfig.class})

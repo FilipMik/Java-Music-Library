@@ -12,6 +12,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Jan Ficko
+ */
+
 @RestController
 public class MainController {
     
