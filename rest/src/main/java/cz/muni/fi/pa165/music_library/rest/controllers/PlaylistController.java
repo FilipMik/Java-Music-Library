@@ -1,7 +1,5 @@
 package cz.muni.fi.pa165.music_library.rest.controllers;
 
-
-import cz.muni.fi.pa165.music_library.data.entities.Genre;
 import cz.muni.fi.pa165.music_library.dto.PlaylistDto;
 import cz.muni.fi.pa165.music_library.facade.PlaylistFacade;
 import cz.muni.fi.pa165.music_library.rest.ApiUris;
@@ -12,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
+/**
+ * @author Filip Mik, 487593
+ */
+
 import java.util.List;
 
 @RestController
