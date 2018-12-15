@@ -73,7 +73,7 @@ public class PlaylistController {
         playlistFacade.updatePlaylist(playlistDto);
     }
 
-    @RequestMapping(value = "/{id}/song/{songId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/song/{songId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final void addSong(@PathVariable("id") Long playlistId, @PathVariable("songId") Long songId) {
         logger.debug("POST addSong");
 
