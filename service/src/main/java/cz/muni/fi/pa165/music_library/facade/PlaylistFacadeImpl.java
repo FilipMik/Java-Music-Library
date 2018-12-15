@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PlaylistFacadeImpl implements PlaylistFacade{
+public class PlaylistFacadeImpl implements PlaylistFacade {
 
     @Autowired
     private PlaylistService playlistService;
@@ -37,26 +37,26 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
     @Override
     public List<PlaylistDto> getAllPlaylists() {
         List<Playlist> playlists = playlistService.getAllPlaylists();
-        return (playlists == null) ? null : beanMappingService.mapTo(playlists,PlaylistDto.class);
+        return (playlists == null) ? null : beanMappingService.mapTo(playlists, PlaylistDto.class);
     }
 
     @Override
     public PlaylistDto findPlaylistById(Long playlistId) {
         Playlist playlist = playlistService.getPlaylistById(playlistId);
-        return (playlist == null) ? null : beanMappingService.mapTo(playlist,PlaylistDto.class);
+        return (playlist == null) ? null : beanMappingService.mapTo(playlist, PlaylistDto.class);
     }
 
     @Override
     public List<PlaylistDto> findPlaylistsByTitle(String title) {
         List<Playlist> playlists = playlistService.getPlaylistsByTitle(title);
-        return (playlists == null) ? null : beanMappingService.mapTo(playlists,PlaylistDto.class);
+        return beanMappingService.mapTo(playlists, PlaylistDto.class);
     }
 
     @Override
     public List<PlaylistDto> findUserPlaylists(Long userId) {
         User user = userService.findUserById(userId);
         List<Playlist> playlists = user.getPlaylists();
-        return (playlists == null) ? null : beanMappingService.mapTo(playlists,PlaylistDto.class);
+        return beanMappingService.mapTo(playlists, PlaylistDto.class);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
         if (playlist == null) {
             throw new IllegalArgumentException("Playlist shouldn't be null");
         }
-        Playlist playlistCreate = beanMappingService.mapTo(playlist,Playlist.class);
+        Playlist playlistCreate = beanMappingService.mapTo(playlist, Playlist.class);
         playlistCreate.setDateCreated(timeService.getCurrentDate());
         playlistService.createPlaylist(playlistCreate);
     }
@@ -74,23 +74,23 @@ public class PlaylistFacadeImpl implements PlaylistFacade{
         if (playlist == null) {
             throw new IllegalArgumentException("Updated playlist shouldn't be null");
         }
-        Playlist playlistUpdate = beanMappingService.mapTo(playlist,Playlist.class);
+        Playlist playlistUpdate = beanMappingService.mapTo(playlist, Playlist.class);
         playlistService.updatePlaylist(playlistUpdate);
     }
 
     @Override
     public void addSongs(Long playlistId, List<Long> songIds) {
-        playlistService.addSongs(playlistId,songIds);
+        playlistService.addSongs(playlistId, songIds);
     }
 
     @Override
     public void addSong(Long playlistId, Long songId) {
-        playlistService.addSong(playlistId,songId);
+        playlistService.addSong(playlistId, songId);
     }
 
     @Override
     public void removeSong(Long playlistId, Long songId) {
-        playlistService.removeSong(playlistId,songId);
+        playlistService.removeSong(playlistId, songId);
     }
 
     @Override
