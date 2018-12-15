@@ -86,6 +86,42 @@ curl -i -X DELETE http://localhost:8080/PA165/rest/album/{id}
 
 ## Artist
 
+Get all artists:
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/artist
+```
+
+Get artist by id:
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/artist/{id}
+```
+
+Get artist by name:
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/artist/name/{name}
+```
+
+Create artist:
+
+```
+curl -X POST -i -H "Content-Type: application/json" --data {"name":"sample name","birthDate":"1990-01-01 05:15", "info":"Some info"} http://localhost:8080/PA165/rest/artist/create
+```
+
+Update artist:
+
+```
+curl -X POST -i -H "Content-Type: application/json" --data {"id":name":"sample name","birthDate":"1990-01-01 05:15", "info":"Some info"} http://localhost:8080/PA165/rest/artist/
+```
+
+Delete artist:
+
+```
+curl -i -X DELETE http://localhost:8080/PA165/rest/artist/{id}
+```
+
 ## Playlist
 
 ## Song
