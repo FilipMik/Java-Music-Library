@@ -114,7 +114,7 @@ public class AlbumController {
         }
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createAlbum(@RequestBody AlbumDto album) {
         logger.debug("POST createAlbum({})", album);
 
