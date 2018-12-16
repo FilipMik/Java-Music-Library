@@ -54,7 +54,7 @@ public class ArtistController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final void createArtist(@RequestBody ArtistDto artistDto) {
-        logger.debug("POST createAlbum");
+        logger.debug("POST createArtist");
 
         artistFacade.createArtist(artistDto);
     }
@@ -68,7 +68,7 @@ public class ArtistController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void deleteArtist(@PathVariable("id") Long artistId) {
-        logger.debug("DELETE deleteAlbum");
+        logger.debug("DELETE deleteArtist");
 
         ArtistDto artistDto = artistFacade.findArtistById(artistId);
 
