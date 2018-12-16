@@ -1,6 +1,6 @@
 # REST API
 
-REST API is available on following url: [http://localhost:8080](http://localhost:8080)
+REST API is available on following url: [http://localhost:8080/PA165/rest](http://localhost:8080/PA165/rest)
 
 ## Commands
 
