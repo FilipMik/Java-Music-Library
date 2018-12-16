@@ -1,6 +1,6 @@
 # REST API
 
-REST API is available on following url: [http://localhost:8080/PA165/rest]()
+REST API is available on following url: [http://localhost:8080/PA165/rest](http://localhost:8080/PA165/rest)
 
 ## Commands
 
@@ -63,7 +63,7 @@ curl -X PUT -i -H "Content-Type: application/json" --data ‘{“albumId“:1,�
 Add multiple songs to album:
 
 ```
-TODO
+curl -X POST -i -H "Content-Type: application/json" --data ‘[ 1, 2, 3 ]' http://localhost:8080/PA165/rest/album/{albumId}/song
 ```
 
 Add one song to album:

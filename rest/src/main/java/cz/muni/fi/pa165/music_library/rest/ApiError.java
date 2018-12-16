@@ -4,11 +4,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
- * Represents a possible representation of errors to be used 
- * with @ControllerAdvice global exception handler
- * 
- * @author brossi
+ * @author Jan Ficko
  */
+
 @XmlRootElement
 public class ApiError {
     

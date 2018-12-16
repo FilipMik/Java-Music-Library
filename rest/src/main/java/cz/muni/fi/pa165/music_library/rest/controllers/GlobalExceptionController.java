@@ -16,7 +16,7 @@ import java.util.Arrays;
  * It is also possible to associate one handler to a set of Controllers
  * See https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ControllerAdvice.html
  * 
- * @author brossi
+ * @author Jan Ficko
  */
 @ControllerAdvice
 public class GlobalExceptionController {
