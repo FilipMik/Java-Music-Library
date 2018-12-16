@@ -78,6 +78,10 @@
             <artifactId>logback-classic</artifactId>
             <scope>test</scope><!-- logging implementation should not be part of a library, but is needed for tests -->
         </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
 
 
         <!-- For embedded usage -->
@@ -96,8 +100,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
-
 
 
 

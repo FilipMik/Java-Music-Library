@@ -40,7 +40,7 @@ public class ArtistFacadeImpl implements ArtistFacade {
     @Override
     public List<ArtistDto> findArtistsByName(String name) {
         List<Artist> artists = artistService.getArtistsByName(name);
-        return (artists == null) ? null : beanMappingService.mapTo(artists,ArtistDto.class);
+        return beanMappingService.mapTo(artists,ArtistDto.class);
     }
 
     @Override
