@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.music_library.rest.controllers;
 
-import cz.muni.fi.pa165.music_library.dto.ArtistDto;
 import cz.muni.fi.pa165.music_library.dto.UserAuthenticateDto;
 import cz.muni.fi.pa165.music_library.dto.UserDto;
 import cz.muni.fi.pa165.music_library.facade.UserFacade;
@@ -112,11 +111,17 @@ public class UserController {
         userFacade.changeUserPassword(userDto, newPassword);
     }
 
-    @RequestMapping(value = "/isAdmin", method = RequestMethod.GET)
-    public final boolean isAdmin(@RequestBody UserDto userDto) {
+    @RequestMapping(value = "/isAdmin/{id}", method = RequestMethod.GET)
+    public final boolean isAdmin(@PathVariable("id") Long userId) {
         logger.debug("GET isAdmin");
 
-        boolean result = userFacade.isAdmin(userDto);
-        return result;
+        UserDto userDto = userFacade.findUserById(userId);
+
+        if (userDto == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            boolean result = userFacade.isAdmin(userDto);
+            return result;
+        }
     }
 }
