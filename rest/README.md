@@ -214,13 +214,13 @@ curl -i -X GET http://localhost:8080/PA165/rest/user/email/{email}
 Register user:
 
 ```
-curl -X POST -i -H "Content-Type: application/json" --data {"username":"sample name","email":"sample email","dateCreated":"2018-12-16 00:00","password":"sample password"} http://localhost:8080/PA165/rest/user/register
+curl -X POST -i -H "Content-Type: application/json" --data '{"username":"sample name","email":"sample email","dateCreated":"2018-12-16 00:00","password":"sample password"}' http://localhost:8080/PA165/rest/user/register
 ```
 
 Update user:
 
 ```
-curl -X PUT -i -H "Content-Type: application/json" --data {"userId":1,"username":"sample name","email":"sample email"} http://localhost:8080/PA165/rest/user/
+curl -X PUT -i -H "Content-Type: application/json" --data '{"userId":1,"username":"sample name","dateCreated":"2018-12-16 00:00","email":"other email","password":"sample password"}' http://localhost:8080/PA165/rest/user/update
 ```
 
 Delete user:
@@ -232,18 +232,18 @@ curl -i -X DELETE http://localhost:8080/PA165/rest/user/{id}
 Authenticate user:
 
 ```
-curl -X POST -i -H "Content-Type: application/json" --data {"userId":1,"password":"sample password"} http://localhost:8080/PA165/rest/user/authenticate
+curl -X POST -i -H "Content-Type: application/json" --data '{"userId":1,"password":"sample password"}' http://localhost:8080/PA165/rest/user/authenticate
 ```
 
 Change password:
 
 ```
-curl -X PUT -i -H "Content-Type: application/json" --data {"userId":1,"password":"sample password"} http://localhost:8080/PA165/rest/user/password
+curl -X PUT -i -H "Content-Type: application/json" --data '{"userId":1,"password":"other password"}' http://localhost:8080/PA165/rest/user/password
 ```
 
 Check if user is admin:
 
 ```
-curl -i -X GET http://localhost:8080/PA165/rest/user/isAdmin/{id}
+curl -i -X GET http://localhost:8080/PA165/rest/user/{id}/isAdmin
 ```
 

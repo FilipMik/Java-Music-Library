@@ -70,13 +70,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final void registerUser(@RequestBody UserDto userDto, String password) {
+    public final void registerUser(@RequestBody UserDto userDto) {
         logger.debug("POST registerUser");
 
-        userFacade.registerUser(userDto, password);
+        userFacade.registerUser(userDto, userDto.getPassword());
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final void updateUser(@RequestBody UserDto userDto) {
         logger.debug("PUT updateUser");
 
@@ -97,21 +97,27 @@ public class UserController {
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final boolean authenticateUser(@RequestBody UserAuthenticateDto userDto) {
+    public final boolean authenticateUser(@RequestBody UserAuthenticateDto userAuthenticateDto) {
         logger.debug("POST authenticateUser");
 
-        boolean result = userFacade.authenticate(userDto);
+        boolean result = userFacade.authenticate(userAuthenticateDto);
         return result;
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final void changePassword(@RequestBody UserDto userDto, String newPassword) {
+    public final void changePassword(@RequestBody UserAuthenticateDto userChangeDto) {
         logger.debug("PUT changePassword");
 
-        userFacade.changeUserPassword(userDto, newPassword);
+        UserDto userDto = userFacade.findUserById(userChangeDto.getUserId());
+
+        if (userDto == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            userFacade.changeUserPassword(userDto, userChangeDto.getPassword());
+        }
     }
 
-    @RequestMapping(value = "/isAdmin/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/isAdmin", method = RequestMethod.GET)
     public final boolean isAdmin(@PathVariable("id") Long userId) {
         logger.debug("GET isAdmin");
 
