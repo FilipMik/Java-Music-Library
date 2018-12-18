@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.Date;
@@ -13,6 +15,8 @@ import java.util.Date;
  * @author Filip Mik on 17. 12. 2018
  */
 
+@Component
+@Transactional
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Autowired
@@ -38,10 +42,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Override
     public void loadData() throws IOException {
-        playlist();
-        artist();
-        album();
-        song();
+//        playlist();
+//        artist();
+//        album();
+//        song();
         try {
             user();
         } catch (EmailAlreadyExistsException e) {
@@ -74,14 +78,14 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
     private Playlist playlist() {
-        Playlist playlist = new Playlist();
+        playlist = new Playlist();
         playlist.setTitle("playlist1");
         playlistService.createPlaylist(playlist);
         return playlistService.getPlaylistsByTitle("playlist1").get(0);
     }
 
     private Album album() {
-        Album album = new Album();
+        album = new Album();
         album.setTitle("albuum");
         album.setReleaseDate(new Date());
         albumService.createAlbum(album);

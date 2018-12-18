@@ -17,8 +17,8 @@ public class StartInitializer extends AbstractAnnotationConfigDispatcherServletI
     }
 
     @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return null;
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 
     @Override
@@ -29,8 +29,8 @@ public class StartInitializer extends AbstractAnnotationConfigDispatcherServletI
     }
 
     @Override
-    protected String[] getServletMappings() {
-        return new String[]{"/"};
+    protected Class<?>[] getServletConfigClasses() {
+        return null;
     }
 
 }

@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.music_library;
 
 import cz.muni.fi.pa165.music_library.config.ServiceConfig;
-import org.dozer.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @ComponentScan(basePackageClasses = {SampleDataLoadingFacadeImpl.class})
 public class SampleDataConfiguration {
 
-    @Inject
+    @Autowired
     SampleDataLoadingFacade sampleDataLoadingFacade;
 
     @PostConstruct

@@ -33,14 +33,14 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><my:a href="/shopping/show"><f:message key="navigation.musicLibrary"/></my:a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.features"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><my:a href="/order/list/all"><f:message key="navigation.admin.playlists"/></my:a></li>
-                        <li><my:a href="/user/list"><f:message key="navigation.admin.users"/></my:a></li>
-                        <li><my:a href="/product/list"><f:message key="navigation.admin.songs"/></my:a></li>
-                        <li><my:a href="/category/list"><f:message key="navigation.admin.albums"/></my:a></li>
+                        <li><my:a href="/playlist"><f:message key="navigation.playlists"/></my:a></li>
+                        <li><my:a href="/user"><f:message key="navigation.users"/></my:a></li>
+                        <li><my:a href="/song"><f:message key="navigation.songs"/></my:a></li>
+                        <li><my:a href="/album"><f:message key="navigation.albums"/></my:a></li>
+                        <li><my:a href="/artist"><f:message key="navigation.artists"/></my:a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
