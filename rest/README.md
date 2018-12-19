@@ -208,7 +208,7 @@ curl -i -X GET http://localhost:8080/PA165/rest/user/name/{name}
 Get user by email:
 
 ```
-curl -i -X GET http://localhost:8080/PA165/rest/user/email/{email}
+curl -i -X GET http://localhost:8080/PA165/rest/user/email/{email}/
 ```
 
 Register user:

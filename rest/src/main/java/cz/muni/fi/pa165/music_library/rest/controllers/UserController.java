@@ -57,7 +57,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/email/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/email/{email}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final UserDto findUserByEmail(@PathVariable("email") String email) {
         logger.debug("GET findUserByEmail");
 
