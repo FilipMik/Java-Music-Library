@@ -75,20 +75,15 @@ public class SongController {
     }
 
     @RequestMapping(value = "/{genre}/genre", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<SongDto> findSongsByGenre(@PathVariable("genre") String genre) {
+    public List<SongDto> findSongsByGenre(@PathVariable("genre") GenreDto genre) {
         logger.debug("GET findSongsByGenre({})", genre);
 
-        try {
-            GenreDto genreDto = GenreDto.valueOf(genre);
-            List<SongDto> songDtos = songFacade.findSongsByGenre(genreDto);
+        List<SongDto> songDtos = songFacade.findSongsByGenre(genre);
 
-            if (songDtos.isEmpty()) {
-                throw new ResourceNotFoundException();
-            } else {
-                return songDtos;
-            }
-        } catch (Exception e) {
-            throw new InvalidParameterException();
+        if (songDtos.isEmpty()) {
+            throw new ResourceNotFoundException();
+        } else {
+            return songDtos;
         }
     }
 
