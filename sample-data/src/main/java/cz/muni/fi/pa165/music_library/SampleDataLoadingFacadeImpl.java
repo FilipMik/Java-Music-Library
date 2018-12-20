@@ -46,13 +46,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 //        artist();
 //        album();
 //        song();
-        try {
-            user();
-        } catch (EmailAlreadyExistsException e) {
-            e.printStackTrace();
-        } catch (UsernameAlreadyExistsException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            user();
+//        } catch (EmailAlreadyExistsException e) {
+//            e.printStackTrace();
+//        } catch (UsernameAlreadyExistsException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private User user() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
