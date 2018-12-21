@@ -87,7 +87,7 @@ public class SongDto {
     }
 
     public void setGenre(GenreDto genreDTO) {
-        this.genre = genre;
+        this.genre = genreDTO;
     }
 
     public List<PlaylistDto> getPlaylists() {

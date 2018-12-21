@@ -8,5 +8,5 @@ public enum GenreDto {
     ROCK,
     METAL,
     COUNTRY,
-    INDIE
+    INDIE;
 }

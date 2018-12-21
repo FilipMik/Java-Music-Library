@@ -53,7 +53,7 @@ public class SongFacadeImpl implements SongFacade {
 
     @Override
     public List<SongDto> findSongsByGenre(GenreDto genreDTO) {
-        List<Song> songs = songService.getSongsByGenre(beanMappingService.mapTo(genreDTO, Genre.class));
+        List<Song> songs = songService.getSongsByGenre(Genre.valueOf(genreDTO.name()));
         return beanMappingService.mapTo(songs, SongDto.class);
     }
 
@@ -65,7 +65,7 @@ public class SongFacadeImpl implements SongFacade {
 
     @Override
     public List<SongDto> getAllTimeTopSongs(Integer numberOfSongs, GenreDto genreDTO) {
-        List<Song> songs = songService.getAllTimeTopSongs(numberOfSongs, beanMappingService.mapTo(genreDTO, Genre.class));
+        List<Song> songs = songService.getAllTimeTopSongs(numberOfSongs, Genre.valueOf(genreDTO.name()));
         return beanMappingService.mapTo(songs, SongDto.class);
     }
 
