@@ -184,5 +184,64 @@ curl -i -X DELETE http://localhost:8080/PA165/rest/playlist/{id}
 ```
 
 ## Song
+Get all songs
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/song
+```
+
+Find song by ID
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/song/{id}
+```
+
+Find songs by song title
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/song/{title}/songs
+```
+
+Find songs by artist name
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/song/{artistName}/artist
+```
+
+Find songs by Genre
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/song/{genre}/genre
+```
+
+Find songs by album title
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/song/{albumTitle}/album
+```
+
+Get all time top songs by genre
+
+```
+curl -i -X GET http://localhost:8080/PA165/rest/song/{numOfSongs}/{genre}/genre
+```
+
+Create new song
+
+```
+curl -X POST -i -H "Content-Type: application/json" --data {"title": "Sample", "bitRate": 96, "albumPosition": 10, "commentary": "Thug life", "genre": "ROCK"} http://localhost:8080/PA165/rest/song/create
+```
+
+Update song:
+
+```
+curl -X PUT -i -H "Content-Type: application/json" --data {"id": 1, "title": "Sample", "bitRate": 96, "albumPosition": 10, "commentary": "Thug life", "genre": "INDIE"} http://localhost:8080/PA165/rest/song/update
+```
+
+Delete song by ID
+
+```
+curl -i -X DELETE http://localhost:8080/PA165/rest/song/{id}
+```
 
 ## User
