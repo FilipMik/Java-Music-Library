@@ -45,7 +45,7 @@ public class ArtistDaoImpl implements ArtistDao {
 
     @Override
     public void deleteArtist(Artist artist) {
-        em.remove(artist);
+        em.remove(em.find(Artist.class, artist.getArtistId()));
     }
 
     @Override
