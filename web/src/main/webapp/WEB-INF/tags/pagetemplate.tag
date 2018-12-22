@@ -40,7 +40,7 @@
                         <li><my:a href="/user"><f:message key="navigation.users"/></my:a></li>
                         <li><my:a href="/song"><f:message key="navigation.songs"/></my:a></li>
                         <li><my:a href="/album"><f:message key="navigation.albums"/></my:a></li>
-                        <li><my:a href="/artist"><f:message key="navigation.artists"/></my:a></li>
+                        <li><my:a href="/artist/all"><f:message key="navigation.artists"/></my:a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

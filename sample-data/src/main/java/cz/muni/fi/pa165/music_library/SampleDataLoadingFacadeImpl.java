@@ -64,9 +64,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     private Artist artist() {
         artist = new Artist();
-        artist.setName("heolda");
+        artist.setName("Halalajka");
+        artist.setBirthDate(new Date());
+        artist.setArtistInfo("Best of the best of the best of the gypsy best");
         artistService.createArtist(artist);
-        return artistService.getArtistsByName("heolda").get(0);
+        return artistService.getArtistsByName("Halalajka").get(0);
     }
 
     private Song song() {
