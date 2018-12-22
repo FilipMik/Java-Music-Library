@@ -92,7 +92,7 @@
         <!-- what to do when only "mvn" is run -->
         <defaultGoal>cargo:run</defaultGoal>
         <!-- name of the produced war -->
-        <finalName>eshop</finalName>
+        <finalName>web</finalName>
         <plugins>
             <!--  embedded Tomcat -->
             <plugin>
