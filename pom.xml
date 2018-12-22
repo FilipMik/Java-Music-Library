@@ -14,6 +14,8 @@
         <module>dao</module>
         <module>service</module>
         <module>rest</module>
+        <module>web</module>
+        <module>sample-data</module>
     </modules>
 
     <properties>
