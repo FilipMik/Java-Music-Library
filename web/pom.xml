@@ -12,8 +12,7 @@
 
     <artifactId>web</artifactId>
     <packaging>war</packaging>
-    <name>Maven Web</name>
-    <url>http://maven.apache.org</url>
+    <name>web</name>
 
     <dependencies>
         <dependency>
