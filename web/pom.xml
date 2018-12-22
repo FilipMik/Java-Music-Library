@@ -120,7 +120,7 @@
     </dependencies>
 
     <!--
-       Start tomcat with "mvn cargo:run" and visit http://localhost:8080/eshop/
+       Start tomcat with "mvn cargo:run" and visit http://localhost:8080/pa165/
      -->
 
     <build>
