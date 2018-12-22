@@ -42,7 +42,7 @@ public class PlayListDaoImpl implements PlayListDao {
 
     @Override
     public void deletePlaylist(Playlist playlist) {
-        em.remove(playlist);
+        em.remove(em.find(Playlist.class, playlist.getPlaylistId()));
     }
 
     @Override

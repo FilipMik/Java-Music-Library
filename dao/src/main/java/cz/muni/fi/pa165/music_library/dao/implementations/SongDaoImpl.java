@@ -78,7 +78,7 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public void deleteSong(Song song) {
-        em.remove(song);
+        em.remove(em.find(Song.class, song.getSongId()));
     }
 
     @Override

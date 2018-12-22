@@ -44,7 +44,7 @@ public class AlbumDaoImpl implements AlbumDao {
 
     @Override
     public void deleteAlbum(Album album) {
-        em.remove(album);
+        em.remove(em.find(Album.class, album.getAlbumId()));
     }
 
     @Override
