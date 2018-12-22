@@ -41,24 +41,23 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     Artist artist;
 
     @Override
-    public void loadData() throws IOException {
-//        playlist();
-//        artist();
-//        album();
-//        song();
-//        try {
-//            user();
-//        } catch (EmailAlreadyExistsException e) {
-//            e.printStackTrace();
-//        } catch (UsernameAlreadyExistsException e) {
-//            e.printStackTrace();
-//        }
+    public void loadData() {
+        playlist();
+        artist();
+        album();
+        song();
+        try {
+            user();
+        } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {
+            e.printStackTrace();
+        }
     }
 
     private User user() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
         user = new User();
         user.setUsername("Filip");
         user.setEmail("s@s.cz");
+        user.setDateCreated(new Date());
         userService.registerUser(user, "aaaa");
         return userService.findUserByEmail("s@s.cz");
     }
@@ -80,6 +79,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Playlist playlist() {
         playlist = new Playlist();
         playlist.setTitle("playlist1");
+        playlist.setDateCreated(new Date());
         playlistService.createPlaylist(playlist);
         return playlistService.getPlaylistsByTitle("playlist1").get(0);
     }
