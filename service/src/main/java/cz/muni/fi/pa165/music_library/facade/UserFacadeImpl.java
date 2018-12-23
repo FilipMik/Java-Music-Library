@@ -79,7 +79,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public boolean authenticate(UserAuthenticateDto userAuthenticate) {
         try {
-            return userService.loginUser(userService.findUserById(userAuthenticate.getUserId()),
+            return userService.loginUser(userService.findUserByEmail(userAuthenticate.getEmail()),
                     userAuthenticate.getPassword());
         } catch (IncorrectPasswordException e) {
             return false;
