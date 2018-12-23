@@ -49,6 +49,16 @@
                     </ul>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <sec:authorize access="!isAuthenticated()">
+                    <li><my:a href="/login"><f:message key="auth.login"/></my:a></li>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+                    <li><a><sec:authentication property="principal"/></a></li>
+                    <li><my:a href="/logout"><f:message key="auth.logout"/></my:a></li>
+                </sec:authorize>
+            </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
