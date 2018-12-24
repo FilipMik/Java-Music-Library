@@ -13,8 +13,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><c:out value="${title}"/></title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
-    <!-- bootstrap loaded from content delivery network -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -33,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}"><f:message key="navigation.project"/></a>
+            <my:a class="navbar-brand" href="/"><f:message key="navigation.project"/></my:a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -49,14 +47,21 @@
                     </ul>
                 </li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <sec:authorize access="!isAuthenticated()">
                     <li><my:a href="/login"><f:message key="auth.login"/></my:a></li>
                 </sec:authorize>
 
                 <sec:authorize access="isAuthenticated()">
-                    <li><a><sec:authentication property="principal"/></a></li>
-                    <li><my:a href="/logout"><f:message key="auth.logout"/></my:a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><sec:authentication
+                                property="principal"/><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><my:a href="/profile"><f:message key="navigation.profile"/></my:a></li>
+                            <li><my:a href="/logout"><f:message key="auth.logout"/></my:a></li>
+                        </ul>
+                    </li>
                 </sec:authorize>
             </ul>
         </div><!--/.nav-collapse -->
