@@ -37,7 +37,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.features"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><my:a href="/playlist"><f:message key="navigation.playlists"/></my:a></li>
-                        <li><my:a href="/user"><f:message key="navigation.users"/></my:a></li>
+                        <li><my:a href="/user/all"><f:message key="navigation.users"/></my:a></li>
                         <li><my:a href="/song"><f:message key="navigation.songs"/></my:a></li>
                         <li><my:a href="/album"><f:message key="navigation.albums"/></my:a></li>
                         <li><my:a href="/artist/all"><f:message key="navigation.artists"/></my:a></li>
@@ -93,21 +93,21 @@
         <%--</div>--%>
     <%--</c:if>--%>
 
-    <%--<!-- alerts -->--%>
-    <%--<c:if test="${not empty alert_danger}">--%>
-        <%--<div class="alert alert-danger" role="alert">--%>
-            <%--<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>--%>
-            <%--<c:out value="${alert_danger}"/></div>--%>
-    <%--</c:if>--%>
-    <%--<c:if test="${not empty alert_info}">--%>
-        <%--<div class="alert alert-info" role="alert"><c:out value="${alert_info}"/></div>--%>
-    <%--</c:if>--%>
-    <%--<c:if test="${not empty alert_success}">--%>
-        <%--<div class="alert alert-success" role="alert"><c:out value="${alert_success}"/></div>--%>
-    <%--</c:if>--%>
-    <%--<c:if test="${not empty alert_warning}">--%>
-        <%--<div class="alert alert-warning" role="alert"><c:out value="${alert_warning}"/></div>--%>
-    <%--</c:if>--%>
+    <!-- alerts -->
+    <c:if test="${not empty alert_danger}">
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <c:out value="${alert_danger}"/></div>
+    </c:if>
+    <c:if test="${not empty alert_info}">
+        <div class="alert alert-info" role="alert"><c:out value="${alert_info}"/></div>
+    </c:if>
+    <c:if test="${not empty alert_success}">
+        <div class="alert alert-success" role="alert"><c:out value="${alert_success}"/></div>
+    </c:if>
+    <c:if test="${not empty alert_warning}">
+        <div class="alert alert-warning" role="alert"><c:out value="${alert_warning}"/></div>
+    </c:if>
 
     <!-- page body -->
     <jsp:invoke fragment="body"/>
