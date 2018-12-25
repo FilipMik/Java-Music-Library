@@ -197,7 +197,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if exception is thrown when trying to delete null user object.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testDeleteUserWhenUserObjectIsNull_Exception() {
         userDao.deleteUser(null);
     }

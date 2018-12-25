@@ -50,15 +50,13 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public List<Song> getSongsByTitle(String title) {
-        return em.createQuery("select s from Song s where title = :title", Song.class)
-                .setParameter("title", title)
+        return em.createQuery("select s from Song s where upper(title) like upper('%"+ title + "%')", Song.class)
                 .getResultList();
     }
 
     @Override
     public List<Song> getSongsByArtist(String artistName) {
-        return em.createQuery("select s from Song s where artist.name = :artistName", Song.class)
-                .setParameter("artistName", artistName)
+        return em.createQuery("select s from Song s where upper(artist.name) like upper('%" + artistName + "%')", Song.class)
                 .getResultList();
     }
 
@@ -71,8 +69,7 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public List<Song> getSongsByAlbum(String albumTitle) {
-        return em.createQuery("select s from Song s where album.title = :albumTitle", Song.class)
-                .setParameter("albumTitle", albumTitle)
+        return em.createQuery("select s from Song s where upper(album.title) like upper('%" + albumTitle + "%')", Song.class)
                 .getResultList();
     }
 
