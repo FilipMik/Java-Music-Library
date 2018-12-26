@@ -108,7 +108,7 @@ public class UserController {
     public final void changePassword(@RequestBody UserAuthenticateDto userChangeDto) {
         logger.debug("PUT changePassword");
 
-        UserDto userDto = userFacade.findUserById(userChangeDto.getUserId());
+        UserDto userDto = userFacade.findUserByEmail(userChangeDto.getEmail());
 
         if (userDto == null) {
             throw new ResourceNotFoundException();

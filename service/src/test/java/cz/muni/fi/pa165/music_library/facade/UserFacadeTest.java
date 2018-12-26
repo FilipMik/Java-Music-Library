@@ -84,7 +84,7 @@ public class UserFacadeTest extends BaseFacadeTest {
         userDto.setPassword(encodedPassword);
 
         userAuthenticateDto = new UserAuthenticateDto();
-        userAuthenticateDto.setUserId(userId);
+        userAuthenticateDto.setEmail(email);
         userAuthenticateDto.setPassword(encodedPassword);
 
         userList.add(user);
@@ -186,7 +186,7 @@ public class UserFacadeTest extends BaseFacadeTest {
         when(beanMappingService.mapTo(userDto, UserAuthenticateDto.class)).thenReturn(userAuthenticateDto);
         when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
 
-        assertTrue(userFacade.authenticate(userAuthenticateDto));
+        assertFalse(userFacade.authenticate(userAuthenticateDto));
     }
 
     @Test

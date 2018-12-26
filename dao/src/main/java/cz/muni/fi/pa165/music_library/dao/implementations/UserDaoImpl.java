@@ -56,6 +56,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(User user) {
+        if (user == null) throw new IllegalArgumentException();
         em.remove(em.find(User.class, user.getUserId()));
     }
 

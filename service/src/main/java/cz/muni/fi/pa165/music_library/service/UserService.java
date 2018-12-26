@@ -26,7 +26,7 @@ public interface UserService {
 
     boolean isUserAdmin(User user);
 
-    boolean loginUser(User user, String password) throws IncorrectPasswordException;
+    boolean loginUser(User user, String password);
 
     void registerUser(User user, String password) throws EmailAlreadyExistsException, UsernameAlreadyExistsException;
 
