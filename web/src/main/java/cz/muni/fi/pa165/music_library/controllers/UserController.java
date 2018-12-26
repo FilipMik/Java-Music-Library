@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.music_library.controllers;
 
+import cz.muni.fi.pa165.music_library.dto.PlaylistDto;
 import cz.muni.fi.pa165.music_library.dto.UserDto;
 import cz.muni.fi.pa165.music_library.facade.PlaylistFacade;
 import cz.muni.fi.pa165.music_library.facade.UserFacade;
@@ -83,6 +84,30 @@ public class UserController {
         log.debug("delete({})", id);
         redirectAttributes.addFlashAttribute("alert_success", "User \"" + user.getEmail() + "\" was deleted.");
         return "redirect:" + uriBuilder.path("/user/all").toUriString();
+    }
+
+    @RequestMapping(value = "profile/{userId}/delete/playlist/{playlistId}",  method = RequestMethod.GET)
+    public String delete(@PathVariable Long userId,
+                         @PathVariable Long playlistId,
+                         UriComponentsBuilder uriBuilder,
+                         RedirectAttributes redirectAttributes) {
+        log.debug("deleteUsersPlaylist");
+
+        UserDto user = userFacade.findUserById(userId);
+        PlaylistDto playlist = playlistFacade.findPlaylistById(playlistId);
+        setAuthUser();
+
+        try{
+            if (!user.equals(authUser) && !userFacade.isAdmin(authUser)) throw new Exception("Cannot delete playlist");
+            user.getPlaylists().remove(playlist);
+            userFacade.updateUser(user);
+            playlistFacade.deletePlaylist(playlist);
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Playlist \"" + playlist.getTitle() + "\" cannot be deleted.");
+            return "redirect:" + uriBuilder.path("/user/profile/" + userId).toUriString();
+        }
+        redirectAttributes.addFlashAttribute("alert_success", "Playlist \"" + playlist.getTitle() + "\" was deleted.");
+        return "redirect:" + uriBuilder.path("/user/profile/" + userId).toUriString();
     }
 
     private void setAuthUser() {
