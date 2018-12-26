@@ -66,9 +66,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean loginUser(User user, String password) throws IncorrectPasswordException {
-        if (password.isEmpty() || userDao.getUserById(user.getUserId()) == null) {
-            throw new IncorrectPasswordException("Wrong name or password");
+    public boolean loginUser(User user, String password) {
+        if (user == null ||userDao.getUserByEmail(user.getEmail()) == null) {
+            return false;
         } else {
             return passwordEncoder.matches(password, user.getPassword());
         }

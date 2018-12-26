@@ -6,16 +6,16 @@ package cz.muni.fi.pa165.music_library.dto;
 
 public class UserAuthenticateDto {
 
-    private Long userId;
+    private String email;
 
     private String password;
 
-    public Long getUserId() {
-        return userId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
