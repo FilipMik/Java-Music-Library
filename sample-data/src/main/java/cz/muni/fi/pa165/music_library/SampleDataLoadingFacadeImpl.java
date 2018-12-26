@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.music_library;
 
 import cz.muni.fi.pa165.music_library.data.entities.*;
+import cz.muni.fi.pa165.music_library.dto.PlaylistDto;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.*;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @author Filip Mik on 17. 12. 2018
@@ -58,6 +59,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user.setUsername("Filip");
         user.setEmail("s@s.cz");
         user.setDateCreated(new Date());
+
+        List<Playlist> playlistList = new ArrayList<>();
+        playlistList.add(playlist);
+        user.setPlaylists(playlistList);
+
         userService.registerUser(user, "aaaa");
         return userService.findUserByEmail("s@s.cz");
     }

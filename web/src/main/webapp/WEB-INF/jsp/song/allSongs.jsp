@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Jan
+  User: Jan Ficko
   Date: 24. 12. 2018
   Time: 15:44
   To change this template use File | Settings | File Templates.
@@ -30,15 +30,15 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="radio-inline">
-                                    <input id="title" name="o" value="title" type="radio" checked>
+                                    <input name="o" id="title" value="title" type="radio" checked />
                                     Title
                                 </label>
                                 <label class="radio-inline">
-                                    <input id="artist" name="o" value="artist" type="radio" <c:if test="${o == 'artist'}">checked</c:if>>
+                                    <input name="o" id="artist" value="artist" type="radio" <c:if test="${o == 'artist'}">checked</c:if> />
                                     Artist
                                 </label>
                                 <label class="radio-inline">
-                                    <input id="album" name="o" value="album" type="radio" <c:if test="${o == 'album'}">checked</c:if>>
+                                    <input name="o" id="album" value="album" type="radio" <c:if test="${o == 'album'}">checked</c:if> />
                                     Album
                                 </label>
                             </div>
@@ -50,10 +50,10 @@
         <br />
 
         <div class="row">
-            <div class="col-md-offset-1 col-md-9">
+            <div class="col-md-offset-1 col-md-10">
                 <c:choose>
                     <c:when test="${songs.size() != 0}">
-                        <table class="table text-center">
+                        <table class="table">
                             <thead>
                             <tr>
                                 <th>Title</th>
@@ -70,9 +70,11 @@
                                         <td><c:out value="${song.artist.name}"/></td>
                                         <td><c:out value="${song.album.title}"/></td>
                                         <td>
-                                            <button type="button" class="btn btn-info">
-                                                <span class="glyphicon glyphicon-plus"></span> Playlist
-                                            </button>
+                                            <c:if test="${user.playlists.size() != 0}">
+                                                <button type="button" class="btn btn-info" id="playlist" name="playlist" data-toggle="modal" data-target="#playlistModal" data-id="${song.songId}">
+                                                    <span class="glyphicon glyphicon-plus"></span> Playlist
+                                                </button>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -88,6 +90,53 @@
         </div>
 
     </div>
+
+    <div class="modal fade" id="playlistModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Choose playlist</h4>
+                </div>
+
+                <form method="GET" action="">
+                    <div class="modal-body">
+
+                        <c:forEach items="${user.playlists}" var="playlist">
+                            <div class="radio">
+                                <label><input type="radio" name="p" value="${playlist.playlistId}">${playlist.title}</label>
+                            </div>
+                        </c:forEach>
+
+                        <input type="hidden" name="q" id="q" />
+                        <input type="hidden" name="o" id="o" />
+                        <input type="hidden" name="s" id="s" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </jsp:attribute>
 </my:pagetemplate>
 
+<script type="text/javascript">
+
+    $(document).on("click", ".btn-info", function () {
+        if(document.getElementById("title").checked) {
+            $(".modal-body #o").val("title");
+        } else if(document.getElementById("artist").checked) {
+            $(".modal-body #o").val("artist");
+        } else if(document.getElementById("album").checked) {
+            $(".modal-body #o").val("album");
+        }
+        $(".modal-body #q").val(document.getElementById("q").value);
+        $(".modal-body #s").val($(this).data('id'));
+    });
+
+</script>
