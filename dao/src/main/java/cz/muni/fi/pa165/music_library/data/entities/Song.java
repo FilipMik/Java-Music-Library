@@ -146,7 +146,7 @@ public class Song {
     }
 
     public List<Playlist> getPlaylists() {
-        return Collections.unmodifiableList(playlists);
+        return playlists;
     }
 
     public void setPlaylists(List<Playlist> playlists) {

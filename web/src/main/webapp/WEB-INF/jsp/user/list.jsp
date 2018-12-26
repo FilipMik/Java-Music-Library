@@ -30,14 +30,16 @@
                         <td><c:out value="${user.userLevel}"/></td>
                         <td><c:out value="${user.email}"/></td>
                         <td>
-                            <div style="float: right">
-                                 <my:a href="${pageContext.request.contextPath}/user/delete/${user.userId}"
-                                       class="btn btn-danger">Delete</my:a>
-                            </div>
-                            <div style="float: right; padding-right: 5px">
+                            <div style="float: right;">
                                  <my:a href="${pageContext.request.contextPath}/user/profile/${user.userId}"
                                        class="btn btn-info">Show</my:a>
                             </div>
+                            <c:if test="${isAdmin}">
+                                <div style="float: right; padding-right: 5px">
+                                     <my:a href="${pageContext.request.contextPath}/user/delete/${user.userId}"
+                                           class="btn btn-danger">Delete</my:a>
+                                </div>
+                            </c:if>
                         </td>
                     </tr>
             </c:forEach>

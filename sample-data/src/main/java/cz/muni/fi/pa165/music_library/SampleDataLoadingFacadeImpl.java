@@ -52,8 +52,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {
             e.printStackTrace();
         }
-//        user.addPlaylist(playlist);
-//        playlist.setUser(user);
+        user.addPlaylist(playlist);
+        playlist.setUser(user);
+        userService.updateUser(user);
+        playlistService.updatePlaylist(playlist);
     }
 
     private User user() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
@@ -61,6 +63,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user.setUsername("Filip");
         user.setEmail("s@s.cz");
         user.setDateCreated(new Date());
+        user.setUserLevel(UserLevel.Admin);
         userService.registerUser(user, "aaaa");
         return userService.findUserByEmail("s@s.cz");
     }

@@ -32,32 +32,38 @@ public class UserController {
     @Autowired
     private PlaylistFacade playlistFacade;
 
+    private UserDto authUser;
+
     @RequestMapping(value = "/profile/{userId}",  method = RequestMethod.GET)
     public String showProfile(@PathVariable Long userId, Model model) {
         log.debug("Show User Profile: " + userId);
 
+        setAuthUser();
+
         model.addAttribute("user", userFacade.findUserById(userId));
         model.addAttribute("playlists", playlistFacade.findUserPlaylists(userId));
+        model.addAttribute("authUser", authUser);
         return "user/profile";
     }
 
     @RequestMapping(value = "/profile",  method = RequestMethod.GET)
     public String showAuthProfile(Model model) {
-        log.debug("Show User Profile: ");
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        UserDto authUser = userFacade.findUserByEmail(currentPrincipalName);
+        setAuthUser();
 
         model.addAttribute("user", authUser);
         model.addAttribute("playlists", playlistFacade.findUserPlaylists(authUser.getUserId()));
+        model.addAttribute("authUser", authUser);
         return "user/profile";
     }
 
     @RequestMapping(value = "/all",  method = RequestMethod.GET)
     public String showUsers(Model model) {
         log.debug("showUsers");
+
+        setAuthUser();
+
         model.addAttribute("users", userFacade.getAllUsers());
+        model.addAttribute("isAdmin", userFacade.isAdmin(authUser));
         return "user/list";
     }
 
@@ -65,9 +71,7 @@ public class UserController {
     public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes ) {
         UserDto user = userFacade.findUserById(id);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        UserDto authUser = userFacade.findUserByEmail(currentPrincipalName);
+        setAuthUser();
 
         try{
             if (user.equals(authUser)) throw new Exception("Cannot delete yourself");
@@ -79,5 +83,11 @@ public class UserController {
         log.debug("delete({})", id);
         redirectAttributes.addFlashAttribute("alert_success", "User \"" + user.getEmail() + "\" was deleted.");
         return "redirect:" + uriBuilder.path("/user/all").toUriString();
+    }
+
+    private void setAuthUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        authUser = userFacade.findUserByEmail(currentPrincipalName);
     }
 }

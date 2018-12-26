@@ -57,16 +57,16 @@
                         <td><c:out value="${playlist.playlistId}"/></td>
                         <td><c:out value="${playlist.title}"/></td>
                         <td>
-                                <%--TODO connect with controller for deleting playlist --%>
                             <div style="float:right;">
-                                <my:a href="${pageContext.request.contextPath}/user/delete/playlist/${playlist.playlistId}"
-                                      class="btn btn-danger">Delete</my:a>
-                            </div>
-                            <%--TODO make Controller for deleting playlist only for user --%>
-                            <div style="float:right; padding-right: 5px">
                                 <my:a href="${pageContext.request.contextPath}/playlist/${playlist.playlistId}"
                                       class="btn btn-info">Show</my:a>
                             </div>
+                            <c:if test="${authUser.userId == user.userId}">
+                                <div style="float:right; padding-right: 5px">
+                                <my:a href="${pageContext.request.contextPath}/user/profile/${user.userId}/delete/playlist/${playlist.playlistId}"
+                                      class="btn btn-danger">Delete</my:a>
+                                </div>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
