@@ -6,6 +6,8 @@ import cz.muni.fi.pa165.music_library.facade.UserFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,10 +41,22 @@ public class UserController {
         return "user/profile";
     }
 
+    @RequestMapping(value = "/profile",  method = RequestMethod.GET)
+    public String showAuthProfile(Model model) {
+        log.debug("Show User Profile: ");
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UserDto authUser = userFacade.findUserByEmail(currentPrincipalName);
+
+        model.addAttribute("user", authUser);
+        model.addAttribute("playlists", playlistFacade.findUserPlaylists(authUser.getUserId()));
+        return "user/profile";
+    }
+
     @RequestMapping(value = "/all",  method = RequestMethod.GET)
     public String showUsers(Model model) {
         log.debug("showUsers");
-
         model.addAttribute("users", userFacade.getAllUsers());
         return "user/list";
     }
@@ -50,7 +64,13 @@ public class UserController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes ) {
         UserDto user = userFacade.findUserById(id);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UserDto authUser = userFacade.findUserByEmail(currentPrincipalName);
+
         try{
+            if (user.equals(authUser)) throw new Exception("Cannot delete yourself");
             userFacade.deleteUser(user);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("alert_danger", "User \"" + user.getEmail() + "\" cannot be deleted.");
