@@ -202,7 +202,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     /**
      * Test if exception is thrown when trying to delete null album object.
      */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testDeleteAlbumWhenAlbumObjectIsNull_Exception() {
         albumDao.deleteAlbum(null);
     }
