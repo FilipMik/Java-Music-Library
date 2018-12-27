@@ -12,6 +12,11 @@
 <jsp:attribute name="body">
     <div class="container">
 
+        <div class="form-group">
+            <my:a href="/playlist/new" class="btn btn-primary">Add new playlist</my:a>
+            <hr/>
+        </div>
+
         <table class="table">
             <thead>
                 <tr>
