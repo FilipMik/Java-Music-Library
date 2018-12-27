@@ -40,7 +40,7 @@ public class MainController {
         resourcesMap.put("song_uri", ApiUris.ROOT_URI_SONG);
         resourcesMap.put("user_uri", ApiUris.ROOT_URI_USER);
 
-        return Collections.unmodifiableMap(resourcesMap);
+        return resourcesMap;
         
     }
 }
