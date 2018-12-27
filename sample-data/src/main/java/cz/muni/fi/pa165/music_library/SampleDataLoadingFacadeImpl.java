@@ -79,10 +79,28 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
     private Playlist playlist() {
+        User user2 = new User();
+        user2.setUsername("Klara");
+        user2.setEmail("k@k.cz");
+        user2.setDateCreated(new Date());
+        try {
+            userService.registerUser(user2, "aaaa");
+        } catch (EmailAlreadyExistsException e) {
+            e.printStackTrace();
+        } catch (UsernameAlreadyExistsException e) {
+            e.printStackTrace();
+        }
+
+        Song song2 = new Song();
+        song2.setTitle("song2");
+        songService.createSong(song2);
+
         playlist = new Playlist();
         playlist.setTitle("playlist1");
         playlist.setDateCreated(new Date());
+        playlist.setUser(user2);
         playlistService.createPlaylist(playlist);
+        playlist.addSong(song2);
         return playlistService.getPlaylistsByTitle("playlist1").get(0);
     }
 

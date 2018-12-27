@@ -39,7 +39,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.features"/><b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><my:a href="/playlist"><f:message key="navigation.playlists"/></my:a></li>
+                        <li><my:a href="/playlist/all"><f:message key="navigation.playlists"/></my:a></li>
                         <li><my:a href="/user"><f:message key="navigation.users"/></my:a></li>
                         <li><my:a href="/song"><f:message key="navigation.songs"/></my:a></li>
                         <li><my:a href="/album"><f:message key="navigation.albums"/></my:a></li>
