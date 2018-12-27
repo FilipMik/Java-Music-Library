@@ -70,7 +70,7 @@ public class Artist {
     }
 
     public List<Song> getSongList() {
-        return Collections.unmodifiableList(songList);
+        return songList;
     }
 
     public void setSongList(List<Song> songList) {

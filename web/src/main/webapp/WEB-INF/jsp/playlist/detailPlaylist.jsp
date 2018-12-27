@@ -8,12 +8,11 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<my:pagetemplate title="Playlist">
+<my:pagetemplate title="${playlist.title}">
 <jsp:attribute name="body">
     <div class="container">
 
         <div class="form-group">
-            <p><strong>Title: </strong><c:out value="${playlist.title}"/>
             <p><strong>Created: </strong><c:out value="${playlist.dateCreated}"/>
             <p><strong>User: </strong><c:out value="${playlist.user.username}"/>
             <hr/>
