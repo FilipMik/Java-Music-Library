@@ -40,7 +40,7 @@
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><my:a href="/playlist"><f:message key="navigation.playlists"/></my:a></li>
-                        <li><my:a href="/user"><f:message key="navigation.users"/></my:a></li>
+                        <li><my:a href="/user/all"><f:message key="navigation.users"/></my:a></li>
                         <li><my:a href="/song/all"><f:message key="navigation.songs"/></my:a></li>
                         <li><my:a href="/album"><f:message key="navigation.albums"/></my:a></li>
                         <li><my:a href="/artist/all"><f:message key="navigation.artists"/></my:a></li>
@@ -58,7 +58,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><sec:authentication
                                 property="principal"/><b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><my:a href="/profile"><f:message key="navigation.profile"/></my:a></li>
+                            <li><my:a href="/user/profile"><f:message key="navigation.profile"/></my:a></li>
                             <li><my:a href="/logout"><f:message key="auth.logout"/></my:a></li>
                         </ul>
                     </li>
@@ -77,11 +77,46 @@
         </div>
     </c:if>
 
+    <!-- alerts -->
+    <c:if test="${not empty alert_danger}">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <c:out value="${alert_danger}"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:if>
+    <c:if test="${not empty alert_info}">
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <c:out value="${alert_info}"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:if>
+    <c:if test="${not empty alert_success}">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <c:out value="${alert_success}"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:if>
+    <c:if test="${not empty alert_warning}">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <c:out value="${alert_warning}"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:if>
+
     <!-- page body -->
     <jsp:invoke fragment="body"/>
 
     <!-- footer -->
-    <footer class="footer">
+    <footer class="footer" style="bottom: 0; position: absolute">
         <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
     </footer>
 </div>

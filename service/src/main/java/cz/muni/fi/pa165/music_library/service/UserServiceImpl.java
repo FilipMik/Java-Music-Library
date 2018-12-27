@@ -60,7 +60,6 @@ public class UserServiceImpl implements UserService {
             throw new UsernameAlreadyExistsException("Username already exists!");
         } else {
             user.setPassword(passwordEncoder.encode(password));
-            user.setUserLevel(UserLevel.BasicUser);
             userDao.createUser(user);
         }
     }

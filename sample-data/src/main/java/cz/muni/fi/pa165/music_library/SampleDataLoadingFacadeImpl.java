@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.music_library;
 
 import cz.muni.fi.pa165.music_library.data.entities.*;
-import cz.muni.fi.pa165.music_library.dto.PlaylistDto;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.*;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
 
 /**
  * @author Filip Mik on 17. 12. 2018
@@ -47,11 +46,16 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         artist();
         album();
         song();
+
         try {
             user();
         } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {
             e.printStackTrace();
         }
+        user.addPlaylist(playlist);
+        playlist.setUser(user);
+        userService.updateUser(user);
+        playlistService.updatePlaylist(playlist);
     }
 
     private User user() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
@@ -59,11 +63,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user.setUsername("Filip");
         user.setEmail("s@s.cz");
         user.setDateCreated(new Date());
-
-        List<Playlist> playlistList = new ArrayList<>();
-        playlistList.add(playlist);
-        user.setPlaylists(playlistList);
-
+        user.setUserLevel(UserLevel.Admin);
         userService.registerUser(user, "aaaa");
         return userService.findUserByEmail("s@s.cz");
     }
