@@ -11,7 +11,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Users">
+<my:pagetemplate title="Album">
 <jsp:attribute name="body">
 
     <my:a href="${pageContext.request.contextPath}/album/create"
