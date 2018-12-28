@@ -133,31 +133,31 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testLoginUser() throws IncorrectPasswordException {
+    public void testLoginUser() {
         when(userDao.getUserById(user1.getUserId())).thenReturn(user1);
-        boolean correct = userService.loginUser(user1, "wrong password");
+        boolean correct = userService.loginUser(user1,"password");
 
         Assert.assertEquals(false, correct);
     }
 
     @Test
-    public void testLoginUserWrongPassword() throws IncorrectPasswordException {
+    public void testLoginUserWrongPassword() {
         when(userDao.getUserById(user1.getUserId())).thenReturn(user1);
-        boolean correct = userService.loginUser(user1, "password123");
+        boolean incorrect = userService.loginUser(user1, "wrong password");
 
-        Assert.assertEquals(true, correct);
+        Assert.assertEquals(false, incorrect);
     }
 
-    @Test(expectedExceptions = IncorrectPasswordException.class)
-    public void testLoginUserPasswordEmpty() throws IncorrectPasswordException {
+    public void testLoginUserPasswordEmpty() {
         when(userDao.getUserById(user1.getUserId())).thenReturn(user1);
-        userService.loginUser(user1, "");
+        boolean result = userService.loginUser(user1, "");
+        Assert.assertEquals(false, result);
     }
 
-    @Test(expectedExceptions = IncorrectPasswordException.class)
-    public void testLoginUserUserNull() throws IncorrectPasswordException {
+    public void testLoginUserUserNull()  {
         when(userDao.getUserById(user1.getUserId())).thenReturn(null);
-        userService.loginUser(user1, "password123");
+        boolean result = userService.loginUser(user1, "password123");
+        Assert.assertEquals(false, result);
     }
 
     @Test

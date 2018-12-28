@@ -80,6 +80,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Song song() {
         song = new Song();
         song.setTitle("song1");
+        song.setArtist(artist);
+        song.setAlbum(album);
         songService.createSong(song);
         return songService.getSongsByTitle("song1").get(0);
     }
