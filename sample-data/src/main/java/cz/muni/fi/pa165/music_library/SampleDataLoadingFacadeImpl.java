@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -34,7 +33,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Autowired
     ArtistService artistService;
 
-    User user;
+    User admin;
+    User basic;
     Playlist playlist;
     Album album;
     Song song;
@@ -48,25 +48,36 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         song();
 
         try {
-            user();
+            admin();
+            basic();
         } catch (EmailAlreadyExistsException | UsernameAlreadyExistsException e) {
             e.printStackTrace();
         }
-        user.addPlaylist(playlist);
-        playlist.setUser(user);
-        userService.updateUser(user);
+        admin.addPlaylist(playlist);
+        playlist.setUser(admin);
+        userService.updateUser(admin);
         playlist.addSong(song);
         playlistService.updatePlaylist(playlist);
     }
 
-    private User user() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
-        user = new User();
-        user.setUsername("Filip");
-        user.setEmail("s@s.cz");
-        user.setDateCreated(new Date());
-        user.setUserLevel(UserLevel.Admin);
-        userService.registerUser(user, "aaaa");
+    private User admin() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
+        admin = new User();
+        admin.setUsername("Filip");
+        admin.setEmail("s@s.cz");
+        admin.setDateCreated(new Date());
+        admin.setUserLevel(UserLevel.Admin);
+        userService.registerUser(admin, "aaaa");
         return userService.findUserByEmail("s@s.cz");
+    }
+
+    private User basic() throws EmailAlreadyExistsException, UsernameAlreadyExistsException {
+        basic = new User();
+        basic.setUsername("Klara");
+        basic.setEmail("k@k.cz");
+        basic.setDateCreated(new Date());
+        basic.setUserLevel(UserLevel.BasicUser);
+        userService.registerUser(basic, "aaaa");
+        return userService.findUserByEmail("k@k.cz");
     }
 
     private Artist artist() {
@@ -81,16 +92,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Song song() {
         song = new Song();
         song.setTitle("song1");
+        song.setArtist(artist);
+        song.setAlbum(album);
         songService.createSong(song);
         return songService.getSongsByTitle("song1").get(0);
     }
 
     private Playlist playlist() {
         playlist = new Playlist();
-        playlist.setTitle("playlist1");
+        playlist.setTitle("My favourites");
         playlist.setDateCreated(new Date());
         playlistService.createPlaylist(playlist);
-        return playlistService.getPlaylistsByTitle("playlist1").get(0);
+        return playlistService.getPlaylistsByTitle("My favourites").get(0);
     }
 
     private Album album() {

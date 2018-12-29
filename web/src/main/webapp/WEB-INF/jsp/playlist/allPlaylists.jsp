@@ -35,7 +35,7 @@
                         <td class="button">
                             <form method="get"
                                   action="/pa165/playlist/detail/${playlist.playlistId}" >
-                                <input class="btn btn-default" type="submit" value="See detail" />
+                                <input class="btn btn-info" type="submit" value="Show" />
                             </form>
                         </td>
                     </tr>

@@ -22,17 +22,25 @@
             <p><strong>Songs:</strong></p>
             <thead>
             <tr>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Album</th>
+                <th class="col-md-3">Title</th>
+                <th class="col-md-3">Artist</th>
+                <th class="col-md-3">Album</th>
+                <th/>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${playlist.songList}" var="song">
                     <tr>
-                        <td><c:out value="${song.title}"/></td>
-                        <td><c:out value="${song.artist.name}"/></td>
-                        <td><c:out value="${song.album.title}"/></td>
+                        <td class="col-md-3"><c:out value="${song.title}"/></td>
+                        <td class="col-md-3"><c:out value="${song.artist.name}"/></td>
+                        <td class="col-md-3"><c:out value="${song.album.title}"/></td>
+                        <c:if test="${playlist.user == authUser}">
+                            <td class="button">
+                                <form method="get" action="/pa165/playlist/remove/${playlist.playlistId}/song/${song.songId}" >
+                                    <input class="btn btn-danger" type="submit" value="Delete" />
+                                </form>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </tbody>
