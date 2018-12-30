@@ -11,17 +11,24 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Birthdate</th>
-                <th>Info</th>
+                <th class="col-md-3">Name</th>
+                <th class="col-md-3">Date of birth/formation</th>
+                <th class="col-md-4">Info</th>
+                <th/>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${artists}" var="artist">
                 <tr>
-                    <td><c:out value="${artist.name}"/></td>
-                    <td><c:out value="${artist.birthDate}"/></td>
-                    <td><c:out value="${artist.artistInfo}"/></td>
+                    <td class="col-md-3"><c:out value="${artist.name}"/></td>
+                    <td class="col-md-3"><fmt:formatDate value="${artist.birthDate}" pattern="dd-MM-yyyy"/></td>
+                    <td class="col-md-4"><c:out value="${artist.artistInfo}"/></td>
+                    <td class="button">
+                        <div style="float: right;">
+                             <my:a href="${pageContext.request.contextPath}/artist/detail/${artist.artistId}"
+                                   class="btn btn-info">Show</my:a>
+                        </div>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
