@@ -111,14 +111,14 @@ public class Album {
 
         if (!getReleaseDate().equals(album.getReleaseDate())) return false;
         if (!getTitle().equals(album.getTitle())) return false;
-        if (!getCommentary().equals(album.getCommentary())) return false;
-        return getAlbumArtUrl().equals(album.getAlbumArtUrl());
+        if (getCommentary() != null ? !getCommentary().equals(album.getCommentary()) : album.getCommentary() != null) return false;
+        return getAlbumArtUrl() != null ? getAlbumArtUrl().equals(album.getAlbumArtUrl()) : album.getAlbumArtUrl() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getReleaseDate() != null ? getReleaseDate().hashCode() : 0;
-        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
+        int result = getReleaseDate().hashCode();
+        result = 31 * result + getTitle().hashCode();
         result = 31 * result + (getCommentary() != null ? getCommentary().hashCode() : 0);
         result = 31 * result + (getAlbumArtUrl() != null ? getAlbumArtUrl().hashCode() : 0);
         return result;

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Filip Mik on 22. 12. 2018
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/artist")
 public class ArtistController {
 
-    final static Logger log = LoggerFactory.getLogger(UserController.class);
+    final static Logger log = LoggerFactory.getLogger(ArtistController.class);
 
     @Autowired
     private ArtistFacade artistFacade;
@@ -28,8 +29,14 @@ public class ArtistController {
     private AlbumFacade albumFacade;
 
     @RequestMapping("/all")
-    public String allArtists(Model model) {
-        model.addAttribute("artists", artistFacade.getAllArtists());
+    public String allArtists(Model model, @RequestParam(value="q", defaultValue = "") String q) {
+        if(q.equals("")) {
+            model.addAttribute("artists", artistFacade.getAllArtists());
+        }
+        else {
+            model.addAttribute("q", q);
+            model.addAttribute("artists", artistFacade.findArtistsByName(q));
+        }
         return "artist/allArtists";
     }
 
