@@ -27,6 +27,9 @@
             </div>
         </form>
     </div>
+    <p>* Hint for reviewers:</p>
+    <p>admin login: s@s.cz, password: aaaa</p>
+    <p>user login: k@k.cz, password: aaaa</p>
 
 </jsp:attribute>
 </my:pagetemplate>

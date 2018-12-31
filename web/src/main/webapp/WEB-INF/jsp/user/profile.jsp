@@ -58,7 +58,7 @@
                         <td><c:out value="${playlist.title}"/></td>
                         <td>
                             <div style="float:right;">
-                                <my:a href="${pageContext.request.contextPath}/playlist/${playlist.playlistId}"
+                                <my:a href="${pageContext.request.contextPath}/playlist/detail/${playlist.playlistId}"
                                       class="btn btn-info">Show</my:a>
                             </div>
                             <c:if test="${authUser.userId == user.userId}">

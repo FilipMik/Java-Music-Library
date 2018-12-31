@@ -1,5 +1,8 @@
 package cz.muni.fi.pa165.music_library.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,9 +15,15 @@ import java.util.Objects;
 public class PlaylistDto {
 
     private Long playlistId;
+
+    @NotNull
+    @Size(min = 1, max = 200)
     private String title;
+
     private Date dateCreated;
+
     private List<SongDto> songList = new ArrayList<>();
+
     private UserDto user;
 
     public Long getPlaylistId() {
@@ -72,5 +81,4 @@ public class PlaylistDto {
     public int hashCode() {
         return Objects.hash(getTitle(), getDateCreated());
     }
-
 }
