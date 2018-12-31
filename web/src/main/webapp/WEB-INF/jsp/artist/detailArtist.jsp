@@ -34,7 +34,7 @@
                     <td class="col-md-4"><fmt:formatDate value="${album.releaseDate}" pattern="dd-MM-yyyy"/></td>
                     <td class="button">
                         <div style="float: right;">
-                             <my:a href="${pageContext.request.contextPath}/album/detail/${album.albumId}"
+                             <my:a href="/album/detail/${album.albumId}"
                                    class="btn btn-info">Show</my:a>
                         </div>
                     </td>

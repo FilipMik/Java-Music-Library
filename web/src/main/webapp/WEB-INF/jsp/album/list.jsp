@@ -32,12 +32,12 @@
                         <td><c:out value="${album.commentary}"/></td>
                         <td>
                             <div style="float: right;">
-                                 <my:a href="${pageContext.request.contextPath}/album/detail/${album.albumId}"
+                                 <my:a href="/album/detail/${album.albumId}"
                                        class="btn btn-info">Show</my:a>
                             </div>
                             <c:if test="${isAdmin}">
                                 <div style="float: right; padding-right: 5px">
-                                     <my:a href="${pageContext.request.contextPath}/album/delete/${album.albumId}"
+                                     <my:a href="/album/delete/${album.albumId}"
                                            class="btn btn-danger">Delete</my:a>
                                 </div>
                             </c:if>
