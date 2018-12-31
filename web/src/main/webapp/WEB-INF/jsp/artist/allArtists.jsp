@@ -41,7 +41,7 @@
                                     <td class="col-md-4"><c:out value="${artist.artistInfo}"/></td>
                                     <td class="button">
                                         <div style="float: right;">
-                                            <my:a href="${pageContext.request.contextPath}/artist/detail/${artist.artistId}"
+                                            <my:a href="/artist/detail/${artist.artistId}"
                                                     class="btn btn-info">Show</my:a>
                                         </div>
                                     </td>

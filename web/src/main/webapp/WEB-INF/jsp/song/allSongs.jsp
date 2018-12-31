@@ -71,12 +71,12 @@
                                     <tr>
                                         <td><c:out value="${song.title}"/></td>
                                         <td>
-                                            <my:a href="${pageContext.request.contextPath}/artist/detail/${song.artist.artistId}">
+                                            <my:a href="/artist/detail/${song.artist.artistId}">
                                                 <c:out value="${song.artist.name}"/>
                                             </my:a>
                                         </td>
                                         <td>
-                                            <my:a href="${pageContext.request.contextPath}/album/detail/${song.album.albumId}">
+                                            <my:a href="/album/detail/${song.album.albumId}">
                                                 <c:out value="${song.album.title}"/>
                                             </my:a>
                                         </td>
