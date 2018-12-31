@@ -39,7 +39,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.features"/><b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><my:a href="/playlist"><f:message key="navigation.playlists"/></my:a></li>
+                        <li><my:a href="/playlist/all"><f:message key="navigation.playlists"/></my:a></li>
                         <li><my:a href="/user/all"><f:message key="navigation.users"/></my:a></li>
                         <li><my:a href="/song/all"><f:message key="navigation.songs"/></my:a></li>
                         <li><my:a href="/album/all"><f:message key="navigation.albums"/></my:a></li>
@@ -125,7 +125,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 </body>
 </html>
