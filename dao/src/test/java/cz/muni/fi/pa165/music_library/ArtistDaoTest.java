@@ -101,7 +101,7 @@ public class ArtistDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals("There should be two artists with name Dynoro",2L,dynoroFound.size());
         Assert.assertNotEquals("These two entities are not equal",dynoro2,dynoroArtist);
 
-        dynoro2.setName("new Dynoro");
+        dynoro2.setName("other artist");
         artistDao.updateArtistInfo(dynoro2);
         dynoroFound = artistDao.getArtistsByName("Dynoro");
 
