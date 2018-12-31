@@ -42,7 +42,7 @@
                         <li><my:a href="/playlist/all"><f:message key="navigation.playlists"/></my:a></li>
                         <li><my:a href="/user/all"><f:message key="navigation.users"/></my:a></li>
                         <li><my:a href="/song/all"><f:message key="navigation.songs"/></my:a></li>
-                        <li><my:a href="/album"><f:message key="navigation.albums"/></my:a></li>
+                        <li><my:a href="/album/all"><f:message key="navigation.albums"/></my:a></li>
                         <li><my:a href="/artist/all"><f:message key="navigation.artists"/></my:a></li>
                     </ul>
                 </li>
