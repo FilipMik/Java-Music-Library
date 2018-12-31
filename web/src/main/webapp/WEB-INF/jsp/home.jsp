@@ -10,14 +10,6 @@
 
     <div class="jumbotron">
         <h1>Welcome to the Music Town!</h1>
-        <br/>
-        <p>Please log in before you start exploring our library</p>
-        <br/>
-        <div class="button">
-            <my:a href="${pageContext.request.contextPath}/login"
-                  class="btn btn-primary btn-lg">Go to login</my:a>
-        </div>
-        <br/>
     </div>
 
 </jsp:attribute>
