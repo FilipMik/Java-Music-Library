@@ -37,7 +37,7 @@
                         <c:if test="${playlist.user == authUser}">
                             <td class="button">
                                 <div style="float: right;">
-                                    <my:a href="${pageContext.request.contextPath}/playlist/remove/${playlist.playlistId}/song/${song.songId}"
+                                    <my:a href="/playlist/remove/${playlist.playlistId}/song/${song.songId}"
                                            class="btn btn-danger">Delete</my:a>
                                 </div>
                             </td>

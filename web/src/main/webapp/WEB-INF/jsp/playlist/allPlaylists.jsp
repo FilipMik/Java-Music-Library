@@ -34,7 +34,7 @@
                         <td class="col-md-3"><c:out value="${playlist.user.username}"/></td>
                         <td class="button">
                             <div style="float: right;">
-                                <my:a href="${pageContext.request.contextPath}/playlist/detail/${playlist.playlistId}"
+                                <my:a href="/playlist/detail/${playlist.playlistId}"
                                       class="btn btn-info">Show</my:a>
                             </div>
                         </td>
