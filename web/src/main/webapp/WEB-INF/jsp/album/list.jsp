@@ -14,8 +14,6 @@
 <my:pagetemplate title="Album">
 <jsp:attribute name="body">
 
-    <my:a href="${pageContext.request.contextPath}/album/create"
-          class="btn btn-info">Create Album</my:a>
     <div class="container">
         <table class="table">
             <thead>
