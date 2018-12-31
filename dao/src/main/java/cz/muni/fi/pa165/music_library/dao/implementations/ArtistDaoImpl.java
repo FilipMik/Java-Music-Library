@@ -38,8 +38,7 @@ public class ArtistDaoImpl implements ArtistDao {
     @Override
     public List<Artist> getArtistsByName(String artistName) {
         return em
-                .createQuery("SELECT a from Artist a WHERE name = :name", Artist.class)
-                .setParameter("name", artistName)
+                .createQuery("SELECT a FROM Artist a WHERE UPPER(name) like UPPER('%" + artistName + "%')", Artist.class)
                 .getResultList();
     }
 

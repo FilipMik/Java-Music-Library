@@ -33,10 +33,10 @@
                         <td class="col-md-3"><c:out value="${playlist.dateCreated}"/></td>
                         <td class="col-md-3"><c:out value="${playlist.user.username}"/></td>
                         <td class="button">
-                            <form method="get"
-                                  action="/pa165/playlist/detail/${playlist.playlistId}" >
-                                <input class="btn btn-info" type="submit" value="Show" />
-                            </form>
+                            <div style="float: right;">
+                                <my:a href="${pageContext.request.contextPath}/playlist/detail/${playlist.playlistId}"
+                                      class="btn btn-info">Show</my:a>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>

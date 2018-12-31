@@ -76,8 +76,8 @@ public class AlbumDto {
 
         if (!getReleaseDate().equals(album.getReleaseDate())) return false;
         if (!getTitle().equals(album.getTitle())) return false;
-        if (!getCommentary().equals(album.getCommentary())) return false;
-        return getAlbumArtUrl().equals(album.getAlbumArtUrl());
+        if (getCommentary() != null ? !getCommentary().equals(album.getCommentary()) : album.getCommentary() != null) return false;
+        return getAlbumArtUrl() != null ? getAlbumArtUrl().equals(album.getAlbumArtUrl()) : album.getAlbumArtUrl() == null;
     }
 
     @Override

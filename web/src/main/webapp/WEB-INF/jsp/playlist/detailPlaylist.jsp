@@ -29,16 +29,17 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${playlist.songList}" var="song">
+                <c:forEach items="${playlist.songList}" var="song">
                     <tr>
                         <td class="col-md-3"><c:out value="${song.title}"/></td>
                         <td class="col-md-3"><c:out value="${song.artist.name}"/></td>
                         <td class="col-md-3"><c:out value="${song.album.title}"/></td>
                         <c:if test="${playlist.user == authUser}">
                             <td class="button">
-                                <form method="get" action="/pa165/playlist/remove/${playlist.playlistId}/song/${song.songId}" >
-                                    <input class="btn btn-danger" type="submit" value="Delete" />
-                                </form>
+                                <div style="float: right;">
+                                    <my:a href="${pageContext.request.contextPath}/playlist/remove/${playlist.playlistId}/song/${song.songId}"
+                                           class="btn btn-danger">Delete</my:a>
+                                </div>
                             </td>
                         </c:if>
                     </tr>
