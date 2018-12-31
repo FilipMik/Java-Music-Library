@@ -20,7 +20,8 @@
             <div class="col-md-offset-3 col-md-6">
                 <form method="GET" action="">
                     <div class="input-group">
-                        <input id="q" name="q" type="text" class="form-control" placeholder="Search for songs..." value="<c:if test="${q != ''}">${q}</c:if>">
+                        <input id="q" name="q" type="text" class="form-control" placeholder="Search for songs..."
+                               value="<c:if test="${q != ''}">${q}</c:if>">
                         <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Search</button>
                         </span>
@@ -30,15 +31,17 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="radio-inline">
-                                    <input name="o" id="title" value="title" type="radio" checked />
+                                    <input name="o" id="title" value="title" type="radio" checked/>
                                     Title
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="o" id="artist" value="artist" type="radio" <c:if test="${o == 'artist'}">checked</c:if> />
+                                    <input name="o" id="artist" value="artist" type="radio"
+                                           <c:if test="${o == 'artist'}">checked</c:if> />
                                     Artist
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="o" id="album" value="album" type="radio" <c:if test="${o == 'album'}">checked</c:if> />
+                                    <input name="o" id="album" value="album" type="radio"
+                                           <c:if test="${o == 'album'}">checked</c:if> />
                                     Album
                                 </label>
                             </div>
@@ -47,7 +50,7 @@
                 </form>
             </div>
         </div>
-        <br />
+        <br/>
 
         <div class="row">
             <div class="col-md-offset-1 col-md-10">
@@ -64,14 +67,24 @@
                             </thead>
                             <tbody>
 
-                                <c:forEach items="${songs}" var="song">
+                            <c:forEach items="${songs}" var="song">
                                     <tr>
                                         <td><c:out value="${song.title}"/></td>
-                                        <td><c:out value="${song.artist.name}"/></td>
-                                        <td><c:out value="${song.album.title}"/></td>
+                                        <td>
+                                            <my:a href="${pageContext.request.contextPath}/artist/detail/${song.artist.artistId}">
+                                                <c:out value="${song.artist.name}"/>
+                                            </my:a>
+                                        </td>
+                                        <td>
+                                            <my:a href="${pageContext.request.contextPath}/album/detail/${song.album.albumId}">
+                                                <c:out value="${song.album.title}"/>
+                                            </my:a>
+                                        </td>
                                         <td>
                                             <c:if test="${user.playlists.size() != 0}">
-                                                <button type="button" class="btn btn-info" id="playlist" name="playlist" data-toggle="modal" data-target="#playlistModal" data-id="${song.songId}">
+                                                <button type="button" class="btn btn-info" id="playlist" name="playlist"
+                                                        data-toggle="modal" data-target="#playlistModal"
+                                                        data-id="${song.songId}">
                                                     <span class="glyphicon glyphicon-plus"></span> Playlist
                                                 </button>
                                             </c:if>
@@ -95,7 +108,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Choose playlist</h4>
                 </div>
 
@@ -104,13 +118,14 @@
 
                         <c:forEach items="${user.playlists}" var="playlist">
                             <div class="radio">
-                                <label><input type="radio" name="p" value="${playlist.playlistId}">${playlist.title}</label>
+                                <label><input type="radio" name="p" value="${playlist.playlistId}">${playlist.title}
+                                </label>
                             </div>
                         </c:forEach>
 
-                        <input type="hidden" name="q" id="q" />
-                        <input type="hidden" name="o" id="o" />
-                        <input type="hidden" name="s" id="s" />
+                        <input type="hidden" name="q" id="q"/>
+                        <input type="hidden" name="o" id="o"/>
+                        <input type="hidden" name="s" id="s"/>
 
                     </div>
                     <div class="modal-footer">
@@ -128,11 +143,11 @@
 <script type="text/javascript">
 
     $(document).on("click", ".btn-info", function () {
-        if(document.getElementById("title").checked) {
+        if (document.getElementById("title").checked) {
             $(".modal-body #o").val("title");
-        } else if(document.getElementById("artist").checked) {
+        } else if (document.getElementById("artist").checked) {
             $(".modal-body #o").val("artist");
-        } else if(document.getElementById("album").checked) {
+        } else if (document.getElementById("album").checked) {
             $(".modal-body #o").val("album");
         }
         $(".modal-body #q").val(document.getElementById("q").value);
