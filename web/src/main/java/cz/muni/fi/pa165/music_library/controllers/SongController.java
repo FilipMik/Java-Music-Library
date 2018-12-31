@@ -1,9 +1,12 @@
 package cz.muni.fi.pa165.music_library.controllers;
 
+import cz.muni.fi.pa165.music_library.dto.UserDto;
 import cz.muni.fi.pa165.music_library.facade.PlaylistFacade;
 import cz.muni.fi.pa165.music_library.facade.SongFacade;
 import cz.muni.fi.pa165.music_library.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +36,7 @@ public class SongController {
             @RequestParam(value="s", defaultValue = "") String songId,
             @RequestParam(value="p", defaultValue = "") String playlistId) {
 
-        model.addAttribute("user", userFacade.findUserByEmail("s@s.cz"));
+        model.addAttribute("user", getAuthUser());
         if(q.equals("")) {
             model.addAttribute("songs", songFacade.getAllSongs());
         } else {
@@ -58,6 +61,11 @@ public class SongController {
             } catch(Exception ignored) { }
         }
         return "song/allSongs";
+    }
+
+    private UserDto getAuthUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return userFacade.findUserByEmail(authentication.getName());
     }
 
 }
