@@ -80,7 +80,7 @@ public class UserFacadeTest extends BaseFacadeTest {
         userDto.setUsername(username);
         userDto.setEmail(email);
         userDto.setDateCreated(date);
-        userDto.setUserLevel(UserLevelDto.BasicUser);
+        userDto.setUserLevel(UserLevelDto.BASIC_USER);
         userDto.setPassword(encodedPassword);
 
         userAuthenticateDto = new UserAuthenticateDto();
