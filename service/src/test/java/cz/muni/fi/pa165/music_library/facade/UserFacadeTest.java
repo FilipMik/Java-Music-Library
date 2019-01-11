@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -35,7 +36,6 @@ import static org.testng.Assert.*;
 public class UserFacadeTest extends BaseFacadeTest {
 
     @Autowired
-    @InjectMocks
     private UserFacade userFacade;
 
     @Mock
@@ -56,13 +56,16 @@ public class UserFacadeTest extends BaseFacadeTest {
     private String username = "Username";
     private String email = "user@mail.muni.cz";
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void initClass() {
         MockitoAnnotations.initMocks(this);
 
         ReflectionTestUtils.setField(userFacade, "userService", userService);
         ReflectionTestUtils.setField(userFacade, "beanMappingService", beanMappingService);
+    }
 
+    @BeforeMethod
+    public void init() {
         Date date = new Date();
 
         String encodedPassword = passwordEncoder.encode("Password");
