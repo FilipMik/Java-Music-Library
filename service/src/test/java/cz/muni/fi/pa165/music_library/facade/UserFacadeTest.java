@@ -56,16 +56,12 @@ public class UserFacadeTest extends BaseFacadeTest {
     private String username = "Username";
     private String email = "user@mail.muni.cz";
 
-    @BeforeClass
-    public void initClass() {
+    @BeforeMethod
+    public void init() {
         MockitoAnnotations.initMocks(this);
 
         ReflectionTestUtils.setField(userFacade, "userService", userService);
         ReflectionTestUtils.setField(userFacade, "beanMappingService", beanMappingService);
-    }
-
-    @BeforeMethod
-    public void init() {
         Date date = new Date();
 
         String encodedPassword = passwordEncoder.encode("Password");

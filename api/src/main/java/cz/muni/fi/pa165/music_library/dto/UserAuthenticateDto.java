@@ -33,14 +33,12 @@ public class UserAuthenticateDto {
 
         UserAuthenticateDto userAuthenticateDto = (UserAuthenticateDto) o;
 
-        if (!getEmail().equals(userAuthenticateDto.getEmail())) return false;
-        return getPassword() == userAuthenticateDto.getPassword();
+        return getEmail() == userAuthenticateDto.getEmail();
     }
 
     @Override
     public int hashCode() {
-        int result = getPassword().hashCode();
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        int result = getEmail().hashCode();
         return result;
     }
 }
