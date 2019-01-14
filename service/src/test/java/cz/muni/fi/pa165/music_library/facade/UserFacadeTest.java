@@ -56,12 +56,16 @@ public class UserFacadeTest extends BaseFacadeTest {
     private String username = "Username";
     private String email = "user@mail.muni.cz";
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void initClass() {
         MockitoAnnotations.initMocks(this);
 
         ReflectionTestUtils.setField(userFacade, "userService", userService);
         ReflectionTestUtils.setField(userFacade, "beanMappingService", beanMappingService);
+    }
+
+    @BeforeMethod
+    public void init() {
         Date date = new Date();
 
         String encodedPassword = passwordEncoder.encode("Password");
@@ -127,19 +131,6 @@ public class UserFacadeTest extends BaseFacadeTest {
         assertThat(foundUser).isNotNull();
         assertThat(foundUser.getUsername()).isEqualTo(username);
         verify(userService).findUserByUsername(username);
-        verify(beanMappingService).mapTo(user, UserDto.class);
-    }
-
-    @Test
-    public void findUserByEmailTest() {
-        when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
-        when(userService.findUserByEmail(email)).thenReturn(user);
-
-        UserDto foundUser = userFacade.findUserByEmail(email);
-
-        assertThat(foundUser).isNotNull();
-        assertThat(foundUser.getEmail()).isEqualTo(email);
-        verify(userService).findUserByEmail(email);
         verify(beanMappingService).mapTo(user, UserDto.class);
     }
 
