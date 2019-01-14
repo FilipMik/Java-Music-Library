@@ -1,11 +1,9 @@
 package cz.muni.fi.pa165.music_library.service;
 
 import cz.muni.fi.pa165.music_library.dao.interfaces.UserDao;
-import cz.muni.fi.pa165.music_library.data.entities.Playlist;
 import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
 import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
-import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserAdmin(User user) {
-        return user.getUserLevel() == UserLevel.Admin;
+        return user.getUserLevel() == UserLevel.ADMIN;
     }
 
     @Override

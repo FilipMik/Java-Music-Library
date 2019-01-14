@@ -59,7 +59,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
         user1.setUserId(1l);
         user1.setUsername("Felipe");
         user1.setEmail("felipe@mike.cz");
-        user1.setUserLevel(UserLevel.BasicUser);
+        user1.setUserLevel(UserLevel.BASIC_USER);
         user1.setPassword(passwordEncoder.encode("password123"));
         user2 = new User();
     }

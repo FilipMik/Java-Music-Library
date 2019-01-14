@@ -10,12 +10,12 @@ import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.UserService;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -35,7 +35,6 @@ import static org.testng.Assert.*;
 public class UserFacadeTest extends BaseFacadeTest {
 
     @Autowired
-    @InjectMocks
     private UserFacade userFacade;
 
     @Mock
@@ -56,13 +55,16 @@ public class UserFacadeTest extends BaseFacadeTest {
     private String username = "Username";
     private String email = "user@mail.muni.cz";
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void initClass() {
         MockitoAnnotations.initMocks(this);
 
         ReflectionTestUtils.setField(userFacade, "userService", userService);
         ReflectionTestUtils.setField(userFacade, "beanMappingService", beanMappingService);
+    }
 
+    @BeforeMethod
+    public void init() {
         Date date = new Date();
 
         String encodedPassword = passwordEncoder.encode("Password");
@@ -72,7 +74,7 @@ public class UserFacadeTest extends BaseFacadeTest {
         user.setUsername(username);
         user.setEmail(email);
         user.setDateCreated(date);
-        user.setUserLevel(UserLevel.BasicUser);
+        user.setUserLevel(UserLevel.BASIC_USER);
         user.setPassword(encodedPassword);
 
         userDto = new UserDto();
@@ -80,7 +82,7 @@ public class UserFacadeTest extends BaseFacadeTest {
         userDto.setUsername(username);
         userDto.setEmail(email);
         userDto.setDateCreated(date);
-        userDto.setUserLevel(UserLevelDto.BasicUser);
+        userDto.setUserLevel(UserLevelDto.BASIC_USER);
         userDto.setPassword(encodedPassword);
 
         userAuthenticateDto = new UserAuthenticateDto();
@@ -128,19 +130,6 @@ public class UserFacadeTest extends BaseFacadeTest {
         assertThat(foundUser).isNotNull();
         assertThat(foundUser.getUsername()).isEqualTo(username);
         verify(userService).findUserByUsername(username);
-        verify(beanMappingService).mapTo(user, UserDto.class);
-    }
-
-    @Test
-    public void findUserByEmailTest() {
-        when(beanMappingService.mapTo(user, UserDto.class)).thenReturn(userDto);
-        when(userService.findUserByEmail(email)).thenReturn(user);
-
-        UserDto foundUser = userFacade.findUserByEmail(email);
-
-        assertThat(foundUser).isNotNull();
-        assertThat(foundUser.getEmail()).isEqualTo(email);
-        verify(userService).findUserByEmail(email);
         verify(beanMappingService).mapTo(user, UserDto.class);
     }
 

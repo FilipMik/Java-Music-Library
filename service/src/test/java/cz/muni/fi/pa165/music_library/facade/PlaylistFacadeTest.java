@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -33,7 +34,6 @@ import static org.testng.Assert.assertTrue;
 public class PlaylistFacadeTest extends BaseFacadeTest {
 
     @Autowired
-    @InjectMocks
     private PlaylistFacade playlistFacade;
 
     @Mock
@@ -51,13 +51,17 @@ public class PlaylistFacadeTest extends BaseFacadeTest {
     private Long playlistId = 1L;
     private String playlistTitle = "Title";
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void initClass() {
         MockitoAnnotations.initMocks(this);
+
         ReflectionTestUtils.setField(playlistFacade, "playlistService", playlistService);
         ReflectionTestUtils.setField(playlistFacade, "userService", userService);
         ReflectionTestUtils.setField(playlistFacade, "beanMappingService", beanMappingService);
+    }
 
+    @BeforeMethod
+    public void init() {
         Date date = new Date();
 
         playlist = new Playlist();

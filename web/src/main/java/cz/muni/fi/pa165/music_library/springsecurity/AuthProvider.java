@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.music_library.springsecurity;
 
-import cz.muni.fi.pa165.music_library.data.entities.User;
 import cz.muni.fi.pa165.music_library.data.entities.UserLevel;
 import cz.muni.fi.pa165.music_library.dto.UserAuthenticateDto;
 import cz.muni.fi.pa165.music_library.dto.UserDto;
@@ -39,11 +38,11 @@ public class AuthProvider implements AuthenticationProvider {
             UserDto user = userFacade.findUserByEmail(mail);
             if (userFacade.isAdmin(user)) {
                 return new UsernamePasswordAuthenticationToken(
-                        mail, pwd, Collections.singletonList(new SimpleGrantedAuthority(UserLevel.Admin.getLevel())));
+                        mail, pwd, Collections.singletonList(new SimpleGrantedAuthority(UserLevel.ADMIN.getLevel())));
 
             } else {
                 return new UsernamePasswordAuthenticationToken(
-                        mail, pwd, Collections.singletonList(new SimpleGrantedAuthority(UserLevel.BasicUser.getLevel())));
+                        mail, pwd, Collections.singletonList(new SimpleGrantedAuthority(UserLevel.BASIC_USER.getLevel())));
             }
         } else {
             throw new BadCredentialsException("Wrong username or password");

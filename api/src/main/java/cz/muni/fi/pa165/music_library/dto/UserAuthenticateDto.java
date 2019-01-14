@@ -25,4 +25,20 @@ public class UserAuthenticateDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserAuthenticateDto)) return false;
+
+        UserAuthenticateDto userAuthenticateDto = (UserAuthenticateDto) o;
+
+        return getEmail() == userAuthenticateDto.getEmail();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getEmail().hashCode();
+        return result;
+    }
 }

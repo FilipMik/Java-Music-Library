@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -35,7 +36,6 @@ import static org.testng.Assert.assertTrue;
 public class SongFacadeTest extends BaseFacadeTest {
 
     @Autowired
-    @InjectMocks
     private SongFacade songFacade;
 
     @Mock
@@ -50,13 +50,16 @@ public class SongFacadeTest extends BaseFacadeTest {
     private Long songId = 1L;
     private String songTitle = "Title";
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void initClass() {
         MockitoAnnotations.initMocks(this);
 
         ReflectionTestUtils.setField(songFacade, "songService", songService);
         ReflectionTestUtils.setField(songFacade, "beanMappingService", beanMappingService);
+    }
 
+    @BeforeMethod
+    public void init() {
         song = new Song();
         song.setSongId(songId);
         song.setTitle(songTitle);

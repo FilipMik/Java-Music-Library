@@ -1,6 +1,9 @@
 package cz.muni.fi.pa165.music_library.dto;
 
+/**
+ * @author Peter Žiška
+ */
 public enum UserLevelDto {
-    BasicUser,
-    Admin
+    BASIC_USER,
+    ADMIN
 }

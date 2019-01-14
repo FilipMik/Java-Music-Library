@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -33,7 +34,6 @@ import static org.testng.Assert.assertTrue;
 public class AlbumFacadeTest extends BaseFacadeTest {
 
     @Autowired
-    @InjectMocks
     private AlbumFacade albumFacade;
 
     @Mock
@@ -49,13 +49,16 @@ public class AlbumFacadeTest extends BaseFacadeTest {
 
     private Long albumId = 1L;
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void initClass() {
         MockitoAnnotations.initMocks(this);
 
         ReflectionTestUtils.setField(albumFacade, "albumService", albumService);
         ReflectionTestUtils.setField(albumFacade, "beanMappingService", beanMappingService);
+    }
 
+    @BeforeMethod
+    public void init() {
         Date date = new Date();
 
         album = new Album();

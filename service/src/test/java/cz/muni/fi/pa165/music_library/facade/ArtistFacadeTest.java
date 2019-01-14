@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -29,7 +30,6 @@ import static org.testng.Assert.assertTrue;
 public class ArtistFacadeTest extends BaseFacadeTest {
 
     @Autowired
-    @InjectMocks
     private ArtistFacade artistFacade;
 
     @Mock
@@ -44,13 +44,15 @@ public class ArtistFacadeTest extends BaseFacadeTest {
     private Long artistId = 1L;
     private String artistName = "Name";
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void initClass() {
         MockitoAnnotations.initMocks(this);
 
         ReflectionTestUtils.setField(artistFacade, "artistService", artistService);
         ReflectionTestUtils.setField(artistFacade, "beanMappingService", beanMappingService);
-
+    }
+    @BeforeMethod
+    public void init() {
         Date date = new Date();
 
         artist = new Artist();
