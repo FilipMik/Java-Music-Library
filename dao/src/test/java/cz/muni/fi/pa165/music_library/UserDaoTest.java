@@ -16,9 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
-
 import java.util.Date;
 import java.util.List;
 
@@ -55,14 +53,14 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         userOne.setUsername("Test1");
         userOne.setEmail("test.one@mail.muni.cz");
         userOne.setDateCreated(new Date());
-        userOne.setUserLevel(UserLevel.BasicUser);
+        userOne.setUserLevel(UserLevel.BASIC_USER);
         userOne.setPassword("halabala");
 
         userTwo = new User();
         userTwo.setUsername("Test2");
         userTwo.setEmail("test.two@mail.muni.cz");
         userTwo.setDateCreated(new Date());
-        userTwo.setUserLevel(UserLevel.Admin);
+        userTwo.setUserLevel(UserLevel.ADMIN);
         userTwo.setPassword("halabala");
 
         playListOne = new Playlist();
@@ -158,12 +156,12 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         assertEquals(users.get(0).getUsername(), "Test1");
         assertEquals(users.get(0).getEmail(), "test.one@mail.muni.cz");
         assertEquals(users.get(0).getDateCreated(), currentDate);
-        assertEquals(users.get(0).getUserLevel(), UserLevel.BasicUser);
+        assertEquals(users.get(0).getUserLevel(), UserLevel.BASIC_USER);
 
         assertEquals(users.get(1).getUsername(), "Test2");
         assertEquals(users.get(1).getEmail(), "test.two@mail.muni.cz");
         assertEquals(users.get(1).getDateCreated(), tomorrowsDate);
-        assertEquals(users.get(1).getUserLevel(), UserLevel.Admin);
+        assertEquals(users.get(1).getUserLevel(), UserLevel.ADMIN);
     }
 
     /**

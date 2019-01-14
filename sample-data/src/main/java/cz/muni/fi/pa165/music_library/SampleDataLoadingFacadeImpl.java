@@ -75,7 +75,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         admin.setUsername("Filip");
         admin.setEmail("s@s.cz");
         admin.setDateCreated(new Date());
-        admin.setUserLevel(UserLevel.Admin);
+        admin.setUserLevel(UserLevel.ADMIN);
         userService.registerUser(admin, "aaaa");
         return userService.findUserByEmail("s@s.cz");
     }
@@ -85,7 +85,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         basic.setUsername("Klara");
         basic.setEmail("k@k.cz");
         basic.setDateCreated(new Date());
-        basic.setUserLevel(UserLevel.BasicUser);
+        basic.setUserLevel(UserLevel.BASIC_USER);
         userService.registerUser(basic, "aaaa");
         return userService.findUserByEmail("k@k.cz");
     }

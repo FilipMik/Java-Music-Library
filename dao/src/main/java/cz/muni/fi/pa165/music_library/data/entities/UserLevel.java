@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.music_library.data.entities;
 
 public enum UserLevel {
-    BasicUser("BasicUser"),
-    Admin("Admin");
+    BASIC_USER("BASIC_USER"),
+    ADMIN("ADMIN");
 
     private String userLevel;
 

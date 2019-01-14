@@ -10,7 +10,6 @@ import cz.muni.fi.pa165.music_library.exceptions.EmailAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.exceptions.IncorrectPasswordException;
 import cz.muni.fi.pa165.music_library.exceptions.UsernameAlreadyExistsException;
 import cz.muni.fi.pa165.music_library.service.UserService;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,7 @@ public class UserFacadeTest extends BaseFacadeTest {
         user.setUsername(username);
         user.setEmail(email);
         user.setDateCreated(date);
-        user.setUserLevel(UserLevel.BasicUser);
+        user.setUserLevel(UserLevel.BASIC_USER);
         user.setPassword(encodedPassword);
 
         userDto = new UserDto();
